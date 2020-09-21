@@ -113,10 +113,7 @@ def generated_bill(request):
                    }
     doc.render(context_doc)
     doc.save("MeterReaderApp/Static/generated/GeneratedBill.docx")
-    pythoncom.CoInitialize()
-    #convert("MeterReaderApp/Static/generated/GeneratedBill.docx",'GeneratedBill1.pdf')
-    convert('MeterReaderApp/Static/generated/GeneratedBill.docx', "MeterReaderApp/Static/generated/GeneratedBill.pdf")
-
+    
 
 
 
