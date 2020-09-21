@@ -121,4 +121,3 @@ USE_TZ = True
 STATIC_URL = '/MeterReaderApp/Static/'
 MEDIA_ROOT=''
 STATIC_ROOT=''
-SESSION_ENGINE= 'django.contrib.sessions.backends.cached_db'
