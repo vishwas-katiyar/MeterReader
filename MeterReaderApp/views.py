@@ -7,7 +7,6 @@ import cv2
 import base64
 from docxtpl import DocxTemplate
 from docx2pdf import convert
-import pythoncom
 from pymongo import MongoClient
 
 
@@ -113,10 +112,7 @@ def generated_bill(request):
                    }
     doc.render(context_doc)
     doc.save("MeterReaderApp/Static/generated/GeneratedBill.docx")
-    pythoncom.CoInitialize()
-    #convert("MeterReaderApp/Static/generated/GeneratedBill.docx",'GeneratedBill1.pdf')
-    convert('MeterReaderApp/Static/generated/GeneratedBill.docx', "MeterReaderApp/Static/generated/GeneratedBill.pdf")
-
+    
 
 
 
