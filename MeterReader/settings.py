@@ -25,7 +25,7 @@ SECRET_KEY = '*52i=@xqx!m02o145xf&%3f08(!jfzmjs&_ekh25b@xoj!v=6n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*','127.0.0.1','mymeterreader.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
@@ -121,3 +121,4 @@ USE_TZ = True
 STATIC_URL = '/MeterReaderApp/Static/'
 MEDIA_ROOT=''
 STATIC_ROOT=''
+SESSION_ENGINE= 'django.contrib.sessions.backends.cached_db'
