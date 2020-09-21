@@ -43,10 +43,8 @@ def send_coad(receiver_address,mail_content):
 
 
 def opencamera(request):
-    if login_confirm == True:
-        return render(request,'opencamera.html')
-    else:
-        return render(request,"j.html")
+    return render(request,'opencamera.html')
+    
 def success(request):
     if request.method=='GET':
         print('in get ')
