@@ -7,7 +7,6 @@ import cv2
 import base64
 from docxtpl import DocxTemplate
 from docx2pdf import convert
-import pythoncom
 from pymongo import MongoClient
 
 
@@ -44,10 +43,8 @@ def send_coad(receiver_address,mail_content):
 
 
 def opencamera(request):
-    if login_confirm == True:
-        return render(request,'opencamera.html')
-    else:
-        return render(request,"j.html")
+    return render(request,'opencamera.html')
+    
 def success(request):
     if request.method=='GET':
         print('in get ')
@@ -113,7 +110,11 @@ def generated_bill(request):
                    }
     doc.render(context_doc)
     doc.save("MeterReaderApp/Static/generated/GeneratedBill.docx")
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> e34e85a29d4b86ccfa7eeace42b01115322b0e7a
 
 
 
