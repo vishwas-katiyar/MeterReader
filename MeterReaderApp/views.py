@@ -110,11 +110,6 @@ def generated_bill(request):
                    }
     doc.render(context_doc)
     doc.save("MeterReaderApp/Static/generated/GeneratedBill.docx")
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> e34e85a29d4b86ccfa7eeace42b01115322b0e7a
 
 
 
