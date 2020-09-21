@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registration</title>
+    <style>
+        body {
+            
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container {
+           
+            margin-bottom: 50px;
+            max-width: 700px;
+            padding: 30px;
+            margin:auto;
+            box-sizing: border-box;
+            background-color: #F3F0EF;
+            border: 1px solid black;
+            border-radius: 6px;
+            
+            
+        }
+        .row {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+        .row-space {
+            -webkit-box-pack: justify;
+            -webkit-justify-content: space-between;
+            -moz-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+        }
+        @media (max-width: 800px) {
+            .col-2 {
+                width: 100%;
+            }
+        }
+
+        input {
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background: transparent;
+            color: black;
+        }
+
+            input[type="submit"] {
+                background-color: #333;
+                color: white;
+                border-radius: 20px;
+                padding: 14px 20px;
+                margin: 50px 0;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+                opacity: 0.8;
+            }
+
+            input[type="submit"]:hover {
+                opacity:1 ;
+            }
+        p {
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action={% url 'email_verification' %} method="POST">
+            {% csrf_token %}
+            <p style="text-align:center;font-size:20px"><b>Regestration</b></p>
+            <div class="row row-space">
+                <div class="col-2">
+                    <label for="name"> Full Name </label>
+                    <input type="text" name="name" placeholder="Enter full name" />
+                </div>
+                <div class="col-2">
+                    <label  for="Add">Address</label>
+                    <input type="text" name="Add" placeholder="Enter Address"  style="margin-left:5px"/>
+                </div>
+            </div>
+
+            <br />
+            <div class="row row-space">
+                <div class="col-2">
+                    <label for="phone">Phone.no</label>
+                    <input type="tel" name="phone" placeholder="Enter phone number" />
+                </div>
+                <div class="col-2">
+                    <label for="mob">IVRS No.</label>
+                    <input type="text" name="ivrs_no" placeholder="Enter mobile number" />
+                </div>
+
+            </div>
+            <br />
+       
+            <label for="meter"> Meter serial.no</label>
+            <input type="text" name="meter_no" placeholder="Enter meter number--" /><br><br />
+            <label>Government id proof</label>
+            <input type="file" id="id" style="display:none" />
+            <label for="id"style="color:blue" >(Select file)</label>
+            <input type="submit" >
+        </form>
+        
+    </div>
+</body>
+</html>

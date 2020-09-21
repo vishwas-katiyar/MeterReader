@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% load static %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <style>
+
+        body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+.topnav a.done{
+	float: right;
+}
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.box{
+	width:95%;
+	height:40%;
+	display:center;
+	justify-content:center;
+	border:2px solid #333;
+	position: absolute;
+    left:2.3%;
+	margin-top:5%;
+}
+
+
+.box img{
+
+    display: block;
+    width: 100%;
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.headingmain{
+	display:flex;
+	position:fixed;
+	bottom:30%;
+	padding:0 1%;
+}
+.reading{
+    border:2px solid #333;
+    margin-top:106%;
+    position: absolute;
+    width:95%;
+	height:5%;
+	left:2.2%;
+	justify-content:center;
+
+  }
+
+.reading .read{
+    margin: 3px;
+}
+
+button{
+  margin: 0;
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	color:white;
+	background-color:#46A049;
+	border:none;
+	border-radius:20px;
+	display:block;
+	width:200px;
+	height:6%;
+
+}
+button:hover{
+	background-color:#4CAF50;
+	color:white;
+	background-position:right center;
+}
+
+    </style>
+</head>
+<body>
+
+<div class="topnav">
+
+  <a class="active" href='{% url 'dashboard' %}'><i class="fa fa-arrow-left"></i></a>
+  <a href="#home">Username</a>
+  <a class="done" href='{% url 'generated_bill' %}'>Done</a>
+
+</div>
+
+<div class="box">
+    <img id="image" src={% static "image.png" %} >
+
+</div>
+
+<h3 class="headingmain"> Your Reading  </h3>
+
+<div class="reading">
+    <h3 class="read">{{ reading }}</h3>
+</div>
+
+<div class="main">
+    <button  class="retake" type="submit" onclick="location.href='{% url 'opencamera' %}'" name='home'> RETAKE PHOTO </button>
+</div>	
+	
+
+</body>
+</html>
