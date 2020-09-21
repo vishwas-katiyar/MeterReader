@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path
 from MeterReaderApp import views
 
+from django.views.static import serve
+from django.conf.urls import url
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.login ,name='login'),
@@ -29,5 +32,7 @@ urlpatterns = [
     path('opencamera/', views.opencamera ,name='opencamera'),
     path('opencamera/success/', views.success ,name='success'),
     path('generated_bill/',views.generated_bill,name="generated_bill"),
+    url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 
 ]
