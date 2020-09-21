@@ -113,7 +113,7 @@ def generated_bill(request):
                    }
     doc.render(context_doc)
     doc.save("MeterReaderApp/Static/generated/GeneratedBill.docx")
-    
+
 
 
 

@@ -34,22 +34,10 @@ cameraTrigger.onclick = function() {
 
     cameraOutput.src = cameraSensor.toDataURL("image/webp");
 
-    input.value = `${cameraSensor.toDataURL("image/webp").toString()}`;
+    input.value = `${cameraSensor.toDataURL("image/webp")}`;
     form.submit();
     cameraOutput.classList.add("taken");
     // track.stop();
 };
 
-
-//var c = document.getElementById("camera--sensor");
-//var ctx = c.getContext("2d");
-//ctx.beginPath();
-//var x=(window.innerWidth)/2
-//var y=window.innerHeight/2
-//
-//ctx.rect(x,y, 150, 100);
-//ctx.stroke();
-
-
-// Start the video stream when the window loads
 window.addEventListener("load", cameraStart, false);
