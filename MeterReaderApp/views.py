@@ -121,6 +121,7 @@ def dashboard(request):
         global login_confirm
         Loggedin_user_ivrs_no = request.POST['ivrs_no']
         Loggedin_user_psw = request.POST['psw']
+        '''
         if collection.count_documents({"_id":Loggedin_user_ivrs_no}) > 0:
             details=collection.find({"_id":Loggedin_user_ivrs_no})
             for detail in details:
@@ -133,6 +134,8 @@ def dashboard(request):
         else :
             login_confirm = False
             return render(request, 'j.html')
+    
+        '''
     if login_confirm == True :
 
         return render(request,'dashboard.html')
@@ -143,6 +146,7 @@ def adminlogin(request):
     login_admin_confirm = False
     Loggedin_admin_user_name = request.POST['admin_uname']
     Loggedin_admin_psw = request.POST['admin_psw']
+    '''
     if collection.count_documents({"_id": Loggedin_admin_user_name}) > 0:
         details = collection.find({"_id": Loggedin_admin_user_name})
         for detail in details:
@@ -155,7 +159,7 @@ def adminlogin(request):
     else :
         login_admin_confirm = False
         return render(request, 'j.html')
-
+    '''
     if login_admin_confirm == True:
 
         return render(request, 'Admin_dasboard.html')
@@ -196,6 +200,7 @@ def login(request):
         if request.POST['pswrd'] == request.POST['cnfirm_pswrd']:
             pswrd=request.POST['cnfirm_pswrd']
             register_value = request.session["register"]
+            '''
             collection.insert_one(
             {"_id": register_value[3],"password": pswrd, "ivrs": register_value[3], "Full_Name": register_value[0], "Address": register_value[1], "Phone_No": register_value[2], "auth": True,
             "Meter_no":register_value[4]})
@@ -208,6 +213,7 @@ def login(request):
                 'not_match': True
             }
             return render(request, 'password.html',context=context)
+    '''
     context = {
         'register': False
     }
