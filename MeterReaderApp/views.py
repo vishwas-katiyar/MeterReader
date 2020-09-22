@@ -6,14 +6,14 @@ import pytesseract
 import cv2
 import base64
 from docxtpl import DocxTemplate
-from docx2pdf import convert
-from pymongo import MongoClient
+from firebase import firebase
+firebase = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/UserRegister/', None)
 
 
-cluster=MongoClient("mongodb+srv://MeterReaderDB:MeterReaderDB@cluster0.u4k67.mongodb.net/MeterReaderDB?retryWrites=true&w=majority")
+#cluster=MongoClient("mongodb+srv://MeterReaderDB:MeterReaderDB@cluster0.u4k67.mongodb.net/MeterReaderDB?retryWrites=true&w=majority")
 
-db=cluster["MeterReaderDB"]
-collection=db["MeterReaderCollection"]
+#db=cluster["MeterReaderDB"]
+#collection=db["MeterReaderCollection"]
 
 
 pytesseract.pytesseract.tesseract_cmd=r'MeterReaderApp/Tesseract-OCR/tesseract.exe'
