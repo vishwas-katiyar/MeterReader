@@ -1,9 +1,11 @@
 from firebase import firebase
-firebase = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/UserRegister/', None)
-data = {'Name': 'test',
-        'RollNo': 3,
-        'Percentage': 70.02
+firebaseadmin = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/Admin/', None)
+data = {'nameadmin': 'admin',
+        'paswordadmin': 'admin'
         }
-result = firebase.post('/UserRegister', data)
-print(result)
-pip install git+https://github.com/ozgur/python-firebase
+
+allusers = firebaseadmin.get('/Admin',None)
+print(allusers)
+
+#pip install git+https://github.com/ozgur/python-firebase
+

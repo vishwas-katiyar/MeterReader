@@ -5,10 +5,14 @@ import imutils
 import pytesseract
 import cv2
 import base64
+import random
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from docxtpl import DocxTemplate
 from firebase import firebase
-firebase = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/UserRegister/', None)
-
+firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/UserRegister/', None)
+firebaseadmin = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/Admin/', None)
 
 #cluster=MongoClient("mongodb+srv://MeterReaderDB:MeterReaderDB@cluster0.u4k67.mongodb.net/MeterReaderDB?retryWrites=true&w=majority")
 
@@ -27,7 +31,7 @@ from email.mime.text import MIMEText
 def send_coad(receiver_address,mail_content):
     sender_address = 'fruit.basket.team.14@gmail.com'
     sender_pass = 'FruitBasket'
-    #receiver_address = 'jayeshagrawal07@gmail.com'
+    #receiver_address = 'honeykatiyar1436@gmail.com'
     message = MIMEMultipart()
     message['From'] = sender_address
     message['To'] = receiver_address
@@ -43,8 +47,10 @@ def send_coad(receiver_address,mail_content):
 
 
 def opencamera(request):
-    return render(request,'opencamera.html')
-    
+    if request.session['login_confirm'] == True:
+        return render(request,'opencamera.html')
+    else:
+        return render(request, 'login.html')
 def success(request):
     if request.method=='GET':
         print('in get ')
@@ -88,7 +94,7 @@ def success(request):
         cv2.imwrite('MeterReaderApp/Static/generated/dilation.png', img_dilation)
 
         out_below1 = pytesseract.image_to_string(erosion, lang="lets", config='--oem 3 --psm 7 outbase digits')
-        print("OUTPUT222:", out_below1)
+        #print("OUTPUT222:", out_below1)
 
         context={
             "reading":out_below1,
@@ -96,7 +102,7 @@ def success(request):
         }
         return render(request,'after_capture.html',context=context)
     else:
-        print('inget')
+        #print('inget')
         return render(request,'j.html')
 
 def generated_bill(request):
@@ -121,53 +127,51 @@ def dashboard(request):
         global login_confirm
         Loggedin_user_ivrs_no = request.POST['ivrs_no']
         Loggedin_user_psw = request.POST['psw']
-        '''
-        if collection.count_documents({"_id":Loggedin_user_ivrs_no}) > 0:
-            details=collection.find({"_id":Loggedin_user_ivrs_no})
-            for detail in details:
-                # print(detail)
-                if detail["_id"] == Loggedin_user_ivrs_no and detail["Meter_no"] == Loggedin_user_psw:
+
+        allusers = firebaseuser.get('/UserRegister', '')
+        for i in allusers:
+            #print(allusers[i]['ivrs'])
+            if str(allusers[i]['ivrs']) == Loggedin_user_ivrs_no :
+                #print(allusers[i]['ivrs'])
+                if str(allusers[i]['ivrs']) == Loggedin_user_ivrs_no and allusers[i]['pasword'] == Loggedin_user_psw:
                     login_confirm = True
+                    request.session['login_confirm'] = login_confirm
+                    return render(request, 'dashboard.html')
                 else :
                     login_confirm = False
-                    return render(request, 'j.html')
-        else :
-            login_confirm = False
-            return render(request, 'j.html')
-    
-        '''
-    if login_confirm == True :
+                    request.session['login_confirm'] = login_confirm
+                    return render(request, 'login.html',context={'notcorrect':True})
 
-        return render(request,'dashboard.html')
-    elif login_confirm == False:
-        return render(request, 'register.html')
+
+        else:
+            return render(request, 'login.html',context={'nouser':True})
+    else:
+        if request.session['login_confirm'] == False :
+            return render(request, 'login.html')
+        elif request.session['login_confirm'] == True :
+            return render(request, 'dashboard.html')
 
 def adminlogin(request):
-    login_admin_confirm = False
-    Loggedin_admin_user_name = request.POST['admin_uname']
-    Loggedin_admin_psw = request.POST['admin_psw']
-    '''
-    if collection.count_documents({"_id": Loggedin_admin_user_name}) > 0:
-        details = collection.find({"_id": Loggedin_admin_user_name})
-        for detail in details:
-            print(detail)
-            if detail["_id"] == Loggedin_admin_user_name and detail["admin_psw"] == Loggedin_admin_psw:
+
+    if request.method=='POST':
+        Loggedin_admin_user_name = request.POST['admin_uname']
+        Loggedin_admin_psw = request.POST['admin_psw']
+
+        allusers = firebaseadmin.get('/Admin', '')
+        for i in allusers:
+            if allusers[i]['nameadmin'] == Loggedin_admin_user_name and allusers[i]['paswordadmin'] == Loggedin_admin_psw:
                 login_admin_confirm = True
-            else:
-                login_admin_confirm = False
-                return render(request, 'j.html')
-    else :
-        login_admin_confirm = False
-        return render(request, 'j.html')
-    '''
-    if login_admin_confirm == True:
-
-        return render(request, 'Admin_dasboard.html')
+                request.session['login_admin_confirm']=login_admin_confirm
+                return render(request, 'Admin_dasboard.html')
+        else :
+            login_admin_confirm = False
+            request.session['login_admin_confirm']=login_admin_confirm
+            return render(request, 'j.html')
     else:
-        register = True
-        return render(request, 'register.html')
-
-
+        if request.session['login_admin_confirm']==True:
+            return render(request, 'Admin_dasboard.html')
+        else:
+            return render(request, 'login.html')
 def email_verification(request):
     if request.method=='POST':
         #print('fffffffffffffffffffffffffff',request.POST)
@@ -175,35 +179,48 @@ def email_verification(request):
         Address = request.POST['Add']
         Phone_No = request.POST['phone']
         ivrs_no = request.POST['ivrs_no']
-        Meter_no = request.POST['meter_no']
-        request.session['register']=[Full_Name,Address,Phone_No,ivrs_no,Meter_no]
+        email = request.POST['email']
+
+        generated_otp = random.randint(100000, 999999)
+        mail_content = '''OTP For U : '''+str(generated_otp)+ '''  ::look'''
+        send_coad(email, mail_content)
+
+        request.session['generated_otp']=generated_otp
+        request.session['register']=[Full_Name,Address,Phone_No,ivrs_no,email,generated_otp]
+
+
         #collection.insert_one({"_id": ivrs_no, "Full_Name": Full_Name,"Address": Address, "Phone_No": Phone_No,"auth": True,"Meter_no":Meter_no})
 
-    return render(request,"email_verification.html")
+        return render(request,"email_verification.html")
+    return render(request, "email_verification.html")
 
 
 def password(request):
     if request.method == 'POST':
-        print(request.POST)
-    return render(request,"password.html")
+        generated_otp=request.session["generated_otp"]
+        if request.POST['otp'] == str(generated_otp):
+            return render(request,"password.html")
+        else :
+            return render(request, "email_verification.html")
+
 
 def forgotpassword(request):
     if request.method == 'POST':
-        print(request.method)
-    return render(request, "forgotpassword.html")
+        #print(request.method)
+        return render(request, "forgotpassword.html")
 
 
 def login(request):
 
     if request.method=="POST":
-        print(request.POST)
+        #print(request.POST)
         if request.POST['pswrd'] == request.POST['cnfirm_pswrd']:
             pswrd=request.POST['cnfirm_pswrd']
             register_value = request.session["register"]
-            '''
-            collection.insert_one(
-            {"_id": register_value[3],"password": pswrd, "ivrs": register_value[3], "Full_Name": register_value[0], "Address": register_value[1], "Phone_No": register_value[2], "auth": True,
-            "Meter_no":register_value[4]})
+            data = {"pasword": pswrd, "ivrs": register_value[3], "name": register_value[0], "address": register_value[1], "phoneno": register_value[2], "auth": False,
+            "email":register_value[4]}
+            firebaseuser.post('/UserRegister', data)
+
             context={
                 'register': True
             }
@@ -213,10 +230,11 @@ def login(request):
                 'not_match': True
             }
             return render(request, 'password.html',context=context)
-    '''
+
     context = {
         'register': False
     }
+    request.session['login_confirm'] = False
     return render(request, 'login.html',context=context)
 
 

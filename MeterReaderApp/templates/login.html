@@ -106,11 +106,7 @@
 
 </head>
 <body>
-<script>
-    {% if register %}
-    alert("You are Registered !");  // display string message
-    {% endif %}
-</script>
+
 
 
     <form name="Admininfo" action={% url 'adminlogin' %} method="POST" value="adminlogin">
@@ -178,4 +174,19 @@
     </form>
 
 </body>
+<script>
+    {% if register %}
+    alert("You are Registered !");  // display string message
+    {% endif %}
+</script>
+<script>
+    {% if notcorrect %}
+    alert("Invalid IVRS No. / Password  !");  // display string message
+    {% endif %}
+</script>
+<script>
+    {% if nouser %}
+    alert("Invalid IVRS No. / Password  !");  // display string message
+    {% endif %}
+</script>
 </html>
