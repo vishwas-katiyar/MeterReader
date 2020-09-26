@@ -20,7 +20,7 @@ firebaseadmin = firebase.FirebaseApplication('https://login-system-73453.firebas
 #collection=db["MeterReaderCollection"]
 
 
-pytesseract.pytesseract.tesseract_cmd=r'MeterReaderApp/Tesseract-OCR/tesseract.exe'
+#pytesseract.pytesseract.tesseract_cmd=r'MeterReaderApp/Tesseract-OCR/tesseract.exe'
 #pytesseract.pytesseract.TESSDATA_PREFIX=r'MeterReaderApp/Tesseract-OCR/tessdata/'
 
 
