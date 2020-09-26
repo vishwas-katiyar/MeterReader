@@ -93,7 +93,7 @@ def success(request):
 
         cv2.imwrite('MeterReaderApp/Static/generated/dilation.png', img_dilation)
 
-        out_below1 = pytesseract.image_to_string(erosion, lang="lets", config='--oem 3 --psm 7 outbase digits')
+        out_below1 = pytesseract.image_to_string(erosion, config='--oem 3 --psm 7 outbase digits')
         #print("OUTPUT222:", out_below1)
 
         context={
