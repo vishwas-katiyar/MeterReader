@@ -128,19 +128,17 @@ def dashboard(request):
         Loggedin_user_ivrs_no = request.POST['ivrs_no']
         Loggedin_user_psw = request.POST['psw']
 
-        allusers = firebaseuser.get('/UserRegister', '')
-        for i in allusers:
-            #print(allusers[i]['ivrs'])
-            if str(allusers[i]['ivrs']) == Loggedin_user_ivrs_no :
-                #print(allusers[i]['ivrs'])
-                if str(allusers[i]['ivrs']) == Loggedin_user_ivrs_no and allusers[i]['pasword'] == Loggedin_user_psw:
-                    login_confirm = True
-                    request.session['login_confirm'] = login_confirm
-                    return render(request, 'dashboard.html')
-                else :
-                    login_confirm = False
-                    request.session['login_confirm'] = login_confirm
-                    return render(request, 'login.html',context={'notcorrect':True})
+        check_user = firebaseuser.get('/UserRegister', name=Loggedin_user_ivrs_no)
+        print(check_user)
+        if check_user != None :
+            if str(check_user['ivrs']) == Loggedin_user_ivrs_no and check_user['pasword'] == Loggedin_user_psw:
+                login_confirm = True
+                request.session['login_confirm'] = login_confirm
+                return render(request, 'dashboard.html')
+            else :
+                login_confirm = False
+                request.session['login_confirm'] = login_confirm
+                return render(request, 'login.html',context={'notcorrect':True})
 
 
         else:
@@ -206,7 +204,7 @@ def password(request):
 
 def forgotpassword(request):
     if request.method == 'POST':
-        #print(request.method)
+
         return render(request, "forgotpassword.html")
 
 
@@ -219,11 +217,17 @@ def login(request):
             register_value = request.session["register"]
             data = {"pasword": pswrd, "ivrs": register_value[3], "name": register_value[0], "address": register_value[1], "phoneno": register_value[2], "auth": False,
             "email":register_value[4]}
-            firebaseuser.post('/UserRegister', data)
+            print(firebaseuser.get('/UserRegister',name=str(register_value[3])))
+            if firebaseuser.get('/UserRegister',name=str(register_value[3])) == None:
+                firebaseuser.put('/UserRegister',data=data,name=register_value[3])
+                context = {
+                    'register': True
+                }
+            else:
 
-            context={
-                'register': True
-            }
+                context={
+                'Already_register': True
+                }
             return render(request, 'login.html',context=context)
         else :
             context={
@@ -241,3 +245,22 @@ def login(request):
 def register(request):
 
     return render(request, 'register.html')
+
+
+def new_user_request(request):
+    allusers = firebaseadmin.get('/UserRegister', None)
+    requestlist = []
+    for i in allusers:
+        if allusers[i]['auth']:
+            #print(allusers[i]['auth'])
+            requestlist.append(allusers[i])
+    return render(request,'new.html',context={'requestlist':requestlist})
+
+def all_user(request):
+    allusers = firebaseadmin.get('/UserRegister', None)
+
+
+    context={
+        'all_user':allusers
+    }
+    return render(request,'AllUser.html',context=context)

@@ -2,3 +2,5 @@ libsm6
 libxrender1
 libfontconfig1
 libice6
+sudo apt install tesseract-ocr
+git+https://github.com/ozgur/python-firebase

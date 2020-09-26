@@ -146,7 +146,7 @@
 
                 <div id="Userinfo" style="display:none">
                     <label for="uname"><b>IVRS Number</b></label>
-                    <input type="text" placeholder="Enter IVRS number" name="ivrs_no" required >
+                    <input type="number" placeholder="Enter IVRS number" name="ivrs_no" required >
 
 
                     <label for="psw"><b>Password</b></label>
@@ -186,7 +186,12 @@
 </script>
 <script>
     {% if nouser %}
-    alert("Invalid IVRS No. / Password  !");  // display string message
+    alert("No user Found Please Register  !");  // display string message
+    {% endif %}
+</script>
+<script>
+    {% if Already_register %}
+    alert("Invalid IVRS No. Already Registered !");  // display string message
     {% endif %}
 </script>
 </html>

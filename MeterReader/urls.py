@@ -23,7 +23,9 @@ from . import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.login ,name='login'),
-    path('register/', views.register ,name='register'),
+    path('register/', views.register, name='register'),
+    path('new_user_request/', views.new_user_request ,name='new_user_request'),
+    path('all_user/', views.all_user ,name='all_user'),
     path('email_verification/', views.email_verification ,name='email_verification'),
     path('forgotpassword/', views.forgotpassword ,name='forgotpassword'),
     path('password/', views.password ,name='password'),

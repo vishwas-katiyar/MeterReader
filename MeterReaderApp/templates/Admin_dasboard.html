@@ -1,165 +1,216 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
-    <style>
-        body{
-        margin: auto;
-        height:100vh;
-        background-color:#EEF5F9;
-        }
 
-        #navebar{
-        margin:0px;
-        height:62px;
-        background-color: #414755;
-        }
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-        #admin{
-        padding:0px;
-        padding-right:10px;
-        width:36px;
-        border-radius:50%;
-        border:solid white 0px;
-        height:36px;
-        float:right;
-        margin:13px;
-        margin-right: 26px;
+  <title>Simple Sidebar - Start Bootstrap Template</title>
 
-        }
+  <!-- Bootstrap Core CSS -->
 
-        #newuser{
-        padding-left: 15px;
-        margin: 20px;
-        display: flex;
-        background-color : #FFFFFF;
-        border-bottom1: solid #414755 4px;
-        }
+  <!-- Custom CSS -->
 
-        #divaddadmin{
-        padding-left: 43px;
-        padding-top: 15px;
-        height: 5%;
-        }
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<style>
 
-        #adduser{
-        float : right;
-        width : 100px;
-        height: 40px;
-        margin: 10px;
-        }
+    /*!
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
 
-        #main{
-        float:right;
-        width : 80%;
-        margin-top: 10px;
-        }
+/* Toggle Styles */
 
-        #addadmin{
-        margin-right: 57px;
-        background-color: #FFFFFF;
-        float: right;
-        height : 40px;
-        width : 100px;
-        }
+#wrapper {
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+#wrapper.toggled {
+  padding-left: 250px;
+}
+#sidebar-wrapper {
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 0;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #000;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+#wrapper.toggled #sidebar-wrapper {
+  width: 250px;
+}
+#page-content-wrapper {
 
-        #moveleft{
-        width: 50%;
-        }
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+}
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -250px;
+}
+/* Sidebar Styles */
 
-        #moveright{
-        float: right;
-        }
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 40px;
+}
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #999999;
+}
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+}
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+.sidebar-nav > .sidebar-brand {
+  height: 65px;
+  font-size: 18px;
+  line-height: 60px;
+}
+.sidebar-nav > .sidebar-brand a {
+  color: #999999;
+}
+.sidebar-nav > .sidebar-brand a:hover {
+  color: #fff;
+  background: none;
+}
+@media(min-width:768px) {
+  #wrapper {
+    padding-left: 250px;
+  }
+  #wrapper.toggled {
+    padding-left: 0;
+  }
+  #sidebar-wrapper {
+   background-color:#2C3446;
+    width: 250px;
+  }
+  #wrapper.toggled #sidebar-wrapper {
+    width: 0;
+  }
+  #page-content-wrapper {
+    padding: 20px;
+    position: relative;
+  }
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
+}
+body{
+color:white;
+background-color:#1F2739;
+}
 
-        #full{
-        width:100%;
-        display: flex;
-        }
-
-        #sidebar{
-        background-color: #FFFFFF;
-        display:inline;
-        width : 20%;
-
-        }
-
-        #sidebtn{
-        background-color: #FFFFFF;
-        border:none;
-        margin-bottom:10px;
-        margin: 0%;
-        width : 100%;
-        height : 40px;
-        }
-
-        #sidebtnadmin{
-        border:none;
-        background-color: #FFFFFF;
-        margin-bottom:25px;
-        width : 100%;
-        height : 60px;
-        }
-
-        #createnew{
-        background-color: #4FC3F7;
-        border:none;
-        margin-bottom:10px;
-        margin: 5%;
-        width : 90%;
-        height : 40px;
-        }
-
-
-    </style>
+</style>
 </head>
+
 <body>
-<div id = 'navebar'>
 
-    <button id="admin">Admin</button>
+  <div id="wrapper" class="toggled">
 
-</div>
-<div id="full">
-
-    <div id="sidebar">
-
-
-        <button id="sidebtnadmin">Admin</button>
-        <button id="createnew" class="createnew">Create User</button>
-        <button id="sidebtn">Dashboard</button>
-        <button id="sidebtn">All Users</button>
-        <button id="sidebtn">Profile</button>
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">
+                    Admin
+                </a>
+            </li>
+            <li>
+                <a href="#">Dashboard</a>
+            </li>
+            <li>
+                <a href="#">Create User</a>
+            </li>
+            <li>
+                <a href="{% url 'new_user_request' %}">All Requests</a>
+            </li>
+            <li>
+                <a href="{% url 'all_user' %}">All Users</a>
+            </li>
+            <li>
+                <a href="#">Profile</a>
+            </li>
+            <li>
+                <a href="#">About</a>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+        </ul>
     </div>
+    <!-- /#sidebar-wrapper -->
 
-
-
-
-<div id='main'>
-<div id="divaddadmin">
-    <h1 style="display: inline;">Dashboard</h1>
-    <button id="addadmin">Add Admin</button>
-</div>
-
-<div id="newuser">
-    <div id="moveleft">
-        <h3>USER NAME : {{samplename}}</h3>
-
-        <h3>IVRS NO. : {{1234567890}}</h3>
-
-        <h3>EMAIL ID : {{sampleemail}}</h3>
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <h1>Simple Sidebar</h1>
+            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+          </div>
+        </div>
+      </div>
     </div>
-    <div id="moveright">
-        <h3>MOBILE NO. : {{987654321}}</h3>
+    <!-- /#page-content-wrapper -->
 
-        <h3>ADDRESS : {{address}}</h3>
+  </div>
+  <!-- /#wrapper -->
 
-        <button id="adduser">Add User</button>
+  <!-- jQuery -->
+  <script src="https://stacksnippets.net/js/jquery.js"></script>
 
-    </div>
-</div>
+  <!-- Bootstrap Core JavaScript -->
+  <script src="https://stacksnippets.net/js/bootstrap.min.js"></script>
 
-</div>
-</div>
+  <!-- Menu Toggle Script -->
+
 
 </body>
+<script>
+
+    $("#menu-toggle").click(function(e) {
+  e.preventDefault();
+  $("#wrapper").toggleClass("toggled");
+});
+
+</script>
 </html>
