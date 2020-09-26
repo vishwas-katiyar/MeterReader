@@ -79,7 +79,7 @@ def success(request):
 
         cv2.imwrite('MeterReaderApp/Static/generated/thresh.png', thresh)
 
-        out_below = pytesseract.image_to_string(thresh, lang='7seg', config='--oem 3 --psm 7 outbase digits')
+        out_below = pytesseract.image_to_string(thresh, config='--oem 3 --psm 7 outbase digits')
 
         print('output',out_below)
 
