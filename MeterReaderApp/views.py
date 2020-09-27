@@ -69,7 +69,7 @@ def success(request):
         image = image[y: y1,x:x1]
         cv2.imwrite('MeterReaderApp/Static/generated/image111.png', image)
         image = imutils.resize(image, height=200, width=400)
-        print(type(image))
+        #print(type(image))
         #image = cv2.imread('new111.png')
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU + 1)[1]
@@ -77,9 +77,9 @@ def success(request):
         thresh = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel)
         # cv2.imshow('thresh',ret)
 
-        cv2.imwrite('MeterReaderApp/Static/generated/thresh.png', thresh)
+        #cv2.imwrite('MeterReaderApp/Static/generated/thresh.png', thresh)
 
-        out_below = pytesseract.image_to_string(thresh, config='--oem 3 --psm 7 outbase digits')
+        #out_below = pytesseract.image_to_string(thresh, config='--oem 3 --psm 7 outbase digits')
 
         print('output',out_below)
 
@@ -89,11 +89,13 @@ def success(request):
 
         img_dilation = cv2.dilate(thresh, kernel, iterations=2)
 
-        cv2.imwrite('MeterReaderApp/Static/generated/erosion.png', erosion)
 
-        cv2.imwrite('MeterReaderApp/Static/generated/dilation.png', img_dilation)
 
-        out_below1 = pytesseract.image_to_string(erosion, config='--oem 3 --psm 7 outbase digits')
+        #cv2.imwrite('MeterReaderApp/Static/generated/erosion.png', erosion)
+
+        #cv2.imwrite('MeterReaderApp/Static/generated/dilation.png', img_dilation)
+
+        out_below1 = pytesseract.image_to_string(erosion,lang='lets', config='--oem 3 --psm 7 outbase digits')
         #print("OUTPUT222:", out_below1)
 
         context={
