@@ -1,0 +1,317 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>User Profile</title>
+
+    <!-- Bootstrap Core CSS -->
+
+    <!-- Custom CSS -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+
+    /*!
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Toggle Styles */
+
+#wrapper {
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+#wrapper.toggled {
+  padding-left: 250px;
+}
+#sidebar-wrapper {
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 0;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #000;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+#wrapper.toggled #sidebar-wrapper {
+  width: 250px;
+}
+#page-content-wrapper {
+
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+}
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -250px;
+}
+/* Sidebar Styles */
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 40px;
+}
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #999999;
+}
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+}
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+.sidebar-nav > .sidebar-brand {
+  height: 65px;
+  font-size: 18px;
+  line-height: 60px;
+}
+.sidebar-nav > .sidebar-brand a {
+  color: #999999;
+}
+.sidebar-nav > .sidebar-brand a:hover {
+  color: #fff;
+  background: none;
+}
+@media(min-width:768px) {
+  #wrapper {
+    padding-left: 250px;
+  }
+  #wrapper.toggled {
+    padding-left: 0;
+  }
+  #sidebar-wrapper {
+   background-color:#2C3446;
+    width: 250px;
+  }
+  #wrapper.toggled #sidebar-wrapper {
+    width: 0;
+  }
+  #page-content-wrapper {
+    padding: 20px;
+    position: relative;
+  }
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
+}
+body{
+color:white;
+background-color:#1F2739;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="wrapper" class="toggled">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">
+                    Admin
+                </a>
+            </li>
+            <li>
+                <a href="#">Dashboard</a>
+            </li>
+            <li>
+                <a href="#">Create User</a>
+            </li>
+            <li>
+                <a href="{% url 'new_user_request' %}">All Requests</a>
+            </li>
+            <li>
+                <a href="{% url 'all_user' %}">All Users</a>
+            </li>
+            <li>
+                <a href="{% url 'search_user' %}">Profile</a>
+            </li>
+            <li>
+                <a href="#">About</a>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Simple Sidebar</h1>
+                    <div class="container">
+                        <h1>Edit Profile</h1>
+                        <hr>
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+                                    <h6>Upload a different photo...</h6>
+
+                                    <input type="file" class="form-control">
+                                </div>
+                            </div>
+
+                            <!-- edit form column -->
+                            <div class="col-md-9 personal-info">
+                                <div class="alert alert-info alert-dismissable">
+                                    <a class="panel-close close" data-dismiss="alert">×</a>
+                                    <i class="fa fa-coffee"></i>
+                                    This is an <strong>.alert</strong>. Use this to show important messages to the user.
+                                </div>
+                                <h3>Personal info</h3>
+
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Full name:</label>
+                                        <div class="col-lg-8">
+                                            <input class="form-control" type="text" value={{searched_user.name}}>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Last name:</label>
+                                        <div class="col-lg-8">
+                                            <input class="form-control" type="text" value="Bishop">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Company:</label>
+                                        <div class="col-lg-8">
+                                            <input class="form-control" type="text" value="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Email:</label>
+                                        <div class="col-lg-8">
+                                            <input class="form-control" type="text" value="janesemail@gmail.com">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Time Zone:</label>
+                                        <div class="col-lg-8">
+                                            <div class="ui-select">
+                                                <select id="user_time_zone" class="form-control">
+                                                    <option value="Hawaii">(GMT-10:00) Hawaii</option>
+                                                    <option value="Alaska">(GMT-09:00) Alaska</option>
+                                                    <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
+                                                    <option value="Arizona">(GMT-07:00) Arizona</option>
+                                                    <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
+                                                    <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
+                                                    <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
+                                                    <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Username:</label>
+                                        <div class="col-md-8">
+                                            <input class="form-control" type="text" value="janeuser">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Password:</label>
+                                        <div class="col-md-8">
+                                            <input class="form-control" type="password" value="11111122333">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Confirm password:</label>
+                                        <div class="col-md-8">
+                                            <input class="form-control" type="password" value="11111122333">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label"></label>
+                                        <div class="col-md-8">
+                                            <input type="button" class="btn btn-primary" value="Save Changes">
+                                            <span></span>
+                                            <input type="reset" class="btn btn-default" value="Cancel">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+
+
+
+
+                    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script src="https://stacksnippets.net/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="https://stacksnippets.net/js/bootstrap.min.js"></script>
+
+<!-- Menu Toggle Script -->
+
+
+</body>
+
+<script>
+
+    $("#menu-toggle").click(function(e) {
+  e.preventDefault();
+  $("#wrapper").toggleClass("toggled");
+});
+
+</script>
+</html>

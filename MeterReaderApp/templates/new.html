@@ -358,13 +358,13 @@ input:checked + .slider:before {
                 <a href="#">Create User</a>
             </li>
             <li>
-                <a href={% url 'new_user_request' %}>All Requests</a>
+                <a href='#'>All Requests</a>
             </li>
             <li>
-                <a href="#">All Users</a>
+                <a href="{% url 'all_user' %}">All Users</a>
             </li>
             <li>
-                <a href="#">Profile</a>
+                <a href="{% url 'search_user' %}">Profile</a>
             </li>
             <li>
                 <a href="#">About</a>
@@ -383,7 +383,7 @@ input:checked + .slider:before {
                 <div class="col-lg-12">
                     <div id="1newuser">
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
-                        <h1><span class="blue">&lt;</span>Table<span class="blue">&gt;</span> <span class="yellow">Responsive</pan></h1>
+                        <h1><span class="blue">&lt;</span>All New<span class="blue">&gt;</span> <span class="yellow">Requests</pan></h1>
                         <h2>Created with love by <a href="http://pablogarciafernandez.com" target="_blank">Pablo García Fernández</a></h2>
 
                         <table class="container">
@@ -409,7 +409,7 @@ input:checked + .slider:before {
                                 <td>{{user.email}}</td>
                                 <td><div class="content">
                                     <label class="switch">
-                                        <input type="checkbox" onc>
+                                        <input type="checkbox" >
                                         <span class="slider round"></span>
                                     </label>
                                 </div></td>

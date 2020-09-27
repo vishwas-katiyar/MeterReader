@@ -6,25 +6,25 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <title>Admin Dashboard</title>
+    <title>Admin Dashboard</title>
 
-  <!-- Bootstrap Core CSS -->
+    <!-- Bootstrap Core CSS -->
 
-  <!-- Custom CSS -->
+    <!-- Custom CSS -->
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-<style>
+    <style>
 
     /*!
  * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
@@ -140,15 +140,78 @@ background-color:#1F2739;
 }
 
 </style>
+    <style>
+        body {
+
+  background-size: cover;
+  font-family: 'Roboto', Tahoma, Arial, sans-serif;
+  line-height: 1.5;
+  font-size: 13px;
+}
+
+form {
+  outline: 0;
+  float: left;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+
+form > .textbox {
+  outline: 0;
+  height: 42px;
+  width: 244px;
+  line-height: 42px;
+  padding: 0 16px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #212121;
+  border: 0;
+  float: left;
+  -webkit-border-radius: 4px 0 0 4px;
+  border-radius: 4px 0 0 4px;
+}
+
+form > .textbox:focus {
+  outline: 0;
+  background-color: #FFF;
+}
+
+form > .button {
+  outline: 0;
+  background: none;
+  background-color: rgba(38, 50, 56, 0.8);
+  float: left;
+  height: 42px;
+  width: 42px;
+  text-align: center;
+  line-height: 42px;
+  border: 0;
+  color: #FFF;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 16px;
+  text-rendering: auto;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  -webkit-transition: background-color .4s ease;
+  transition: background-color .4s ease;
+  -webkit-border-radius: 0 4px 4px 0;
+  border-radius: 0 4px 4px 0;
+}
+
+form > .button:hover {
+  background-color: rgba(0, 150, 136, 0.8);
+}
+
+    </style>
 </head>
 
 <body>
 
-  <div id="wrapper" class="toggled">
+<div id="wrapper" class="toggled">
 
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
-      <ul class="sidebar-nav">
+        <ul class="sidebar-nav">
             <li class="sidebar-brand">
                 <a href="#">
                     Admin
@@ -167,7 +230,7 @@ background-color:#1F2739;
                 <a href="{% url 'all_user' %}">All Users</a>
             </li>
             <li>
-                <a href="{% url 'search_user' %}">Profile</a>
+                <a href="#">Profile</a>
             </li>
             <li>
                 <a href="#">About</a>
@@ -181,30 +244,41 @@ background-color:#1F2739;
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-12">
-            <h1>Simple Sidebar</h1>
-            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
-          </div>
+        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Simple Sidebar</h1>
+                    <form action="{% url 'user_profile' %}" method="POST">
+                        {% csrf_token %}
+                        <input name='ivrs' type="text" class="textbox" placeholder="Enter Ivrs No.">
+                        <input title="Search" value="" type="submit" class="button">
+                    </form>
+
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <!-- /#page-content-wrapper -->
 
-  </div>
-  <!-- /#wrapper -->
+</div>
+<!-- /#wrapper -->
 
-  <!-- jQuery -->
-  <script src="https://stacksnippets.net/js/jquery.js"></script>
+<!-- jQuery -->
+<script src="https://stacksnippets.net/js/jquery.js"></script>
 
-  <!-- Bootstrap Core JavaScript -->
-  <script src="https://stacksnippets.net/js/bootstrap.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="https://stacksnippets.net/js/bootstrap.min.js"></script>
 
-  <!-- Menu Toggle Script -->
+<!-- Menu Toggle Script -->
 
 
 </body>
+<script>
+    {% if nouserfound %}
+    alert("Invalid IVRS No. No user Found !");  // display string message
+    {% endif %}
+</script>
 <script>
 
     $("#menu-toggle").click(function(e) {

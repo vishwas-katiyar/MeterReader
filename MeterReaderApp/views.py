@@ -52,10 +52,12 @@ def opencamera(request):
     else:
         return render(request, 'login.html')
 def success(request):
-    if request.method=='GET':
-        print('in get ')
+    print(request.POST)
 
-        uri=request.GET['check_this']
+    if request.method=='POST':
+        print('in POST ')
+
+        uri=request.POST['check_this_o']
         encoded_data = uri.split(',')[1]
         nparr = np.fromstring(base64.b64decode(encoded_data), np.uint8)
         image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
@@ -81,7 +83,7 @@ def success(request):
 
         #out_below = pytesseract.image_to_string(thresh, config='--oem 3 --psm 7 outbase digits')
 
-        print('output',out_below)
+        #print('output',out_below)
 
         kernel = np.ones((5, 5), np.uint8)
 
@@ -219,7 +221,7 @@ def login(request):
             register_value = request.session["register"]
             data = {"pasword": pswrd, "ivrs": register_value[3], "name": register_value[0], "address": register_value[1], "phoneno": register_value[2], "auth": False,
             "email":register_value[4]}
-            print(firebaseuser.get('/UserRegister',name=str(register_value[3])))
+            #print(firebaseuser.get('/UserRegister',name=str(register_value[3])))
             if firebaseuser.get('/UserRegister',name=str(register_value[3])) == None:
                 firebaseuser.put('/UserRegister',data=data,name=register_value[3])
                 context = {
@@ -266,3 +268,23 @@ def all_user(request):
         'all_user':allusers
     }
     return render(request,'AllUser.html',context=context)
+
+def search_user(request):
+    if request.method=="POST":
+        print(request.POST)
+    return render(request,'search_user.html')
+
+def user_profile(request):
+    if request.method=="POST":
+        search_ivrs=request.POST['ivrs']
+        searched_user = firebaseuser.get('/UserRegister', name=search_ivrs)
+        if searched_user == None :
+            context={
+                'nouserfound':True
+            }
+            return render(request,'search_user.html',context=context)
+        else:
+            context={
+                'searched_user':searched_user
+            }
+    return render(request,'userprofile.html',context=context)
