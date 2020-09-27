@@ -52,24 +52,26 @@ def opencamera(request):
     else:
         return render(request, 'login.html')
 def success(request):
-    print(request.POST)
-
+    #print(request.POST)
+    #print(request.FILES)
     if request.method=='POST':
         print('in POST ')
 
-        uri=request.POST['check_this_o']
+        uri=request.POST['check_this']
+        #print(uri)
+        #print(type(uri))
         encoded_data = uri.split(',')[1]
         nparr = np.fromstring(base64.b64decode(encoded_data), np.uint8)
         image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-        print(type(image))
-        cv2.imwrite('MeterReaderApp/Static/image.png',image)
+        #print(type(image))
+        #cv2.imwrite('MeterReaderApp/Static/image.png',image)
         height, width = image.shape[:2]
         y=((height // 2) - 100)
         y1=((height //2) + 100)
         x=((width // 2) - (round(width // 2.5)))
         x1=((width // 2) + (round(width//2.5)))
         image = image[y: y1,x:x1]
-        cv2.imwrite('MeterReaderApp/Static/generated/image111.png', image)
+        #cv2.imwrite('MeterReaderApp/Static/generated/image111.png', image)
         image = imutils.resize(image, height=200, width=400)
         #print(type(image))
         #image = cv2.imread('new111.png')
@@ -107,6 +109,7 @@ def success(request):
         return render(request,'after_capture.html',context=context)
     else:
         #print('inget')
+        print(request.GET)
         return render(request,'j.html')
 
 def generated_bill(request):

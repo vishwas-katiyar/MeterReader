@@ -138,8 +138,7 @@ visibility:hidden;
 		</main>
 		<form action="success" method="post" id="form"  enctype="multipart/form-data">
 			{% csrf_token %}
-			<input type="hidden" name="check_this_o" value="" id="input">
-			<button id="camera--trigger">Take a picture</button>
+			<input type="hidden" name="check_this" value="" id="input">
 		</form>
 
 		<!-- Reference to your JavaScript file -->
@@ -183,7 +182,7 @@ cameraTrigger.onclick = function() {
 
     cameraOutput.src = cameraSensor.toDataURL("image/webp");
 
-    //input.value = `${cameraSensor.toDataURL("image/webp").toString()}`;
+    input.value = `${cameraSensor.toDataURL("image/webp").toString()}`;
     form.submit();
     cameraOutput.classList.add("taken");
     // track.stop();
