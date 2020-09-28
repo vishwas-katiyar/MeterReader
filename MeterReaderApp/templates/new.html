@@ -238,7 +238,7 @@ h2 a {
 	        box-shadow: 0 6px 6px -6px #0E1119;
 }
 
-.container td:hover {
+.container tr:hover {
   background-color: #FFF842;
   color: #403E10;
   font-weight: bold;
@@ -259,28 +259,8 @@ h2 a {
 
     </style>
     <style>
-$lightGrey: #F2F2F2;
-$grey: #6E6E6E;
-$white: #FFFFFF;
-$blue: #1849AB;
-
-body {
-  background-color: $lightGrey;
-  display: flex;
-  font-family: 'Arial';
-  justify-content: center;
-  padding: 4rem;
-}
-
-.content {
-  background-color: $white;
-  display: flex;
-  justify-content: center;
-  padding: 2rem;
-
-}
-
 .switch {
+
   position: relative;
   display: inline-block;
   width: 60px;
@@ -300,7 +280,8 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: $grey;
+  background-color: #ccc;
+  -webkit-transition: .4s;
   transition: .4s;
 }
 
@@ -312,22 +293,25 @@ body {
   left: 4px;
   bottom: 4px;
   background-color: white;
+  -webkit-transition: .4s;
   transition: .4s;
 }
 
-input:checked + .slider {
-  background-color: $blue;
+input:submit + .slider {
+  background-color: #1F2739;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 0 4px rgba(21, 156, 228, 0.7);
-  outline: none;
+  box-shadow: 0 0 1px #2196F3;
 }
 
-input:checked + .slider:before {
+input:submit + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
 
+/* Rounded sliders */
 .slider.round {
   border-radius: 34px;
 }
@@ -335,8 +319,10 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
-
-    </style>
+.content{
+margin-right: 10px;
+}
+</style>
 </head>
 
 <body>
@@ -409,8 +395,12 @@ input:checked + .slider:before {
                                 <td>{{user.email}}</td>
                                 <td><div class="content">
                                     <label class="switch">
-                                        <input type="checkbox" >
+                                        <form method="post" action="{% url 'add_new_user_request' %}">
+                                            {% csrf_token %}
+                                        <input name="ivrs" type="submit" value="{{user.ivrs}}">
+                                            <input name="ivrs" type="submit" value="{{user.ivrs}}">
                                         <span class="slider round"></span>
+                                        </form>
                                     </label>
                                 </div></td>
 

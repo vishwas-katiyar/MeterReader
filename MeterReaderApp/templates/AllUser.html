@@ -387,7 +387,7 @@ margin-right: 10px;
                             </thead>
                             <tbody>
                             {% for userid,user in all_user.items %}
-
+                            {% if user.auth %}
                             <tr>
                                 <td>{{user.name}}</td>
                                 <td>{{user.ivrs}}</td>
@@ -413,7 +413,7 @@ margin-right: 10px;
 
                                     </label>
                                 </div></td>
-
+                                {% endif %}
                             </tr>
                             {% endfor %}
 

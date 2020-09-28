@@ -52,18 +52,18 @@ def opencamera(request):
     else:
         return render(request, 'login.html')
 def success(request):
-    #print(request.POST)
-    #print(request.FILES)
+    ##print(request.POST)
+    ##print(request.FILES)
     if request.method=='POST':
-        print('in POST ')
+        #print('in POST ')
 
         uri=request.POST['check_this']
-        #print(uri)
-        #print(type(uri))
+        ##print(uri)
+        ##print(type(uri))
         encoded_data = uri.split(',')[1]
         nparr = np.fromstring(base64.b64decode(encoded_data), np.uint8)
         image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-        #print(type(image))
+        ##print(type(image))
         #cv2.imwrite('MeterReaderApp/Static/image.png',image)
         height, width = image.shape[:2]
         y=((height // 2) - 100)
@@ -73,7 +73,7 @@ def success(request):
         image = image[y: y1,x:x1]
         #cv2.imwrite('MeterReaderApp/Static/generated/image111.png', image)
         image = imutils.resize(image, height=200, width=400)
-        #print(type(image))
+        ##print(type(image))
         #image = cv2.imread('new111.png')
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU + 1)[1]
@@ -85,7 +85,7 @@ def success(request):
 
         #out_below = pytesseract.image_to_string(thresh, config='--oem 3 --psm 7 outbase digits')
 
-        #print('output',out_below)
+        ##print('output',out_below)
 
         kernel = np.ones((5, 5), np.uint8)
 
@@ -100,7 +100,7 @@ def success(request):
         #cv2.imwrite('MeterReaderApp/Static/generated/dilation.png', img_dilation)
 
         out_below1 = pytesseract.image_to_string(erosion, config='--oem 3 --psm 7 outbase digits')
-        #print("OUTPUT222:", out_below1)
+        ##print("OUTPUT222:", out_below1)
 
         context={
             "reading":out_below1,
@@ -108,8 +108,8 @@ def success(request):
         }
         return render(request,'after_capture.html',context=context)
     else:
-        #print('inget')
-        print(request.GET)
+        ##print('inget')
+        #print(request.GET)
         return render(request,'j.html')
 
 def generated_bill(request):
@@ -136,12 +136,17 @@ def dashboard(request):
         Loggedin_user_psw = request.POST['psw']
 
         check_user = firebaseuser.get('/UserRegister', name=Loggedin_user_ivrs_no)
-        print(check_user)
         if check_user != None :
             if str(check_user['ivrs']) == Loggedin_user_ivrs_no and check_user['pasword'] == Loggedin_user_psw:
-                login_confirm = True
-                request.session['login_confirm'] = login_confirm
-                return render(request, 'dashboard.html')
+                if check_user['auth']==True:
+                    login_confirm = True
+                    request.session['login_confirm'] = login_confirm
+                    return render(request, 'dashboard.html')
+                else:
+                    login_confirm = False
+                    request.session['login_confirm'] = login_confirm
+                    return render(request, 'j.html')
+
             else :
                 login_confirm = False
                 request.session['login_confirm'] = login_confirm
@@ -179,7 +184,7 @@ def adminlogin(request):
             return render(request, 'login.html')
 def email_verification(request):
     if request.method=='POST':
-        #print('fffffffffffffffffffffffffff',request.POST)
+        ##print('fffffffffffffffffffffffffff',request.POST)
         Full_Name = request.POST['name']
         Address = request.POST['Add']
         Phone_No = request.POST['phone']
@@ -218,13 +223,13 @@ def forgotpassword(request):
 def login(request):
 
     if request.method=="POST":
-        #print(request.POST)
+        ##print(request.POST)
         if request.POST['pswrd'] == request.POST['cnfirm_pswrd']:
             pswrd=request.POST['cnfirm_pswrd']
             register_value = request.session["register"]
             data = {"pasword": pswrd, "ivrs": register_value[3], "name": register_value[0], "address": register_value[1], "phoneno": register_value[2], "auth": False,
             "email":register_value[4]}
-            #print(firebaseuser.get('/UserRegister',name=str(register_value[3])))
+            ##print(firebaseuser.get('/UserRegister',name=str(register_value[3])))
             if firebaseuser.get('/UserRegister',name=str(register_value[3])) == None:
                 firebaseuser.put('/UserRegister',data=data,name=register_value[3])
                 context = {
@@ -258,14 +263,13 @@ def new_user_request(request):
     allusers = firebaseadmin.get('/UserRegister', None)
     requestlist = []
     for i in allusers:
-        if allusers[i]['auth']:
-            #print(allusers[i]['auth'])
+        if not allusers[i]['auth']:
+            ##print(allusers[i]['auth'])
             requestlist.append(allusers[i])
     return render(request,'new.html',context={'requestlist':requestlist})
 
 def all_user(request):
     allusers = firebaseadmin.get('/UserRegister', None)
-
 
     context={
         'all_user':allusers
@@ -273,14 +277,16 @@ def all_user(request):
     return render(request,'AllUser.html',context=context)
 
 def search_user(request):
-    if request.method=="POST":
-        print(request.POST)
+
     return render(request,'search_user.html')
 
 def user_profile(request):
     if request.method=="POST":
+        #print(request.POST)
         search_ivrs=request.POST['ivrs']
         searched_user = firebaseuser.get('/UserRegister', name=search_ivrs)
+        #print(searched_user)
+        #print(searched_user['name'])
         if searched_user == None :
             context={
                 'nouserfound':True
@@ -290,4 +296,34 @@ def user_profile(request):
             context={
                 'searched_user':searched_user
             }
-    return render(request,'userprofile.html',context=context)
+        return render(request,'userprofile.html',context=context)
+
+def update_user_profile(request):
+    if request.method=="POST":
+        #print(request.POST)
+        search_ivrs=request.POST['ivrs']
+        searched_user = firebaseuser.get('/UserRegister', name=search_ivrs)
+        #print(searched_user)
+        firebaseuser.put('/UserRegister/'+str(search_ivrs),'name',request.POST['name'])
+        firebaseuser.put('/UserRegister/'+str(search_ivrs),'ivrs',request.POST['ivrs'])
+        firebaseuser.put('/UserRegister/'+str(search_ivrs),'address',request.POST['address'])
+        firebaseuser.put('/UserRegister/'+str(search_ivrs),'phoneno',request.POST['phoneno'])
+        firebaseuser.put('/UserRegister/'+str(search_ivrs),'email',request.POST['email'])
+        searched_user = firebaseuser.get('/UserRegister', name=search_ivrs)
+        #print(searched_user)
+        context={
+                'searched_user':searched_user
+        }
+        return render(request,'userprofile.html',context=context)
+
+
+def add_new_user_request(request):
+    ivrs=request.POST['ivrs']
+    firebaseuser.put('/UserRegister/' + str(ivrs), 'auth', True)
+    allusers = firebaseadmin.get('/UserRegister', None)
+    requestlist = []
+    for i in allusers:
+        if not allusers[i]['auth']:
+            ##print(allusers[i]['auth'])
+            requestlist.append(allusers[i])
+    return render(request,'new.html',context={'requestlist':requestlist})
