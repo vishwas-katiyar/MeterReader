@@ -241,7 +241,7 @@ h2 a {
 
 .container tr:hover {
   background-color: #1F2739;
-  color: #403E10;
+  color: #A7A1AE;
   font-weight: bold;
 
   box-shadow: #CCCCCC -1px 1px, #CCCCCC -2px 2px, #CCCCCC -3px 3px, #CCCCCC -4px 4px, #CCCCCC -5px 5px, #CCCCCC -6px 6px;
@@ -334,15 +334,13 @@ margin-right: 10px;
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="#">
-                    Admin
-                </a>
+                <a href="{% url 'AdminProfile' %}">{{admin_name}}</a>
             </li>
             <li>
-                <a href="#">Dashboard</a>
+                <a href="{% url 'adminlogin' %}">Dashboard</a>
             </li>
             <li>
-                <a href="#">Create User</a>
+                <a href="{% url 'register' %}">Create User</a>
             </li>
             <li>
                 <a href={% url 'new_user_request' %}>All Requests</a>

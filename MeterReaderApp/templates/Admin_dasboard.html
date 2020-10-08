@@ -150,15 +150,15 @@ background-color:#1F2739;
     <div id="sidebar-wrapper">
       <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="#">
-                    Admin
-                </a>
+
+                    <a href="{% url 'AdminProfile' %}">{{admin_name}}</a>
+
             </li>
             <li>
                 <a href="#">Dashboard</a>
             </li>
             <li>
-                <a href="#">Create User</a>
+                <a href="{% url 'register' %}">Create User</a>
             </li>
             <li>
                 <a href="{% url 'new_user_request' %}">All Requests</a>
@@ -170,7 +170,7 @@ background-color:#1F2739;
                 <a href="{% url 'search_user' %}">Profile</a>
             </li>
             <li>
-                <a href="#">About</a>
+                <a href="{% url 'AddAdmin' %}">Add New Admin</a>
             </li>
             <li>
                 <a href="#">Contact</a>

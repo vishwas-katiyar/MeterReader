@@ -166,22 +166,30 @@ def adminlogin(request):
     if request.method=='POST':
         Loggedin_admin_user_name = request.POST['admin_uname']
         Loggedin_admin_psw = request.POST['admin_psw']
-
-        allusers = firebaseadmin.get('/Admin', '')
-        for i in allusers:
-            if allusers[i]['nameadmin'] == Loggedin_admin_user_name and allusers[i]['paswordadmin'] == Loggedin_admin_psw:
+        search_admin = firebaseadmin.get('/Admin', name=Loggedin_admin_user_name)
+        if search_admin != None:
+            if search_admin['admin_username'] == Loggedin_admin_user_name and search_admin['admin_pswrd'] == Loggedin_admin_psw:
                 login_admin_confirm = True
                 request.session['login_admin_confirm']=login_admin_confirm
-                return render(request, 'Admin_dasboard.html')
+                request.session['admin_name']=Loggedin_admin_user_name
+                #print(search_admin['admin_designation'])
+                request.session['admin_designation']=search_admin['admin_designation']
+                request.session['admin_full_name']=search_admin['admin_fullname']
+                return render(request, 'Admin_dasboard.html',context={'admin_name':Loggedin_admin_user_name})
+            else:
+                login_admin_confirm = False
+                request.session['login_admin_confirm'] = login_admin_confirm
+                return render(request, 'login.html',context={'admin_pswrd':True})
         else :
             login_admin_confirm = False
             request.session['login_admin_confirm']=login_admin_confirm
-            return render(request, 'j.html')
+            return render(request, 'login.html',context={'no_admin':True})
     else:
         if request.session['login_admin_confirm']==True:
-            return render(request, 'Admin_dasboard.html')
+            return render(request, 'Admin_dasboard.html',context={'admin_name':request.session['admin_name']})
         else:
             return render(request, 'login.html')
+
 def email_verification(request):
     if request.method=='POST':
         ##print('fffffffffffffffffffffffffff',request.POST)
@@ -266,19 +274,18 @@ def new_user_request(request):
         if not allusers[i]['auth']:
             ##print(allusers[i]['auth'])
             requestlist.append(allusers[i])
-    return render(request,'new.html',context={'requestlist':requestlist})
+    return render(request,'new.html',context={'requestlist':requestlist,'admin_name':request.session['admin_name']})
 
 def all_user(request):
     allusers = firebaseadmin.get('/UserRegister', None)
-
     context={
-        'all_user':allusers
+        'all_user':allusers,'admin_name':request.session['admin_name']
     }
     return render(request,'AllUser.html',context=context)
 
 def search_user(request):
 
-    return render(request,'search_user.html')
+    return render(request,'search_user.html',context={'admin_name':request.session['admin_name']})
 
 def user_profile(request):
     if request.method=="POST":
@@ -294,7 +301,7 @@ def user_profile(request):
             return render(request,'search_user.html',context=context)
         else:
             context={
-                'searched_user':searched_user
+                'searched_user':searched_user,'admin_name':request.session['admin_name']
             }
         return render(request,'userprofile.html',context=context)
 
@@ -312,7 +319,8 @@ def update_user_profile(request):
         searched_user = firebaseuser.get('/UserRegister', name=search_ivrs)
         #print(searched_user)
         context={
-                'searched_user':searched_user
+                'searched_user':searched_user,
+            'admin_name':request.session['admin_name']
         }
         return render(request,'userprofile.html',context=context)
 
@@ -326,4 +334,40 @@ def add_new_user_request(request):
         if not allusers[i]['auth']:
             ##print(allusers[i]['auth'])
             requestlist.append(allusers[i])
-    return render(request,'new.html',context={'requestlist':requestlist})
+    return render(request,'new.html',context={'requestlist':requestlist,'admin_name':request.session['admin_name']})
+
+def AdminProfile(request):
+    admin_name=request.session['admin_name']
+    admin_designation=request.session['admin_designation']
+    admin_full_name=request.session['admin_full_name']
+    context={'admin_name':admin_name,
+             'admin_designation':admin_designation,
+             'admin_full_name':admin_full_name
+             }
+
+
+    return render(request,'AdminProfile.html',context=context)
+
+def AddAdmin(request):
+    if request.method=='POST':
+        admin_fullname=request.POST['admin_name']
+        admin_username=request.POST['admin_username']
+        pswrodadmin=request.POST['paswrd']
+        c_pswrodadmin=request.POST['cpaswrd']
+        admin_Designation=request.POST['admin_Designation']
+        if c_pswrodadmin == pswrodadmin:
+            data={'admin_fullname':admin_fullname,
+                'admin_username':admin_username,
+                 'admin_pswrd': pswrodadmin,
+                  'admin_designation':admin_Designation
+                  }
+            search_admin=firebaseuser.get('/Admin', name=admin_username)
+            print(search_admin)
+            if search_admin == None:
+                firebaseadmin.put('/Admin', data=data, name=admin_username)
+                return render(request, 'AddAdmin.html', context={'Added': True})
+            else:
+                return render(request, 'AddAdmin.html',context={'already':True})
+        else:
+            return render(request, 'AddAdmin.html',context={'notmatch':True})
+    return render(request, 'AddAdmin.html')

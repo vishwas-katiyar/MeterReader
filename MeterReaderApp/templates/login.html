@@ -194,4 +194,14 @@
     alert("Invalid IVRS No. Already Registered !");  // display string message
     {% endif %}
 </script>
+<script>
+    {% if admin_pswrd %}
+    alert("Invalid Password ");  // display string message
+    {% endif %}
+</script>
+<script>
+    {% if no_admin %}
+    alert("No Admin Found with this UserName ");  // display string message
+    {% endif %}
+</script>
 </html>
