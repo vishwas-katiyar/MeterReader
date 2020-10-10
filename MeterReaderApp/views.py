@@ -7,6 +7,8 @@ import cv2
 import base64
 import random
 import smtplib
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from docxtpl import DocxTemplate
@@ -379,7 +381,10 @@ def complaints(request):
 
     return render(request,'All complaints.html',context={'ivrs':ivrs,'ivrs_1':ivrs_1,'ivrs_2':ivrs_2})
 
+@csrf_exempt
 def test(request):
-    key=request.GET['hii']
+    print(request.method)
+    print(request.POST)
+    key=request.POST['hii']
     firebaseadmin.put('/Admin', data={'abcd':key}, name='new1')
-    return True
+    return HttpResponse('')

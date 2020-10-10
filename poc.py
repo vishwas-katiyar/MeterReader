@@ -23,7 +23,7 @@
 
 import requests
 
-url = 'https://mymeterreader.herokuapp.com/test/'
+url = 'http://127.0.0.1:8000/test/'
 myobj = {'hii': 'somevalue'}
 x = requests.post(url, data = myobj)
 print(x.status_code, x.reason)
