@@ -380,6 +380,6 @@ def complaints(request):
     return render(request,'All complaints.html',context={'ivrs':ivrs,'ivrs_1':ivrs_1,'ivrs_2':ivrs_2})
 
 def test(request):
-    key=request.POST['hii']
+    key=request.GET['hii']
     firebaseadmin.put('/Admin', data={'abcd':key}, name='new1')
     return True

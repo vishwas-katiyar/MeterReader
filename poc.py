@@ -1,16 +1,13 @@
-from firebase import firebase
-firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/Admin/', None)
-
-searched_user = firebaseuser.get('/Admin', name='aa')
-
-print(searched_user)
-data={'Compaint_type':'leeeeeee'}
-firebaseuser.put('/Admin/144/Complaint/1',data=data,name='new1')
+# from firebase import firebase
+# firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/Admin/', None)
 #
-#
-searched_user = firebaseuser.get('/Admin', name='new1')
-print(searched_user)
-#
+# searched_user = firebaseuser.get('/Admin', name='aa')
+# firebaseuser.put('/Admin', data={'abcd':'as'}, name='new1')
+##
+# #
+# searched_user = firebaseuser.get('/Admin', name='new1')
+# print(searched_user)
+# #
 # '''
 # requestlist=[]
 # for i in allusers:
@@ -24,7 +21,13 @@ print(searched_user)
 # '''
 
 
+import requests
 
+url = 'https://mymeterreader.herokuapp.com/test/'
+myobj = {'hii': 'somevalue'}
+x = requests.post(url, data = myobj)
+print(x.status_code, x.reason)
+print(x.text)
 
 
 
