@@ -1,0 +1,307 @@
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin Dashboard</title>
+
+    <!-- Bootstrap Core CSS -->
+
+    <!-- Custom CSS -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+
+    /*!
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Toggle Styles */
+
+#wrapper {
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+#wrapper.toggled {
+  padding-left: 250px;
+}
+#sidebar-wrapper {
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 0;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #000;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+#wrapper.toggled #sidebar-wrapper {
+  width: 250px;
+}
+#page-content-wrapper {
+
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+}
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -250px;
+}
+/* Sidebar Styles */
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 40px;
+}
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #999999;
+}
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+}
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+.sidebar-nav > .sidebar-brand {
+  height: 65px;
+  font-size: 18px;
+  line-height: 60px;
+}
+.sidebar-nav > .sidebar-brand a {
+  color: #999999;
+}
+.sidebar-nav > .sidebar-brand a:hover {
+  color: #fff;
+  background: none;
+}
+@media(min-width:768px) {
+  #wrapper {
+    padding-left: 250px;
+  }
+  #wrapper.toggled {
+    padding-left: 0;
+  }
+  #sidebar-wrapper {
+   background-color:#2C3446;
+    width: 250px;
+  }
+  #wrapper.toggled #sidebar-wrapper {
+    width: 0;
+  }
+  #page-content-wrapper {
+    padding: 20px;
+    position: relative;
+  }
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
+}
+body{
+color:white;
+background-color:#1F2739;
+}
+
+</style>
+    <style>
+    .nav-tabs{
+    margin-top: 16px;
+    background: #2C3446;
+    margin-left: -4%;
+    }
+    .nav-pills .nav-link{
+        margin-top: 12px ;
+        background:#2C3446;
+}
+.col-3{
+border-right:white 2px solid;
+height:100vh;
+}
+.h1 , h1{
+display:inline;
+}
+</style>
+</head>
+
+<body>
+
+<div id="wrapper" class="toggled">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+
+                <a href="{% url 'AdminProfile' %}">{{admin_name}}</a>
+
+            </li>
+            <li>
+                <a href="{% url 'adminlogin' %}">Dashboard</a>
+            </li>
+            <li>
+                <a href="{% url 'register' %}">Create User</a>
+            </li>
+            <li>
+                <a href="{% url 'new_user_request' %}">All Requests</a>
+            </li>
+            <li>
+                <a href="{% url 'all_user' %}">All Users</a>
+            </li>
+            <li>
+                <a href="{% url 'search_user' %}">Profile</a>
+            </li>
+            <li>
+                <a href="{% url 'AddAdmin' %}">Add New Admin</a>
+            </li>
+            <li>
+                <a href="#">Complaints</a>
+            </li>
+            <li>
+                <a href="{% url 'login' %}">Logout</a>
+            </li>
+
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <h1><a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>  Admin Dashboard</h1>
+                    <ul class="nav nav-tabs" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+                            <div class="row">
+                                <div class="nav col-3 flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    {% for i in ivrs %}
+                                    <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-{{i}}" role="tab" aria-controls="v-pills-home" aria-selected="true">{{i}}</a>
+                                    {% endfor %}
+                                </div>
+                                <div class="col-9 tab-content" id="v-pills-tabContent">
+                                    {% for i in ivrs %}
+                                    <div class="tab-pane fade " id="v-pills-{{i}}" role="tabpanel" aria-labelledby="v-pills-home-tab">{{i}}</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+                            <div class="row">
+                                <div class="nav col-3 flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    {% for i in ivrs_1 %}
+                                    <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-{{i}}" role="tab" aria-controls="v-pills-home" aria-selected="true">{{i}}</a>
+                                    {% endfor %}
+                                </div>
+                                <div class="col-9 tab-content" id="v-pills-tabContent">
+                                    {% for i in ivrs_1 %}
+                                    <div class="tab-pane fade " id="v-pills-{{i}}" role="tabpanel" aria-labelledby="v-pills-home-tab">{{i}}</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                            <div class="row">
+                                <div class="nav col-3 flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    {% for i in ivrs_2 %}
+                                    <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-{{i}}" role="tab" aria-controls="v-pills-home" aria-selected="true">{{i}}</a>
+                                    {% endfor %}
+                                </div>
+                                <div class="col-9 tab-content" id="v-pills-tabContent">
+                                    {% for i in ivrs_2 %}
+                                    <div class="tab-pane fade " id="v-pills-{{i}}" role="tabpanel" aria-labelledby="v-pills-home-tab">{{i}}</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script src="https://stacksnippets.net/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="https://stacksnippets.net/js/bootstrap.min.js"></script>
+
+<!-- Menu Toggle Script -->
+
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+
+    $("#menu-toggle").click(function(e) {
+  e.preventDefault();
+  $("#wrapper").toggleClass("toggled");
+});
+
+</script>
+</html>

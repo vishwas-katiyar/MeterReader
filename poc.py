@@ -1,17 +1,14 @@
 from firebase import firebase
 firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/Admin/', None)
-data = {'_name':'unique22',
-        'nameadmin': 'admin122',
-        'paswordadmin': 'admin122'
-        }
 
 searched_user = firebaseuser.get('/Admin', name='aa')
 
 print(searched_user)
-#firebaseuser.put('/Admin',data=data,name='new1')
+data={'Compaint_type':'leeeeeee'}
+firebaseuser.put('/Admin/144/Complaint/1',data=data,name='new1')
 #
 #
-searched_user = firebaseuser.get('/Admin', None)
+searched_user = firebaseuser.get('/Admin', name='new1')
 print(searched_user)
 #
 # '''

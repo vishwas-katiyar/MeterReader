@@ -365,9 +365,21 @@ def AddAdmin(request):
             print(search_admin)
             if search_admin == None:
                 firebaseadmin.put('/Admin', data=data, name=admin_username)
-                return render(request, 'AddAdmin.html', context={'Added': True})
+                return render(request, 'AddAdmin.html', context={'Added': True,'admin_name':request.session['admin_name']})
             else:
-                return render(request, 'AddAdmin.html',context={'already':True})
+                return render(request, 'AddAdmin.html',context={'already':True,'admin_name':request.session['admin_name']})
         else:
-            return render(request, 'AddAdmin.html',context={'notmatch':True})
-    return render(request, 'AddAdmin.html')
+            return render(request, 'AddAdmin.html',context={'notmatch':True,'admin_name':request.session['admin_name']})
+    return render(request, 'AddAdmin.html',context={'admin_name':request.session['admin_name']})
+
+def complaints(request):
+    ivrs=['one','two',3]
+    ivrs_1=['one1','two1',31]
+    ivrs_2=['one2','two2',32]
+
+    return render(request,'All complaints.html',context={'ivrs':ivrs,'ivrs_1':ivrs_1,'ivrs_2':ivrs_2})
+
+def test(request):
+    key=request.POST['hii']
+    firebaseadmin.put('/Admin', data={'abcd':key}, name='new1')
+    return True

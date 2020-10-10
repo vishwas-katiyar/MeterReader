@@ -353,11 +353,15 @@ margin-right: 10px;
                 <a href="{% url 'search_user' %}">Profile</a>
             </li>
             <li>
-                <a href="#">About</a>
+                <a href="{% url 'AddAdmin' %}">Add New Admin</a>
             </li>
             <li>
-                <a href="#">Contact</a>
+                <a href="{% url 'complaints' %}">Complaints</a>
             </li>
+            <li>
+                <a href="{% url 'login' %}">Logout</a>
+            </li>
+
         </ul>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -370,7 +374,7 @@ margin-right: 10px;
                     <div id="1newuser">
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
                         <h1><span class="blue">&lt;</span>All New<span class="blue">&gt;</span> <span class="yellow">Requests</pan></h1>
-                        <h2>Created with love by <a href="http://pablogarciafernandez.com" target="_blank">Pablo García Fernández</a></h2>
+                        <h2>Created with love by <a href="#" target="_blank">MVAR Developments</a></h2>
 
                         <table class="container">
                             <thead>

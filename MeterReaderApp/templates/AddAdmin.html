@@ -169,10 +169,13 @@ background-color:#1F2739;
                 <a href="{% url 'search_user' %}">Profile</a>
             </li>
             <li>
-                <a href="#">About</a>
+                <a href="#">Add New Admin</a>
             </li>
             <li>
-                <a href="#">Contact</a>
+                <a href="{% url 'complaints' %}">Complaints</a>
+            </li>
+            <li>
+                <a href="{% url 'login' %}">Logout</a>
             </li>
         </ul>
     </div>
@@ -205,13 +208,13 @@ background-color:#1F2739;
                                     <div class="form-group">
                                         <label class="col-lg-3 control-label">Full Name:</label>
                                         <div class="col-lg-8">
-                                            <input name="admin_name" class="form-control" type="text" placeholder="Enter New Admin Name..">
+                                            <input name="admin_name" class="form-control" type="text" placeholder="Enter New Admin Name.." required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-3 control-label">User Name :</label>
                                         <div class="col-lg-8">
-                                            <input name="admin_username" class="form-control" type="text" placeholder="Enter Admin User Name..">
+                                            <input name="admin_username" class="form-control" type="text" placeholder="Enter Admin User Name.." required>
                                         </div>
                                     </div>
 
@@ -219,7 +222,7 @@ background-color:#1F2739;
                                     <div class="form-group">
                                         <label class="col-md-3 control-label">Designation :</label>
                                         <div class="col-md-8">
-                                            <select class="form-control" id="cars" name="admin_Designation" >
+                                            <select class="form-control" id="cars" name="admin_Designation" required>
                                                 <option value="" selected disabled hidden>Select Designation</option>
                                                 <option value="Department Under Security">Department Under Security</option>
                                                 <option value="Deputy Secretary">Deputy Secretary</option>
@@ -233,13 +236,13 @@ background-color:#1F2739;
                                     <div class="form-group">
                                         <label class="col-lg-3 control-label">Password :</label>
                                         <div class="col-lg-8">
-                                            <input name="paswrd" class="form-control" type="text" placeholder='Enter New Password..'>
+                                            <input name="paswrd" class="form-control" type="text" placeholder='Enter New Password..' required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-3 control-label">Confirm Password :</label>
                                         <div class="col-lg-8">
-                                            <input name="cpaswrd" class="form-control" type="text" placeholder="Enter Password Again..">
+                                            <input name="cpaswrd" class="form-control" type="text" placeholder="Enter Password Again.." required>
                                         </div>
                                     </div>
                                     <div class="form-group">

@@ -231,10 +231,13 @@ form > .button:hover {
                 <a href="#">Profile</a>
             </li>
             <li>
-                <a href="#">About</a>
+                <a href="{% url 'AddAdmin' %}">Add New Admin</a>
             </li>
             <li>
-                <a href="#">Contact</a>
+                <a href="{% url 'complaints' %}">Complaints</a>
+            </li>
+            <li>
+                <a href="{% url 'login' %}">Logout</a>
             </li>
         </ul>
     </div>
