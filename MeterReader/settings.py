@@ -121,8 +121,12 @@ USE_TZ = True
 
 STATIC_URL = '/MeterReaderApp/Static/'
 MEDIA_ROOT=''
-STATIC_ROOT=''
+STATIC_ROOT='staticfiles'
 APPEND_SLASH=False
+STATICFILES_DIRS = (
+    (os.path.join(BASE_DIR,'smcore','/MeterReaderApp/Static/')),
+)
+
 #SECURE_SSL_REDIRECT = True
 #SESSION_COOKIE_SECURE = True
 #CSRF_COOKIE_SECURE = True

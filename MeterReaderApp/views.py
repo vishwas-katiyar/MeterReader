@@ -386,5 +386,32 @@ def test(request):
     print(request.method)
     print(request.POST)
     key=request.POST['hii']
+
     firebaseadmin.put('/Admin', data={'abcd':key}, name='new1')
-    return HttpResponse('')
+
+    doc = DocxTemplate("staticfiles/SampleBill.docx")
+
+    context_doc = {'meterNumber': '123456789',
+                   'customer_name': 'avsss',
+                   'previousYear': 123,
+                   'currentYear': 123
+                   }
+    doc.render(context_doc)
+    doc.save("staticfiles/generated/GeneratedBill.docx")
+    from firebase_admin import credentials, initialize_app, storage
+    # Init firebase with your credentials
+    cred = credentials.Certificate("login-system-73453-5ca66a2acaee.json")
+    initialize_app(cred, {'storageBucket': 'login-system-73453.appspot.com'})
+
+    # Put your local file path
+    fileName = "MeterReaderApp/Static/generated/GeneratedBill.docx"
+    bucket = storage.bucket()
+    blob = bucket.blob(fileName)
+    blob.upload_from_filename(fileName)
+
+    # Opt : if you want to make public access from the URL
+    blob.make_public()
+
+    print("your file url", blob.public_url)
+
+    return  HttpResponse({'a':blob.public_url}, content_type='application/json')
