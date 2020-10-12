@@ -8,6 +8,7 @@ import base64
 import random
 import smtplib
 from django.http import HttpResponse
+from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 import firebase_admin
 from firebase_admin import credentials, initialize_app, storage
@@ -385,18 +386,72 @@ def complaints(request):
 
 @csrf_exempt
 def test(request):
-    print(request.method)
-    print(request.POST)
-    key=request.POST['hii']
 
-    firebaseadmin.put('/Admin', data={'abcd':key}, name='new1')
+    print(request.POST)
+
+    ivrs_no = request.POST['ivrs']
+    current_reading = request.POST['CurrentReading']
+    current_date = request.POST['CurrentDate']
+    current_date = current_date.replace('_',',')
+    user = firebaseuser.get('/UserRegister', name=ivrs_no)
+    customer_name=user['name']
+    customer_email=user['email']
+    customer_address=user['address']
+    customer_phoneno=user['phoneno']
+    customer_auth=user['auth']
+    if customer_auth:
+        customer_auth='Verified User'
+    else :
+        customer_auth = 'Not Verified '
+    a=user['MeterReading'][list(user['MeterReading'].keys())[-2]]
+    previous_date = list(a.keys())[0].replace('_',',')
+    previous_reading = list(a.values())[0]
+    date_format = "%d,%m,%y"
+
+    pd = datetime.strptime(previous_date, date_format)
+    cd = datetime.strptime(current_date, date_format)
+    days = (cd - pd).days
+    print(type(days))
+
+    #firebaseadmin.put('/Admin', data={'abcd':key}, name='new1')
+
+    units = int(current_reading) - int(previous_reading)
+    print(type(units))
+
+    if (units < 50):
+        amount = units * 2.60
+        surcharge = 25
+    elif (units <= 100):
+        amount = 130 + ((units - 50) * 3.25)
+        surcharge = 35
+    elif (units <= 200):
+        amount = 130 + 162.50 + ((units - 100) * 5.26)
+        surcharge = 45
+    else:
+        amount = 130 + 162.50 + 526 + ((units - 200) * 8.45)
+        surcharge = 75
+
+    total = amount + surcharge
+
 
     doc = DocxTemplate("staticfiles/SampleBill.docx")
-
-    context_doc = {'meterNumber': '123456789',
-                   'customer_name': 'avsss',
-                   'previousYear': 123,
-                   'currentYear': 123
+    avg_unit=units/days
+    context_doc = {'ivrs': ivrs_no,
+                   'customer_name': customer_name,
+                   'customer_address': customer_address,
+                   'previous_date': previous_date,
+                   'current_date': current_date,
+                   'current_reading': current_reading,
+                   'previous_reading': previous_reading,
+                   'days': days,
+                   'supplycharges': surcharge,
+                   'units': units,
+                   'amount': amount,
+                   'total_amount': total,
+                   'customer_email': customer_email,
+                   'avg_unit': avg_unit,
+                   'customer_status': customer_auth,
+                   'customer_phoneno': customer_phoneno
                    }
     doc.render(context_doc)
     doc.save("staticfiles/generated/GeneratedBill.docx")
@@ -407,9 +462,9 @@ def test(request):
         initialize_app(cred, {'storageBucket': 'login-system-73453.appspot.com'})
 
     # Put your local file path
-    fileName = "MeterReaderApp/Static/generated/GeneratedBill.docx"
+    fileName = "staticfiles/generated/GeneratedBill.docx"
     bucket = storage.bucket()
-    blob = bucket.blob(fileName)
+    blob = bucket.blob(ivrs_no+'/'+current_date+'.docx')
     blob.upload_from_filename(fileName)
 
     # Opt : if you want to make public access from the URL
@@ -417,4 +472,6 @@ def test(request):
 
     print("your file url", blob.public_url)
 
+    #firebaseuser.put('/UserRegister/' + str(123) + '/MeterReading', str(123) + '0010201/link/', 'hiiii')
+    firebaseuser.put('/UserRegister/' + ivrs_no + '/MeterReading', ivrs_no + '00'+str(cd.month)+str(cd.year)+'/Bill/', blob.public_url)
     return  HttpResponse({blob.public_url}, content_type='application/json')

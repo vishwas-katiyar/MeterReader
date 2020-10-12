@@ -1,10 +1,14 @@
-# # from firebase import firebase
-# from docxtpl import DocxTemplate
-# # import json
-# #
-# # firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/Admin/', None)
-# #
-# #
+# from firebase import firebase
+# firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/', None)
+#
+# firebaseuser.put('/UserRegister/' + str(123)+'/MeterReading', str(123)+'0010201/link/', 'hiiii11')
+#
+# # from docxtpl import DocxTemplate
+# # # import json
+# # # #
+# firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/', None)
+# # #
+# # #
 # doc = DocxTemplate("MeterReaderApp/Static/SampleBill.docx")
 # #
 # context_doc = {'meterNumber': '123456789',
@@ -37,11 +41,14 @@
 
 import requests
 url = 'http://127.0.0.1:8000/test/'
-myobj = {'hii': 'somevalue111'}
+myobj = {'ivrs': '444',
+         'CurrentDate':'13_10_20',
+         'CurrentReading':180,
+         }
 x = requests.post(url, data = myobj)
-# print(x.status_code, x.reason)
-print(x.text)
-
+# print(x.status_code, x.qreason)
+print('jhgkjhghgjk',x.text)
+#
 
 
 
@@ -72,3 +79,36 @@ print(x.text)
 # li2 = li1.copy()
 # print("Original List:", li1)
 # print("After Cloning:", li2)
+#
+# #
+# user = firebaseuser.get('/UserRegister', name='444')
+# print(user['auth'])
+# for i in user:
+#     print(i)
+#
+#
+#
+
+
+
+
+#
+# #
+# a=user['MeterReading'][list(user['MeterReading'].keys())[-2]]
+# print(list(a.keys())[0].replace('_',','))
+# # print(list(a.values())[0])
+# c='12,12,2016'
+# d='12,3,2016'
+#
+# from datetime import datetime
+# date_format = "%d,%m,%Y"
+# a = datetime.strptime(c, date_format)
+# b = datetime.strptime(d, date_format)
+# delta = b - a
+# # #print delta.days # that's it
+# # print(delta.days)
+# if c[3:5] == 12:
+#     c[3:5]='01'
+# else :
+#     c[3:5]=str(int(c[3:5])+1)
+# print(c)
