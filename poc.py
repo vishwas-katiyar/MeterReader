@@ -36,13 +36,19 @@
 #
 
 import requests
-
 url = 'http://mymeterreader.herokuapp.com/test/'
 myobj = {'hii': 'somevalue111'}
 x = requests.post(url, data = myobj)
-print(x.status_code, x.reason)
-print(x.text)
+# print(x.status_code, x.reason)
+# print(x.text)
+import json
+
+
+
 print(x)
+
+
+
 
 # # print(x)
 # from firebase_admin import credentials, initialize_app, storage

@@ -400,8 +400,9 @@ def test(request):
     doc.save("staticfiles/generated/GeneratedBill.docx")
     from firebase_admin import credentials, initialize_app, storage
     # Init firebase with your credentials
-    cred = credentials.Certificate("login-system-73453-5ca66a2acaee.json")
-    initialize_app(cred, {'storageBucket': 'login-system-73453.appspot.com'})
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("login-system-73453-5ca66a2acaee.json")
+        initialize_app(cred, {'storageBucket': 'login-system-73453.appspot.com'})
 
     # Put your local file path
     fileName = "MeterReaderApp/Static/generated/GeneratedBill.docx"
