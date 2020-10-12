@@ -9,6 +9,8 @@ import random
 import smtplib
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+import firebase_admin
+from firebase_admin import credentials, initialize_app, storage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from docxtpl import DocxTemplate
@@ -398,7 +400,7 @@ def test(request):
                    }
     doc.render(context_doc)
     doc.save("staticfiles/generated/GeneratedBill.docx")
-    from firebase_admin import credentials, initialize_app, storage
+
     # Init firebase with your credentials
     if not firebase_admin._apps:
         cred = credentials.Certificate("login-system-73453-5ca66a2acaee.json")
@@ -415,4 +417,4 @@ def test(request):
 
     print("your file url", blob.public_url)
 
-    return  HttpResponse({'a':blob.public_url}, content_type='application/json')
+    return  HttpResponse({blob.public_url}, content_type='application/json')
