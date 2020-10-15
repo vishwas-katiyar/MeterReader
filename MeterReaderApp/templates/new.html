@@ -231,14 +231,14 @@ h2 a {
 
 .container td:first-child { color: #FB667A; }
 
-.container tr:hover {
+.container1 tr:hover {
    background-color: #464A52;
 -webkit-box-shadow: 0 6px 6px -6px #0E1119;
 	   -moz-box-shadow: 0 6px 6px -6px #0E1119;
 	        box-shadow: 0 6px 6px -6px #0E1119;
 }
 
-.container tr:hover {
+.container1 tr:hover {
   background-color: #FFF842;
   color: #A7A1AE;
   font-weight: bold;
@@ -321,7 +321,19 @@ input:submit + .slider:before {
 }
 .content{
 margin-right: 10px;
+
+
 }
+.inputinitial{
+ background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+padding: .375rem .75rem;
+
+}
+
 </style>
 </head>
 
@@ -334,7 +346,7 @@ margin-right: 10px;
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
 
-                    <a href="{% url 'AdminProfile' %}">{{admin_name}}</a>
+                <a href="{% url 'AdminProfile' %}">{{admin_name}}</a>
 
             </li>
             <li>
@@ -397,15 +409,37 @@ margin-right: 10px;
                                 <td>{{user.address}}</td>
                                 <td>{{user.phoneno}}</td>
                                 <td>{{user.email}}</td>
-                                <td><div class="content">
-                                    <label class="switch">
-                                        <form method="post" action="{% url 'add_new_user_request' %}">
-                                            {% csrf_token %}
-                                        <input name="ivrs" type="submit" value="{{user.ivrs}}">
-                                            <input name="ivrs" type="submit" value="{{user.ivrs}}">
-                                        <span class="slider round"></span>
-                                        </form>
-                                    </label>
+                                <td><div class="content1">
+
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Verify</button>
+                                        <div class="modal fade" id="myModal" role="dialog">
+                                            <div class="modal-dialog">
+
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title"> Enter Initial reading for IVRS No. : {{user.ivrs}}</h4>
+                                                    </div>
+                                                    <form method="post" action="{% url 'add_new_user_request' %}" autocomplete="off">
+
+                                                        <div class="modal-body">
+                                                            {% csrf_token %}
+
+                                                            <input name="ivrs" type="hidden" value="{{user.ivrs}}">
+                                                            <input type="text" class="inputinitial" placeholder="Enter initial Reading..." name='initial_reading' required >
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <input type="submit" class="btn btn-primary" value="Submit" >
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
                                 </div></td>
 
                             </tr>

@@ -312,9 +312,9 @@ def user_profile(request):
 
 def update_user_profile(request):
     if request.method=="POST":
+
         #print(request.POST)
         search_ivrs=request.POST['ivrs']
-        searched_user = firebaseuser.get('/UserRegister', name=search_ivrs)
         #print(searched_user)
         firebaseuser.put('/UserRegister/'+str(search_ivrs),'name',request.POST['name'])
         firebaseuser.put('/UserRegister/'+str(search_ivrs),'ivrs',request.POST['ivrs'])
@@ -332,7 +332,12 @@ def update_user_profile(request):
 
 def add_new_user_request(request):
     ivrs=request.POST['ivrs']
+    initial_reading=request.POST['initial_reading']
     firebaseuser.put('/UserRegister/' + str(ivrs), 'auth', True)
+    from datetime import date
+    today = date.today()
+    _today=str(date.today()).replace('-','_')
+    firebaseuser.put('/UserRegister/' + str(ivrs) + '/MeterReading/'+str(ivrs)+'00'+str(today.month)+str(today.year)+'/',_today, initial_reading)
     allusers = firebaseadmin.get('/UserRegister', None)
     requestlist = []
     for i in allusers:
@@ -387,56 +392,57 @@ def complaints(request):
 @csrf_exempt
 def test(request):
 
-    print(request.POST)
 
     ivrs_no = request.POST['ivrs']
     current_reading = request.POST['CurrentReading']
     current_date = request.POST['CurrentDate']
     current_date = current_date.replace('_',',')
     user = firebaseuser.get('/UserRegister', name=ivrs_no)
-    customer_name=user['name']
-    customer_email=user['email']
-    customer_address=user['address']
-    customer_phoneno=user['phoneno']
-    customer_auth=user['auth']
-    if customer_auth:
-        customer_auth='Verified User'
-    else :
-        customer_auth = 'Not Verified '
-    a=user['MeterReading'][list(user['MeterReading'].keys())[-2]]
-    previous_date = list(a.keys())[0].replace('_',',')
-    previous_reading = list(a.values())[0]
-    date_format = "%d,%m,%y"
+    if len(list(user['MeterReading'].keys())) > 1:
+        a = user['MeterReading'][list(user['MeterReading'].keys())[-2]]
+        customer_name=user['name']
+        customer_email=user['email']
+        customer_address=user['address']
+        customer_phoneno=user['phoneno']
+        customer_auth=user['auth']
+        if customer_auth:
+            customer_auth='Verified User'
+        else :
+            customer_auth = 'Not Verified '
 
-    pd = datetime.strptime(previous_date, date_format)
-    cd = datetime.strptime(current_date, date_format)
-    days = (cd - pd).days
-    print(type(days))
+        previous_date = list(a.keys())[0].replace('_',',')
+        previous_reading = list(a.values())[0]
+        date_format = "%d,%m,%y"
 
-    #firebaseadmin.put('/Admin', data={'abcd':key}, name='new1')
-
-    units = int(current_reading) - int(previous_reading)
-    print(type(units))
-
-    if (units < 50):
-        amount = units * 2.60
-        surcharge = 25
-    elif (units <= 100):
-        amount = 130 + ((units - 50) * 3.25)
-        surcharge = 35
-    elif (units <= 200):
-        amount = 130 + 162.50 + ((units - 100) * 5.26)
-        surcharge = 45
-    else:
-        amount = 130 + 162.50 + 526 + ((units - 200) * 8.45)
-        surcharge = 75
-
-    total = amount + surcharge
+        pd = datetime.strptime(previous_date, date_format)
+        cd = datetime.strptime(current_date, date_format)
+        days = (cd - pd).days
 
 
-    doc = DocxTemplate("staticfiles/SampleBill.docx")
-    avg_unit=units/days
-    context_doc = {'ivrs': ivrs_no,
+        #firebaseadmin.put('/Admin', data={'abcd':key}, name='new1')
+
+        units = int(current_reading) - int(previous_reading)
+
+
+        if (units < 50):
+            amount = units * 2.60
+            surcharge = 25
+        elif (units <= 100):
+            amount = 130 + ((units - 50) * 3.25)
+            surcharge = 35
+        elif (units <= 200):
+            amount = 130 + 162.50 + ((units - 100) * 5.26)
+            surcharge = 45
+        else:
+            amount = 130 + 162.50 + 526 + ((units - 200) * 8.45)
+            surcharge = 75
+
+        total = amount + surcharge
+
+
+        doc = DocxTemplate("staticfiles/SampleBill.docx")
+        avg_unit=units/days
+        context_doc = {'ivrs': ivrs_no,
                    'customer_name': customer_name,
                    'customer_address': customer_address,
                    'previous_date': previous_date,
@@ -453,25 +459,27 @@ def test(request):
                    'customer_status': customer_auth,
                    'customer_phoneno': customer_phoneno
                    }
-    doc.render(context_doc)
-    doc.save("staticfiles/generated/GeneratedBill.docx")
+        doc.render(context_doc)
+        doc.save("staticfiles/generated/GeneratedBill.docx")
 
-    # Init firebase with your credentials
-    if not firebase_admin._apps:
-        cred = credentials.Certificate("login-system-73453-5ca66a2acaee.json")
-        initialize_app(cred, {'storageBucket': 'login-system-73453.appspot.com'})
+        # Init firebase with your credentials
+        if not firebase_admin._apps:
+            cred = credentials.Certificate("login-system-73453-5ca66a2acaee.json")
+            initialize_app(cred, {'storageBucket': 'login-system-73453.appspot.com'})
 
-    # Put your local file path
-    fileName = "staticfiles/generated/GeneratedBill.docx"
-    bucket = storage.bucket()
-    blob = bucket.blob(ivrs_no+'/'+current_date+'.docx')
-    blob.upload_from_filename(fileName)
+        # Put your local file path
+        fileName = "staticfiles/generated/GeneratedBill.docx"
+        bucket = storage.bucket()
+        blob = bucket.blob(ivrs_no+'/'+current_date+'.docx')
+        blob.upload_from_filename(fileName)
 
-    # Opt : if you want to make public access from the URL
-    blob.make_public()
+        # Opt : if you want to make public access from the URL
+        blob.make_public()
 
-    print("your file url", blob.public_url)
+        print("your file url", blob.public_url)
 
-    #firebaseuser.put('/UserRegister/' + str(123) + '/MeterReading', str(123) + '0010201/link/', 'hiiii')
-    firebaseuser.put('/UserRegister/' + ivrs_no + '/MeterReading', ivrs_no + '00'+str(cd.month)+str(cd.year)+'/Bill/', blob.public_url)
-    return  HttpResponse({blob.public_url}, content_type='application/json')
+        #firebaseuser.put('/UserRegister/' + str(123) + '/MeterReading', str(123) + '0010201/link/', 'hiiii')
+        firebaseuser.put('/UserRegister/' + ivrs_no + '/MeterReading', ivrs_no + '00'+str(cd.month)+str(cd.year)+'/Bill/', blob.public_url)
+        return  HttpResponse({blob.public_url}, list(user['MeterReading'].keys()))
+    else:
+        return HttpResponse({'First Reading Entered'},list(user['MeterReading'].keys()))

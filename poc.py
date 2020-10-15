@@ -1,6 +1,21 @@
 # from firebase import firebase
 # firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/', None)
-#
+# searched_user = firebaseuser.get('/UserRegister', name='444')
+# print(searched_user)
+# firebaseuser.put('/UserRegister/'+str(444)+'/MeterReading/44400102020','12_12_2020','00' )
+# searched_user = firebaseuser.get('/UserRegister', name='444')
+# print(searched_user)
+# # print(searched_user['Complaints'][1])
+# #
+from datetime import date
+
+today = date.today()
+_today=str(date.today()).replace('-','/')
+print(_today)
+print(today.year)
+print(today.month)
+print(today)
+
 # firebaseuser.put('/UserRegister/' + str(123)+'/MeterReading', str(123)+'0010201/link/', 'hiiii11')
 #
 # # from docxtpl import DocxTemplate
@@ -37,19 +52,19 @@
 #
 # #chmod +x MeterReaderApp/Tesseract-OCR/tesseract.exe
 # '''
-#
 
-import requests
-url = 'http://127.0.0.1:8000/test/'
-myobj = {'ivrs': '444',
-         'CurrentDate':'13_10_20',
-         'CurrentReading':180,
-         }
-x = requests.post(url, data = myobj)
-# print(x.status_code, x.qreason)
-print('jhgkjhghgjk',x.text)
 #
-
+# import requests
+# url = 'http://127.0.0.1:8000/test/'
+# myobj = {'ivrs': '444',
+#          'CurrentDate':'13_10_20',
+#          'CurrentReading':180,
+#          }
+# x = requests.post(url, data = myobj)
+# # print(x.status_code, x.qreason)
+# print('jhgkjhghgjk',x.text)
+# # #
+#
 
 
 # # print(x)
