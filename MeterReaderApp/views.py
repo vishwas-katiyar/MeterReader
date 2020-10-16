@@ -412,7 +412,7 @@ def test(request):
 
     previous_date = list(a.keys())[0].replace('_',',')
     previous_reading = list(a.values())[0]
-    date_format = "%d,%m,%y"
+    date_format = "%Y,%m,%d"
 
     pd = datetime.strptime(previous_date, date_format)
     cd = datetime.strptime(current_date, date_format)
