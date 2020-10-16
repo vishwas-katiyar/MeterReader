@@ -6,15 +6,15 @@
 # searched_user = firebaseuser.get('/UserRegister', name='444')
 # print(searched_user)
 # # print(searched_user['Complaints'][1])
-# #
-from datetime import date
-
-today = date.today()
-_today=str(date.today()).replace('-','/')
-print(_today)
-print(today.year)
-print(today.month)
-print(today)
+# # #/
+# from datetime import date
+#
+# today = date.today()
+# _today=str(date.today()).replace('-','/')
+# print(_today)
+# print(today.year)
+# print(today.month)
+# print(today)
 
 # firebaseuser.put('/UserRegister/' + str(123)+'/MeterReading', str(123)+'0010201/link/', 'hiiii11')
 #
