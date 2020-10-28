@@ -205,6 +205,7 @@ def email_verification(request):
         email = request.POST['email']
 
         generated_otp = random.randint(100000, 999999)
+
         mail_content = '''OTP For U : '''+str(generated_otp)+ '''  ::look'''
         send_coad(email, mail_content)
 
@@ -331,13 +332,13 @@ def update_user_profile(request):
 
 
 def add_new_user_request(request):
+    print(request.POST)
     ivrs=request.POST['ivrs']
+    initial_date=request.POST['initial_date']
     initial_reading=request.POST['initial_reading']
     firebaseuser.put('/UserRegister/' + str(ivrs), 'auth', True)
-    from datetime import date
-    today = date.today()
-    _today=str(date.today()).replace('-','_')
-    firebaseuser.put('/UserRegister/' + str(ivrs) + '/MeterReading/'+str(ivrs)+'00'+str(today.month)+str(today.year)+'/',_today, initial_reading)
+    initial_date=str(initial_date).replace('-','_')
+    firebaseuser.put('/UserRegister/' + str(ivrs) + '/MeterReading/'+str(ivrs)+'00'+initial_date[5:7]+initial_date[:4]+'/',initial_date, initial_reading)
     allusers = firebaseadmin.get('/UserRegister', None)
     requestlist = []
     for i in allusers:
@@ -383,11 +384,63 @@ def AddAdmin(request):
     return render(request, 'AddAdmin.html',context={'admin_name':request.session['admin_name']})
 
 def complaints(request):
-    ivrs=['one','two',3]
-    ivrs_1=['one1','two1',31]
-    ivrs_2=['one2','two2',32]
+    searched_user = firebaseuser.get('/UserRegister', '')
 
-    return render(request,'All complaints.html',context={'ivrs':ivrs,'ivrs_1':ivrs_1,'ivrs_2':ivrs_2})
+    complaint = []
+    emergency_ivrs = []
+    emergency_dict = {}
+    emergency_ivrs_complaint = []
+    complaint_ivrs = []
+    complaint_dict = {}
+    complaint_ivrs_complaint = []
+    appli_sugg_ivrs = []
+    appli_sugg_dict = {}
+    appli_sugg_ivrs_complaint = []
+    for i in searched_user:
+        # print(i)
+
+        if 'Complaints' in searched_user[i].keys():
+            complaint.append(i)
+            for j in searched_user[i]["Complaints"][1:]:
+                val = j.values()
+                if 'Emergency Complaints' in val:
+                    emergency_ivrs.append(i)
+                    emergency_ivrs_complaint.append(j['complaintMessage'])
+                    if i in emergency_dict.keys():
+                        emergency_dict[i] = [emergency_dict[i], j['complaintMessage']]
+                    else:
+                        emergency_dict[i] = [j['complaintMessage']]
+                elif 'Complaints' in val:
+                    complaint_ivrs.append(i)
+                    complaint_ivrs_complaint.append(j['complaintMessage'])
+                    if i in complaint_dict.keys():
+                        complaint_dict[i] = complaint_dict[i] + [j['complaintMessage']]
+                    else:
+                        complaint_dict[i] = [j['complaintMessage']]
+                elif 'Application/Suggestions' in val:
+                    appli_sugg_ivrs.append(i)
+                    appli_sugg_ivrs_complaint.append(j['complaintMessage'])
+                    if i in appli_sugg_dict.keys():
+                        appli_sugg_dict[i] = appli_sugg_dict[i].insert(j['complaintMessage'])
+                    else:
+                        appli_sugg_dict[i] = [j['complaintMessage']]
+
+    complaint_ivrs = list(set(complaint_ivrs))
+    context={
+        'emergency_ivrs':emergency_ivrs,
+        'emergency_dict':emergency_dict,
+        'emergency_ivrs_complaint':emergency_ivrs_complaint,
+        'complaint_ivrs':complaint_ivrs,
+        'complaint_ivrs_complaint':complaint_ivrs_complaint,
+        'complaint_dict':complaint_dict,
+        'appli_sugg_ivrs':appli_sugg_ivrs,
+        'appli_sugg_ivrs_complaint':appli_sugg_ivrs_complaint,
+        'appli_sugg_dict':appli_sugg_dict
+    }
+    return render(request,'All complaints.html',context=context)
+
+
+
 
 @csrf_exempt
 def test(request):
@@ -413,13 +466,9 @@ def test(request):
     previous_date = list(a.keys())[0].replace('_',',')
     previous_reading = list(a.values())[0]
     date_format = "%Y,%m,%d"
-
     pd = datetime.strptime(previous_date, date_format)
     cd = datetime.strptime(current_date, date_format)
     days = (cd - pd).days
-
-
-    #firebaseadmin.put('/Admin', data={'abcd':key}, name='new1')
 
     units = int(current_reading) - int(previous_reading)
 

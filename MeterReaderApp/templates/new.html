@@ -411,33 +411,35 @@ padding: .375rem .75rem;
                                 <td>{{user.email}}</td>
                                 <td><div class="content1">
 
-                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Verify</button>
-                                        <div class="modal fade" id="myModal" role="dialog">
-                                            <div class="modal-dialog">
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Verify</button>
+                                    <div class="modal fade" id="myModal" role="dialog">
+                                        <div class="modal-dialog">
 
-                                                <!-- Modal content-->
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                        <h4 class="modal-title"> Enter Initial reading for IVRS No. : {{user.ivrs}}</h4>
-                                                    </div>
-                                                    <form method="post" action="{% url 'add_new_user_request' %}" autocomplete="off">
-
-                                                        <div class="modal-body">
-                                                            {% csrf_token %}
-
-                                                            <input name="ivrs" type="hidden" value="{{user.ivrs}}">
-                                                            <input type="text" class="inputinitial" placeholder="Enter initial Reading..." name='initial_reading' required >
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <input type="submit" class="btn btn-primary" value="Submit" >
-                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                                        </div>
-                                                    </form>
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title"> Enter Initial reading for IVRS No. : {{user.ivrs}}</h4>
                                                 </div>
+                                                <form method="post" action="{% url 'add_new_user_request' %}" autocomplete="off">
 
+                                                    <div class="modal-body">
+                                                        {% csrf_token %}
+                                                        <label for="date">Enter Initial Date   :</label>
+                                                        <input type="date" id="date" name="initial_date">
+                                                        <input name="ivrs" type="hidden" value="{{user.ivrs}}"><br>
+                                                        <label for="reading">Enter Initial Reading :</label>
+                                                        <input type="text" id='reading' class="inputinitial"  placeholder="Enter initial Reading..." name='initial_reading' required >
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <input type="submit" class="btn btn-primary" value="Submit" >
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </form>
                                             </div>
+
                                         </div>
+                                    </div>
 
 
                                 </div></td>

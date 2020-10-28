@@ -147,7 +147,7 @@ background-color:#1F2739;
     .nav-tabs{
     margin-top: 16px;
     background: #2C3446;
-    margin-left: -4%;
+    margin-left: -2%;
     }
     .nav-pills .nav-link{
         margin-top: 12px ;
@@ -161,6 +161,38 @@ height:100vh;
 display:inline;
 }
 </style>
+    <style>
+    #box {
+  padding:5px;
+  width:200px;
+  z-index:10;
+  position:relative;
+}
+#box form {
+ background:#006699;
+ padding:5px;
+ display:none;
+ position:absolute;
+ top:27px;
+}
+#button {
+  width:75px;
+  background:#006699;
+  color:#fff;
+  padding:3px 10px;
+  border:1px solid #006699;
+  margin-bottom:15px;
+  cursor:pointer;
+}
+input[type="submit"] {
+  background:none;
+  color:#fff;
+  border:none;
+  text-align:left;
+  cursor:pointer;
+}
+</style>
+
 </head>
 
 <body>
@@ -213,13 +245,13 @@ display:inline;
                     <h1><a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>  Admin Dashboard</h1>
                     <ul class="nav nav-tabs" id="pills-tab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Application/Suggestion</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Emergency Complaints</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
+                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Complaints</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
@@ -228,13 +260,15 @@ display:inline;
 
                             <div class="row">
                                 <div class="nav col-3 flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                    {% for i in ivrs %}
+                                    {% for i in appli_sugg_ivrs %}
                                     <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-{{i}}" role="tab" aria-controls="v-pills-home" aria-selected="true">{{i}}</a>
                                     {% endfor %}
                                 </div>
                                 <div class="col-9 tab-content" id="v-pills-tabContent">
-                                    {% for i in ivrs %}
-                                    <div class="tab-pane fade " id="v-pills-{{i}}" role="tabpanel" aria-labelledby="v-pills-home-tab">{{i}}</div>
+                                    {% for i,j in appli_sugg_dict.items %}
+                                    <div class="tab-pane fade " id="v-pills-{{i}}" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                        <h4>{{j}}</h4>>
+                                    </div>
                                     {% endfor %}
                                 </div>
                             </div>
@@ -244,13 +278,15 @@ display:inline;
 
                             <div class="row">
                                 <div class="nav col-3 flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                    {% for i in ivrs_1 %}
+                                    {% for i in emergency_ivrs %}
                                     <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-{{i}}" role="tab" aria-controls="v-pills-home" aria-selected="true">{{i}}</a>
                                     {% endfor %}
                                 </div>
                                 <div class="col-9 tab-content" id="v-pills-tabContent">
-                                    {% for i in ivrs_1 %}
-                                    <div class="tab-pane fade " id="v-pills-{{i}}" role="tabpanel" aria-labelledby="v-pills-home-tab">{{i}}</div>
+                                    {% for i,j in emergency_dict.items %}
+                                    <div class="tab-pane fade " id="v-pills-{{i}}" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                        <h4>{{j}}</h4>
+                                    </div>
                                     {% endfor %}
                                 </div>
                             </div>
@@ -259,20 +295,25 @@ display:inline;
                         <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                             <div class="row">
                                 <div class="nav col-3 flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                    {% for i in ivrs_2 %}
+                                    {% for i in complaint_ivrs %}
                                     <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-{{i}}" role="tab" aria-controls="v-pills-home" aria-selected="true">{{i}}</a>
                                     {% endfor %}
                                 </div>
                                 <div class="col-9 tab-content" id="v-pills-tabContent">
-                                    {% for i in ivrs_2 %}
-                                    <div class="tab-pane fade " id="v-pills-{{i}}" role="tabpanel" aria-labelledby="v-pills-home-tab">{{i}}</div>
+                                    {% for i,j in complaint_dict.items %}
+                                    <div class="tab-pane fade " id="v-pills-{{i}}" role="tabpanel" aria-labelledby="v-pills-home-tab">
+
+                                        {% for k in j %}
+                                        <h4>{{ forloop.counter }}. {{k}}</h4>
+
+
+                                        {% endfor %}
+                                    </div>
                                     {% endfor %}
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -280,15 +321,6 @@ display:inline;
     <!-- /#page-content-wrapper -->
 
 </div>
-<!-- /#wrapper -->
-
-<!-- jQuery -->
-<script src="https://stacksnippets.net/js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="https://stacksnippets.net/js/bootstrap.min.js"></script>
-
-<!-- Menu Toggle Script -->
 
 
 </body>
@@ -303,5 +335,9 @@ display:inline;
   $("#wrapper").toggleClass("toggled");
 });
 
+$("#button").click(function() {
+  $("#box form").toggle("slow");
+  return false;
+});
 </script>
 </html>
