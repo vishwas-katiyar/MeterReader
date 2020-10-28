@@ -384,8 +384,13 @@ def AddAdmin(request):
     return render(request, 'AddAdmin.html',context={'admin_name':request.session['admin_name']})
 
 def complaints(request):
+    if request.method=='POST':
+        print(request.POST)
+        ivrs_complaint=request.POST['ivrs_complaint']
+        ivrs_complaint_no=request.POST['ivrs_complaint_no']
+        reply_complaint=request.POST['reply_complaint']
+        firebaseuser.put('/UserRegister/'+str(ivrs_complaint)+'/Complaints/'+str(ivrs_complaint_no)+'/', 'reply', reply_complaint)
     searched_user = firebaseuser.get('/UserRegister', '')
-
     complaint = []
     emergency_ivrs = []
     emergency_dict = {}
@@ -404,25 +409,28 @@ def complaints(request):
             for j in searched_user[i]["Complaints"][1:]:
                 val = j.values()
                 if 'Emergency Complaints' in val:
-                    emergency_ivrs.append(i)
+
                     emergency_ivrs_complaint.append(j['complaintMessage'])
                     if i in emergency_dict.keys():
-                        emergency_dict[i] = [emergency_dict[i], j['complaintMessage']]
+                        emergency_dict[i].append(j['complaintMessage'])
                     else:
+                        emergency_ivrs.append(i)
                         emergency_dict[i] = [j['complaintMessage']]
                 elif 'Complaints' in val:
-                    complaint_ivrs.append(i)
+
                     complaint_ivrs_complaint.append(j['complaintMessage'])
                     if i in complaint_dict.keys():
-                        complaint_dict[i] = complaint_dict[i] + [j['complaintMessage']]
+                        complaint_dict[i].append(j['complaintMessage'])
                     else:
+                        complaint_ivrs.append(i)
                         complaint_dict[i] = [j['complaintMessage']]
                 elif 'Application/Suggestions' in val:
-                    appli_sugg_ivrs.append(i)
+
                     appli_sugg_ivrs_complaint.append(j['complaintMessage'])
                     if i in appli_sugg_dict.keys():
-                        appli_sugg_dict[i] = appli_sugg_dict[i].insert(j['complaintMessage'])
+                        appli_sugg_dict[i].append(j['complaintMessage'])
                     else:
+                        appli_sugg_ivrs.append(i)
                         appli_sugg_dict[i] = [j['complaintMessage']]
 
     complaint_ivrs = list(set(complaint_ivrs))
@@ -437,7 +445,7 @@ def complaints(request):
         'appli_sugg_ivrs_complaint':appli_sugg_ivrs_complaint,
         'appli_sugg_dict':appli_sugg_dict
     }
-    return render(request,'All complaints.html',context=context)
+    return render(request,'All_Complaints.html',context=context)
 
 
 

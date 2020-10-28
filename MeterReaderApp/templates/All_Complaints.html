@@ -255,27 +255,54 @@ input[type="submit"] {
                         </li>
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
-
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-
                             <div class="row">
                                 <div class="nav col-3 flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     {% for i in appli_sugg_ivrs %}
-                                    <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-{{i}}" role="tab" aria-controls="v-pills-home" aria-selected="true">{{i}}</a>
+                                    <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-{{i}}{{forloop.counter}}" role="tab" aria-controls="v-pills-home" aria-selected="true">{{i}}</a>
                                     {% endfor %}
                                 </div>
                                 <div class="col-9 tab-content" id="v-pills-tabContent">
                                     {% for i,j in appli_sugg_dict.items %}
-                                    <div class="tab-pane fade " id="v-pills-{{i}}" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                                        <h4>{{j}}</h4>>
+                                    <div class="tab-pane fade " id="v-pills-{{i}}{{forloop.counter}}" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                        {% for k in j %}
+                                        <h4>{{ forloop.counter }}. {{k}}</h4>
+                                        <div class="container">
+                                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#{{i}}{{forloop.counter}}">Open Modal</button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id={{i}}{{forloop.counter}} role="dialog">
+                                                <div class="modal-dialog">
+                                                    <form action="{% url 'complaints' %}" method="post">
+                                                        <!-- Modal content-->
+                                                        {% csrf_token %}
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h4 class="modal-title">Modal Header</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <label class="text_c" style="color: slateblue;"> Reply For Complaint No. : {{forloop.counter}}  </label>
+                                                                <input name="reply_complaint" placeholder="Enter Reply Comment for complaint ">
+                                                                <input name="ivrs_complaint" type="hidden" value={{i}}>
+                                                                <input name="ivrs_complaint_no" type="hidden" value={{forloop.counter}}>
+                                                                <h1>{{forloop.counter}}</h1>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-primary" >Reply</button>
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
                                     </div>
                                     {% endfor %}
                                 </div>
                             </div>
-
                         </div>
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-
                             <div class="row">
                                 <div class="nav col-3 flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     {% for i in emergency_ivrs %}
@@ -285,7 +312,37 @@ input[type="submit"] {
                                 <div class="col-9 tab-content" id="v-pills-tabContent">
                                     {% for i,j in emergency_dict.items %}
                                     <div class="tab-pane fade " id="v-pills-{{i}}" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                                        <h4>{{j}}</h4>
+                                        {% for k in j %}
+                                        <h4>{{ forloop.counter }}. {{k}}</h4>
+                                        <div class="container">
+                                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#{{i}}complaints{{forloop.counter}}">Open Modal</button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id={{i}}complaints{{forloop.counter}} role="dialog">
+                                                <div class="modal-dialog">
+                                                    <form action="{% url 'complaints' %}" method="post">
+                                                        <!-- Modal content-->
+                                                        {% csrf_token %}
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h4 class="modal-title">Modal Header</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <label class="text_c" style="color: slateblue;"> Reply For Complaint No. : {{forloop.counter}}  </label>
+                                                                <input name="reply_complaint" placeholder="Enter Reply Comment for complaint ">
+                                                                <input name="ivrs_complaint" type="hidden" value={{i}}>
+                                                                <input name="ivrs_complaint_no" type="hidden" value={{forloop.counter}}>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-primary" >Reply</button>
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
                                     </div>
                                     {% endfor %}
                                 </div>
@@ -296,15 +353,45 @@ input[type="submit"] {
                             <div class="row">
                                 <div class="nav col-3 flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     {% for i in complaint_ivrs %}
-                                    <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-{{i}}" role="tab" aria-controls="v-pills-home" aria-selected="true">{{i}}</a>
+                                    <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-{{i}}{{forloop.counter}}" role="tab" aria-controls="v-pills-home" aria-selected="true">{{i}}</a>
                                     {% endfor %}
                                 </div>
                                 <div class="col-9 tab-content" id="v-pills-tabContent">
                                     {% for i,j in complaint_dict.items %}
-                                    <div class="tab-pane fade " id="v-pills-{{i}}" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                    <div class="tab-pane fade " id="v-pills-{{i}}{{forloop.counter}}" role="tabpanel" aria-labelledby="v-pills-home-tab">
 
                                         {% for k in j %}
                                         <h4>{{ forloop.counter }}. {{k}}</h4>
+                                        <div class="container">
+                                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#{{i}}{{forloop.counter}}">Open Modal</button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id={{i}}{{forloop.counter}} role="dialog">
+                                                <div class="modal-dialog">
+                                                    <form action="{% url 'complaints' %}" method="post">
+                                                        <!-- Modal content-->
+                                                        {% csrf_token %}
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h4 class="modal-title">Modal Header</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <label class="text_c" style="color: slateblue;"> Reply For Complaint No. : {{forloop.counter}}  </label>
+                                                                <input name="reply_complaint" placeholder="Enter Reply Comment for complaint ">
+                                                                <input name="ivrs_complaint" type="hidden" value={{i}}>
+                                                                <input name="ivrs_complaint_no" type="hidden" value={{forloop.counter}}>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-primary" >Reply</button>
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
 
 
                                         {% endfor %}

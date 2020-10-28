@@ -1,68 +1,75 @@
-from firebase import firebase
-firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/', None)
-searched_user = firebaseuser.get('/UserRegister','')
+# from firebase import firebase
+# firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/', None)
+# searched_user = firebaseuser.get('/UserRegister',name=1628)
 # print(searched_user)
-complaint=[]
-emergency_ivrs=[]
-emergency_dict={}
-emergency_ivrs_complaint=[]
-complaint_ivrs=[]
-complaint_dict={}
-complaint_ivrs_complaint=[]
-appli_sugg_ivrs=[]
-appli_sugg_dict= {}
-appli_sugg_ivrs_complaint=[]
-for i in searched_user:
-    #print(i)
-
-    if 'Complaints' in searched_user[i].keys():
-        complaint.append(i)
-        for j in searched_user[i]["Complaints"][1:]:
-            val=j.values()
-            if 'Emergency Complaints' in val:
-                emergency_ivrs.append(i)
-                emergency_ivrs_complaint.append(j['complaintMessage'])
-                if i in emergency_dict.keys():
-                    emergency_dict[i]=[emergency_dict[i],j['complaintMessage']]
-                else:
-                    emergency_dict[i]=[j['complaintMessage']]
-            elif 'Complaints' in val:
-                complaint_ivrs.append(i)
-                complaint_ivrs_complaint.append(j['complaintMessage'])
-                if i in complaint_dict.keys():
-                    print(complaint_dict[i])
-                    print(str(j['complaintMessage']))
-                    complaint_dict[i]=complaint_dict[i]+[j['complaintMessage']]
-                else:
-                    complaint_dict[i]=[j['complaintMessage']]
-            elif 'Application/Suggestions' in val:
-                appli_sugg_ivrs.append(i)
-                appli_sugg_ivrs_complaint.append(j['complaintMessage'])
-                if i in appli_sugg_dict.keys():
-                    appli_sugg_dict[i]=appli_sugg_dict[i].insert(j['complaintMessage'])
-                else:
-                    appli_sugg_dict[i]= [j['complaintMessage']]
- #       print(searched_user[i]["Complaints"][1:])
-
-#print(complaint)
-print(appli_sugg_ivrs)
-print(appli_sugg_ivrs_complaint)
-print(appli_sugg_dict)
-print(emergency_ivrs)
-print(emergency_ivrs_complaint)
-print(emergency_dict)
-print(list(set(complaint_ivrs)))
-print(complaint_ivrs_complaint)
-print(complaint_dict)
+# firebaseuser.put('/UserRegister/1628/Complaints/'+str(1),'reply','this is reply')
+# searched_user = firebaseuser.get('/UserRegister',name=1628)
+# print(searched_user)
+#
 
 
-
-x=['a']
-y='b'
-p=x+[y]
-print(p)
-
-# firebaseuser.put('/UserRegister/'+str(444)+'/MeterReading/44400102020','12_12_2020','00' )
+# print(searched_user)
+# complaint=[]
+# emergency_ivrs=[]
+# emergency_dict={}
+# emergency_ivrs_complaint=[]
+# complaint_ivrs=[]
+# complaint_dict={}
+# complaint_ivrs_complaint=[]
+# appli_sugg_ivrs=[]
+# appli_sugg_dict= {}
+# appli_sugg_ivrs_complaint=[]
+# for i in searched_user:
+#     #print(i)
+#
+#     if 'Complaints' in searched_user[i].keys():
+#         complaint.append(i)
+#         for j in searched_user[i]["Complaints"][1:]:
+#             val=j.values()
+#             if 'Emergency Complaints' in val:
+#                 emergency_ivrs.append(i)
+#                 emergency_ivrs_complaint.append(j['complaintMessage'])
+#                 if i in emergency_dict.keys():
+#                     emergency_dict[i]=[emergency_dict[i],j['complaintMessage']]
+#                 else:
+#                     emergency_dict[i]=[j['complaintMessage']]
+#             elif 'Complaints' in val:
+#                 complaint_ivrs.append(i)
+#                 complaint_ivrs_complaint.append(j['complaintMessage'])
+#                 if i in complaint_dict.keys():
+#                     print(complaint_dict[i])
+#                     print(str(j['complaintMessage']))
+#                     complaint_dict[i]=complaint_dict[i]+[j['complaintMessage']]
+#                 else:
+#                     complaint_dict[i]=[j['complaintMessage']]
+#             elif 'Application/Suggestions' in val:
+#                 appli_sugg_ivrs.append(i)
+#                 appli_sugg_ivrs_complaint.append(j['complaintMessage'])
+#                 if i in appli_sugg_dict.keys():
+#                     appli_sugg_dict[i]=appli_sugg_dict[i].insert(j['complaintMessage'])
+#                 else:
+#                     appli_sugg_dict[i]= [j['complaintMessage']]
+#  #       print(searched_user[i]["Complaints"][1:])
+#
+# #print(complaint)
+# print(appli_sugg_ivrs)
+# print(appli_sugg_ivrs_complaint)
+# print(appli_sugg_dict)
+# print(emergency_ivrs)
+# print(emergency_ivrs_complaint)
+# print(emergency_dict)
+# print(list(set(complaint_ivrs)))
+# print(complaint_ivrs_complaint)
+# print(complaint_dict)
+#
+#
+#
+# x=['a']
+# y='b'
+# p=x+[y]
+# print(p)
+#
+# # firebaseuser.put('/UserRegister/'+str(444)+'/MeterReading/44400102020','12_12_2020','00' )
 # searched_user = firebaseuser.get('/UserRegister', name='444')
 # print(searched_user)
 # # print(searched_user['Complaints'][1])
@@ -143,6 +150,15 @@ print(p)
 # blob.make_public()
 #
 # print("your file url", blob.public_url)
+
+
+s={}
+s['1']=['one']
+print(s)
+print(s['1'])
+s['1'].append('two')
+print(s)
+
 
 
 
