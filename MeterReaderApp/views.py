@@ -533,9 +533,6 @@ def test(request):
     # Opt : if you want to make public access from the URL
     blob.make_public()
 
-    #print("your file url", blob.public_url)
-    #firebaseuser.put('/UserRegister/' + str(123) + '/MeterReading', str(123) + '0010201/link/', 'hiiii')
     firebaseuser.put('/UserRegister/' + ivrs_no + '/MeterReading', ivrs_no + '00'+str(cd.month)+str(cd.year)+'/Bill/', blob.public_url)
+    firebaseuser.put('/UserRegister/' + ivrs_no + '/MeterReading', ivrs_no + '00'+str(cd.month)+str(cd.year)+'/Bill_Amount/', total)
     return  HttpResponse({blob.public_url}, list(user['MeterReading'].keys()))
-# else:
-#     return HttpResponse({'First Reading Entered'},list(user['MeterReading'].keys()))
