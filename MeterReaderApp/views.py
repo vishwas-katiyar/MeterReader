@@ -277,7 +277,7 @@ def new_user_request(request):
     allusers = firebaseadmin.get('/UserRegister', None)
     requestlist = []
     for i in allusers:
-        if not allusers[i]['auth']:
+        if allusers[i]['auth']=='true':
             ##print(allusers[i]['auth'])
             requestlist.append(allusers[i])
     return render(request,'new.html',context={'requestlist':requestlist,'admin_name':request.session['admin_name']})
@@ -332,17 +332,17 @@ def update_user_profile(request):
 
 
 def add_new_user_request(request):
-    print(request.POST)
+    #print(request.POST)
     ivrs=request.POST['ivrs']
     initial_date=request.POST['initial_date']
     initial_reading=request.POST['initial_reading']
-    firebaseuser.put('/UserRegister/' + str(ivrs), 'auth', True)
+    firebaseuser.put('/UserRegister/' + str(ivrs), 'auth', 'true')
     initial_date=str(initial_date).replace('-','_')
     firebaseuser.put('/UserRegister/' + str(ivrs) + '/MeterReading/'+str(ivrs)+'00'+initial_date[5:7]+initial_date[:4]+'/',initial_date, initial_reading)
     allusers = firebaseadmin.get('/UserRegister', None)
     requestlist = []
     for i in allusers:
-        if not allusers[i]['auth']:
+        if allusers[i]['auth']=='true':
             ##print(allusers[i]['auth'])
             requestlist.append(allusers[i])
     return render(request,'new.html',context={'requestlist':requestlist,'admin_name':request.session['admin_name']})
@@ -466,9 +466,9 @@ def test(request):
     customer_address=user['address']
     customer_phoneno=user['phoneno']
     customer_auth=user['auth']
-    if customer_auth:
+    if customer_auth=='true':
         customer_auth='Verified User'
-    else :
+    elif customer_auth=='false' :
         customer_auth = 'Not Verified '
 
     previous_date = list(a.keys())[0].replace('_',',')

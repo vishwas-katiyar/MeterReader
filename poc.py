@@ -1,13 +1,20 @@
 # from firebase import firebase
 # firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/', None)
-# searched_user = firebaseuser.get('/UserRegister',name=1628)
+# searched_user = firebaseuser.get('/UserRegister',name='0130')
 # print(searched_user)
+# print(searched_user['auth'])
+# # a=[]
+#
+# for i in searched_user['MeterReading']:
+#     print(i)
+#     a.append(list(searched_user['MeterReading'][i].keys())[0])
+#     a.append(list(searched_user['MeterReading'][i].values())[0])
+# print(a)
+
 # firebaseuser.put('/UserRegister/1628/Complaints/'+str(1),'reply','this is reply')
 # searched_user = firebaseuser.get('/UserRegister',name=1628)
 # print(searched_user)
 #
-
-
 # print(searched_user)
 # complaint=[]
 # emergency_ivrs=[]
@@ -121,15 +128,15 @@
 # '''
 
 #
-# import requests
-# url = 'http://127.0.0.1:8000/test/'
-# myobj = {'ivrs': '444',
-#          'CurrentDate':'13_10_20',
-#          'CurrentReading':180,
-#          }
-# x = requests.post(url, data = myobj)
-# # print(x.status_code, x.qreason)
-# print('jhgkjhghgjk',x.text)
+import requests
+url = 'http://mymeterreader.herokuapp.com/test'
+myobj = {'ivrs': '0130',
+         'CurrentDate':'2020_11_06',
+         'CurrentReading':65,
+         }
+x = requests.post(url, data = myobj)
+# print(x.status_code, x.qreason)
+print('jhgkjhghgjk',x.text)
 # # #
 #
 
@@ -152,13 +159,13 @@
 # print("your file url", blob.public_url)
 
 
-s={}
-s['1']=['one']
-print(s)
-print(s['1'])
-s['1'].append('two')
-print(s)
-
+# s={}
+# s['1']=['one']
+# print(s)
+# print(s['1'])
+# s['1'].append('two')
+# print(s)
+#
 
 
 

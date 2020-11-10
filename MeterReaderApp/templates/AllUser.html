@@ -388,7 +388,7 @@ margin-right: 10px;
                             </thead>
                             <tbody>
                             {% for userid,user in all_user.items %}
-                            {% if user.auth %}
+                            {% if user.auth == 'true' %}
                             <tr>
                                 <td>{{user.name}}</td>
                                 <td>{{user.ivrs}}</td>
@@ -397,7 +397,7 @@ margin-right: 10px;
                                 <td>{{user.email}}</td>
                                 <td><div class="content">
                                     <label class="switch">
-                                        {% if user.auth %}
+                                        {% if user.auth == 'true' %}
                                         <label class="switch">
                                             <input type="checkbox" checked>
                                             <span class="slider round"></span>
@@ -408,9 +408,6 @@ margin-right: 10px;
                                             <span class="slider round"></span>
                                         </label>
                                         {% endif %}
-
-
-
 
                                     </label>
                                 </div></td>
