@@ -1,7 +1,45 @@
-# from firebase import firebase
-# firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/', None)
+from firebase import firebase
+firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/', None)
+allusers=searched_user = firebaseuser.get('/UserRegister', '')
+verified_user=0
+not_verified_user=0
+user_complaint=0
+total_user=len(allusers)
+Complaints=0
+Appli_suggetion=0
+Emergency_Complaints=0
+reply=0
+for i in allusers:
+    if allusers[i]['auth']=='true':
+        verified_user += 1
+    else:
+        not_verified_user += 1
+    if 'Complaints' in allusers[i].keys():
+        user_complaint+=1
+        for j in allusers[i]['Complaints']:
+            if j :
+                if j['complaintType']=='Emergency Complaints':
+                    Emergency_Complaints+=1
+                elif j['complaintType']=='Application/Suggestions':
+                    Appli_suggetion+=1
+                else:
+                    Complaints+=1
+                if 'reply' in j.keys():
+                    reply+=1
+    print(allusers[i])
+
+
 # searched_user = firebaseuser.get('/UserRegister',name='0130')
 # print(searched_user)
+# count=-1
+# for i in searched_user['Complaints']:
+#     count+=1
+#     if i:
+#         if i['complaintMessage']=='this is suggestion':
+#             print(i)
+#             firebaseuser.put('/UserRegister/' + '0130' + '/Complaints/' + str(count) + '/',
+#                              'reply', 'myyyyyy')
+
 # print(searched_user['auth'])
 # # a=[]
 #
@@ -127,21 +165,52 @@
 # #chmod +x MeterReaderApp/Tesseract-OCR/tesseract.exe
 # '''
 
-#
-import requests
-url = 'http://mymeterreader.herokuapp.com/test'
-myobj = {'ivrs': '0130',
-         'CurrentDate':'2020_11_06',
-         'CurrentReading':65,
-         }
-x = requests.post(url, data = myobj)
-# print(x.status_code, x.qreason)
-print('jhgkjhghgjk',x.text)
+# #
+# import requests
+# url = 'http://mymeterreader.herokuapp.com/test'
+# myobj = {'ivrs': '0130',
+#          'CurrentDate':'2020_11_06',
+#          'CurrentReading':65,
+#          }
+# x = requests.post(url, data = myobj)
+# # print(x.status_code, x.qreason)
+# print('jhgkjhghgjk',x.text)
 # # #
+
+#
+#
+# def login():
+#     h=1
+#
+#
+#
+# def loginh():
+#     if h:
 #
 
 
-# # print(x)
+
+
+
+
+
+
+
+
+
+
+
+# Define a blank dictionary with no elements
+#
+# initial=int(input("Enter initial range :"))
+# final=int(input("Enter final range :"))
+# n=int(input("Enter the number to divided by :"))
+# a=[]
+# for i in range(initial,final+1):
+#     if(i%n == 0):
+#         a.append(i)
+# print('Number  {0}  can divided in range from {1} to {2}  is {3}'.format(n,initial,final,a))
+#
 # from firebase_admin import credentials, initialize_app, storage
 # # Init firebase with your credentials
 # cred = credentials.Certificate("login-system-73453-5ca66a2acaee.json")

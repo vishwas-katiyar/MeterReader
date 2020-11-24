@@ -4,27 +4,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body {
-            
+            color:#8B0003;
+            display:flex;
             font-family: Arial, Helvetica, sans-serif;
         }
 
         form {
-           
+           display:inline;
         }
 
-        .maincontainer {
-            max-width: 700px;
-            background-color: #f3f0ef;
-            margin: auto;
-            box-sizing: border-box;
-            border: 1px solid black;
-        }
+
 
         input[type=text], input[type=password], input[type=number] {
             width: 100%;
             background:transparent;
             padding: 12px 20px;
-            margin: 8px 0;
+            margin: 15px 0;
             display: inline-block;
             border: 1px solid #ccc;
             box-sizing: border-box;
@@ -38,7 +33,7 @@
             color: white;
             border-radius: 20px;
             padding: 14px 20px;
-            margin: 8px 0;
+            margin: 35px 0;
             border: none;
             cursor: pointer;
             width: 100%;
@@ -53,7 +48,9 @@
             padding: 10px 18px;
             background-color: #f44336;
         }
-
+        p{
+        margin: 2rem 0rem;
+        }
         .imgcontainer {
             text-align: center;
             margin: 24px 0 12px 0;
@@ -63,11 +60,26 @@
             width: 15%;
             border-radius: 50%;
         }
+        .maincontainer{
 
+    display: inline;
+    border-left: black 1px solid;
+    min-height: 80vh;
+    margin: 10vh 0vh;
+
+        }
+
+.imgvali{
+
+    vertical-align: middle;
+    margin: 35vh 13vh;
+    height: 11rem;
+
+}
         .container {
-            margin-top: 30px;
-            margin-left: 25%;
-            margin-right: 25%;
+                margin: 4vh 25vh;
+            float :right;
+            display:inline;
 
         }
 
@@ -76,7 +88,7 @@
             margin-left: 10%;
             margin-right: 10%;
         }
-        
+
         span.psw {
             float: right;
             padding-top: 16px;
@@ -93,6 +105,8 @@
                 width: 100%;
             }
         }
+
+
     </style>
     <script>
         function swapConfig(x) {
@@ -106,73 +120,57 @@
 
 </head>
 <body>
+<div style="display:inline;" class="imgvali">
+    <img src="https://iili.io/FG6zhl.md.png" alt="FG6zhl.md.png" border="0">
+</div>
 
-
+<div style="display:inline;    text-align: center;" class="maincontainer">
 
     <form name="Admininfo" action={% url 'adminlogin' %} method="POST" value="adminlogin">
-        {% csrf_token %}
-        <div class="maincontainer">
-            <div class="imgcontainer">
+    {% csrf_token %}
 
-                <br />
-                <p>
-                    <input type="radio" onchange="swapConfig(this)" name="urlOptions" id="Admin" checked="checked" style="margin-top:30px;" >
-                    <label for="Admin">Admin</label>
+    <div class="container">
+        <div id="Admininfo">
+            <h1 style="">Welcome</h1>
 
-                    <input type="radio" onchange="swapConfig(this)" name="urlOptions" id="User" >
-                    <label for="User">User</label><br>
-                </p>
-            </div>
-            <div class="container">
-                <div id="Admininfo">
-                    <label for="uname"><b>Username</b></label>
-                    <input type="text" placeholder="Enter Username" name="admin_uname" required>
+                <p>Please Login to Admin Dashboard</p>
 
+            <input type="text" placeholder="Enter Admin Username" name="admin_uname" required>
+            <input type="password" placeholder="Enter Admin Password" name="admin_psw" required>
 
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="admin_psw" required>
-                    <br /><br />
-                    <div class="container2">
-                        <button type="submit" href="{% url 'dashboard' %}">Login</button>
-                        <label>
-                            <input type="checkbox" checked="checked" name="remember" style="margin-top:20px" > Remember me
-                        </label>
-                    </div>
-                </div>
-    </form>
-    <form name="Userinfo" action={% url 'dashboard' %} method="POST" value="userlogin">
-        {% csrf_token %}
+            <div class="container2">
+                <button type="submit" href="#">Login</button>
 
-
-                <div id="Userinfo" style="display:none">
-                    <label for="uname"><b>IVRS Number</b></label>
-                    <input type="number" placeholder="Enter IVRS number" name="ivrs_no" required >
-
-
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" required>
-                    <br /><br />
-                    <div class="container2">
-                        <button type="submit" >Login</button>
-
-                        <label>
-                            <input type="checkbox" checked="checked" name="remember" style="margin-top:20px"> Remember me
-                        </label>
-
-                        <a href='{% url 'register' %}' style="float:right;margin-top:20px">New user</a>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="container1" style=" margin-top:20px;padding-top:30px;padding-bottom:30px; ">
-                <button type="button" class="cancelbtn">Cancel</button>
-                <span class="psw">Forgot <a href={% url 'forgotpassword' %}>password?</a></span>
             </div>
         </div>
-    </form>
+        </form>
+        <form name="Userinfo" action=# method="POST" value="userlogin">
+            {% csrf_token %}
 
+
+            <div id="Userinfo" style="display:none">
+                <label for="uname"><b>IVRS Number</b></label>
+                <input type="number" placeholder="Enter IVRS number" name="ivrs_no" required >
+
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+                <br /><br />
+                <div class="container2">
+                    <button type="submit" >Login</button>
+
+                    <label>
+                        <input type="checkbox" checked="checked" name="remember" style="margin-top:20px"> Remember me
+                    </label>
+
+                    <a href='{% url 'register' %}' style="float:right;margin-top:20px">New user</a>
+                </div>
+            </div>
+    </div>
+
+
+    </form>
+</div>
 </body>
 <script>
     {% if register %}

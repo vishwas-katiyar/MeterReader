@@ -1,6 +1,3 @@
-<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,6 +21,19 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+
     <style>
 
     /*!
@@ -333,7 +343,10 @@ margin-right: 10px;
 padding: .375rem .75rem;
 
 }
-
+.foot{
+    text-align: right;
+display: block;
+}
 </style>
 </head>
 
@@ -371,7 +384,7 @@ padding: .375rem .75rem;
                 <a href="{% url 'complaints' %}">Complaints</a>
             </li>
             <li>
-                <a href="{% url 'login' %}">Logout</a>
+                <a href="{% url 'logout' %}">Logout</a>
             </li>
 
         </ul>
@@ -384,7 +397,9 @@ padding: .375rem .75rem;
             <div class="row">
                 <div class="col-lg-12">
                     <div id="1newuser">
-                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                        <a href="#menu-toggle" class=" navbar-toggler" id="menu-toggle">
+                            <span class="navbar-toggler-icon" style="vertical-align: inherit; background:url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PScwIDAgMzAgMzAnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHBhdGggc3Ryb2tlPSdyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuNSknIHN0cm9rZS13aWR0aD0nMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIGQ9J000IDdoMjJNNCAxNWgyMk00IDIzaDIyJy8+PC9zdmc+
+);"></span></a>
                         <h1><span class="blue">&lt;</span>All New<span class="blue">&gt;</span> <span class="yellow">Requests</pan></h1>
                         <h2>Created with love by <a href="#" target="_blank">MVAR Developments</a></h2>
 
@@ -410,53 +425,75 @@ padding: .375rem .75rem;
                                 <td>{{user.phoneno}}</td>
                                 <td>{{user.email}}</td>
                                 <td><div class="content1">
-
-                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Verify</button>
-                                    <div class="modal fade" id="myModal" role="dialog">
+                                    {% if user.message %}
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal{{user.ivrs}}">Verify</button>
+                                    {% else %}
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal{{user.ivrs}}">Verify</button>
+                                    {% endif %}
+                                    <div class="modal fade" id="myModal{{user.ivrs}}" role="dialog">
                                         <div class="modal-dialog">
-
                                             <!-- Modal content-->
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                     <h4 class="modal-title"> Enter Initial reading for IVRS No. : {{user.ivrs}}</h4>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 </div>
                                                 <form method="post" action="{% url 'add_new_user_request' %}" autocomplete="off">
 
                                                     <div class="modal-body">
                                                         {% csrf_token %}
+                                                        <label for="bill">View Uploaded Bill   :</label>
+                                                        <a id="bill" target="_blank" class="btn btn-primary" style="" href="{{user.initialBill}}">View</a><br>
+                                                        <br>
                                                         <label for="date">Enter Initial Date   :</label>
                                                         <input type="date" id="date" name="initial_date">
-                                                        <input name="ivrs" type="hidden" value="{{user.ivrs}}"><br>
+                                                        <br>
+                                                        <input name="ivrs" type="hidden" value="{{user.ivrs}}">
+                                                        <input name="name" type="hidden" value="{{user.name}}">
+                                                        <input name="email" type="hidden" value="{{user.email}}"><br>
                                                         <label for="reading">Enter Initial Reading :</label>
                                                         <input type="text" id='reading' class="inputinitial"  placeholder="Enter initial Reading..." name='initial_reading' required >
+                                                        <br>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <input type="submit" class="btn btn-primary" value="Submit" >
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                    <div class="modal-footer foot" style="border-top: 1px solid #e5e5e5;display: block;">
+
+                                                        <input type="submit" class="btn btn-success" value="Verify" >
+
+                                                </form>
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                <form style="display:inline;" id="notverifyform" method="post" action="{% url 'Not_Verify_user' %}" autocomplete="off">
+                                                    {% csrf_token %}
+                                                    <input  type="button" onClick="unhideReg({{user.ivrs}})" class="btn btn-primary" value="Not Verify" ><br>
+                                                    <br>
+                                                    <div class="hidden_div" style="text-align: left;">
+                                                        <label for="message_input{{user.ivrs}}" id="hiddenlable{{user.ivrs}}" style="display:none">Reason for Not verification   :</label>
+                                                        <input type="input" name="message" id="message_input{{user.ivrs}}" style="display:none" placeholder="Enter Message for User." required/>
                                                     </div>
+
+                                                    <input name="ivrs" type="hidden" value="{{user.ivrs}}">
+                                                    <input name="name" type="hidden" value="{{user.name}}">
+                                                    <input name="email" type="hidden" value="{{user.email}}"><br>
+
+                                                    <input  type="submit"  id="btnsubmt{{user.ivrs}}" class="btn btn-primary" value="Submit" style="display:none">
                                                 </form>
                                             </div>
-
                                         </div>
                                     </div>
-
-
-                                </div></td>
-
-                            </tr>
-                            {% endfor %}
-
-                            </tbody>
-                        </table>
+                                </div>
                     </div>
+                    </td>
 
+                    </tr>
+                    {% endfor %}
 
+                    </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /#page-content-wrapper -->
+</div>
+<!-- /#page-content-wrapper -->
 
 </div>
 <!-- /#wrapper -->
@@ -471,6 +508,15 @@ padding: .375rem .75rem;
 
 
 </body>
+<script>
+
+
+function unhideReg(ivrs) {
+    document.getElementById(`message_input${ivrs}`).style.display = "inline";
+    document.getElementById(`btnsubmt${ivrs}`).style.display = "block";
+    document.getElementById(`hiddenlable${ivrs}`).style.display = "inline";
+ }
+</script>
 <script>
 
     $("#menu-toggle").click(function(e) {

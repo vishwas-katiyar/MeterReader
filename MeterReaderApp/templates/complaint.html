@@ -1,212 +1,447 @@
-jhgkjhghgjk <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Page not found at /test</title>
-  <meta name="robots" content="NONE,NOARCHIVE">
-  <style type="text/css">
-    html * { padding:0; margin:0; }
-    body * { padding:10px 20px; }
-    body * * { padding:0; }
-    body { font:small sans-serif; background:#eee; color:#000; }
-    body>div { border-bottom:1px solid #ddd; }
-    h1 { font-weight:normal; margin-bottom:.4em; }
-    h1 span { font-size:60%; color:#666; font-weight:normal; }
-    table { border:none; border-collapse: collapse; width:100%; }
-    td, th { vertical-align:top; padding:2px 3px; }
-    th { width:12em; text-align:right; color:#666; padding-right:.5em; }
-    #info { background:#f6f6f6; }
-    #info ol { margin: 0.5em 4em; }
-    #info ol li { font-family: monospace; }
-    #summary { background: #ffc; }
-    #explanation { background:#eee; border-bottom: 0px none; }
-  </style>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin Dashboard</title>
+
+    <!-- Bootstrap Core CSS -->
+
+    <!-- Custom CSS -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <style>
+
+    /*!
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Toggle Styles */
+
+#wrapper {
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+#wrapper.toggled {
+  padding-left: 250px;
+}
+#sidebar-wrapper {
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 0;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #000;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+#wrapper.toggled #sidebar-wrapper {
+  width: 250px;
+}
+#page-content-wrapper {
+
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+}
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -250px;
+}
+/* Sidebar Styles */
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 40px;
+}
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #999999;
+}
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+}
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+.sidebar-nav > .sidebar-brand {
+  height: 65px;
+  font-size: 18px;
+  line-height: 60px;
+}
+.sidebar-nav > .sidebar-brand a {
+  color: #999999;
+}
+.sidebar-nav > .sidebar-brand a:hover {
+  color: #fff;
+  background: none;
+}
+@media(min-width:768px) {
+  #wrapper {
+    padding-left: 250px;
+  }
+  #wrapper.toggled {
+    padding-left: 0;
+  }
+  #sidebar-wrapper {
+   background-color:#2C3446;
+    width: 250px;
+  }
+  #wrapper.toggled #sidebar-wrapper {
+    width: 0;
+  }
+  #page-content-wrapper {
+    padding: 20px;
+    position: relative;
+  }
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
+}
+body{
+color:white;
+background-color:#1F2739;
+}
+
+</style>
+    <style>
+    .nav-tabs{
+    margin-top: 16px;
+    background: #2C3446;
+    margin-left: -2%;
+    }
+    .nav-pills .nav-link{
+        margin-top: 12px ;
+        background:#2C3446;
+}
+.col-3{
+border-right:white 2px solid;
+height:100vh;
+}
+.h1 , h1{
+display:inline;
+}
+</style>
+    <style>
+    #box {
+  padding:5px;
+  width:200px;
+  z-index:10;
+  position:relative;
+}
+#box form {
+ background:#006699;
+ padding:5px;
+ display:none;
+ position:absolute;
+ top:27px;
+}
+#button {
+  width:75px;
+  background:#006699;
+  color:#fff;
+  padding:3px 10px;
+  border:1px solid #006699;
+  margin-bottom:15px;
+  cursor:pointer;
+}
+input[type="submit"] {
+  background:none;
+  color:#fff;
+  border:none;
+  text-align:left;
+  cursor:pointer;
+}
+</style>
+
 </head>
+
 <body>
-  <div id="summary">
-    <h1>Page not found <span>(404)</span></h1>
-    <table class="meta">
-      <tr>
-        <th>Request Method:</th>
-        <td>POST</td>
-      </tr>
-      <tr>
-        <th>Request URL:</th>
-        <td>http://mymeterreader.herokuapp.com/test</td>
-      </tr>
 
-    </table>
-  </div>
-  <div id="info">
+<div id="wrapper" class="toggled">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+
+                <a href="{% url 'AdminProfile' %}">{{admin_name}}</a>
+
+            </li>
+            <li>
+                <a href="{% url 'adminlogin' %}">Dashboard</a>
+            </li>
+            <li>
+                <a href="{% url 'register' %}">Create User</a>
+            </li>
+            <li>
+                <a href="{% url 'new_user_request' %}">All Requests</a>
+            </li>
+            <li>
+                <a href="{% url 'all_user' %}">All Users</a>
+            </li>
+            <li>
+                <a href="{% url 'search_user' %}">Profile</a>
+            </li>
+            <li>
+                <a href="{% url 'AddAdmin' %}">Add New Admin</a>
+            </li>
+            <li>
+                <a href="#">Complaints</a>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}">Logout</a>
+            </li>
+
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <h2 style="display:inline;">     <a href="#menu-toggle" class=" navbar-toggler" id="menu-toggle">
+                            <span class="navbar-toggler-icon" style="vertical-align: inherit;background:url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PScwIDAgMzAgMzAnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHBhdGggc3Ryb2tlPSdyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuNSknIHN0cm9rZS13aWR0aD0nMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIGQ9J000IDdoMjJNNCAxNWgyMk00IDIzaDIyJy8+PC9zdmc+
+);"></span></a>Complaints</h2>
+                    <ul class="nav nav-tabs" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Application/Suggestion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Emergency Complaints</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Complaints</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <div class="row">
+                                <div class="nav col-3 flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    {% for i in appli_sugg_ivrs %}
+                                    <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-{{i}}{{forloop.counter}}" role="tab" aria-controls="v-pills-home" aria-selected="true">{{i}}</a>
+                                    {% endfor %}
+                                </div>
+                                <div class="col-9 tab-content" id="v-pills-tabContent">
+                                    {% for i,j in appli_sugg_dict.items %}
+                                    <div class="tab-pane fade " id="v-pills-{{i}}{{forloop.counter}}" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                        {% for k in j %}
+                                        <h4>{{ forloop.counter }}. {{k}}</h4>
+                                        <div class="container">
+                                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#{{i}}{{forloop.counter}}">Reply</button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id={{i}}{{forloop.counter}} role="dialog">
+                                                <div class="modal-dialog">
+                                                    <form action="{% url 'complaints' %}" method="post">
+                                                        <!-- Modal content-->
+                                                        {% csrf_token %}
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h4 class="modal-title">Modal Header</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <label class="text_c" style="color: slateblue;"> Reply For Complaint No. : {{forloop.counter}}  </label>
+                                                                <input name="reply_complaint" placeholder="Enter Reply Comment for complaint ">
+                                                                <input name="ivrs_complaint" type="hidden" value={{i}}>
+                                                                <input name="ivrs_complaint_no" type="hidden" value={{forloop.counter}}>
+                                                                <input name="complaint" type="hidden" value='{{k}}'>
+                                                                <input name="complaint_type" type="hidden" value='Application/Suggestions'>
+                                                                <h1>{{forloop.counter}}</h1>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-primary" >Reply</button>
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <div class="row">
+                                <div class="nav col-3 flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    {% for i in emergency_ivrs %}
+                                    <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-{{i}}" role="tab" aria-controls="v-pills-home" aria-selected="true">{{i}}</a>
+                                    {% endfor %}
+                                </div>
+                                <div class="col-9 tab-content" id="v-pills-tabContent">
+                                    {% for i,j in emergency_dict.items %}
+                                    <div class="tab-pane fade " id="v-pills-{{i}}" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                        {% for k in j %}
+                                        <h4>{{ forloop.counter }}. {{k}}</h4>
+                                        <div class="container">
+                                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#{{i}}complaints{{forloop.counter}}">Reply</button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id={{i}}complaints{{forloop.counter}} role="dialog">
+                                                <div class="modal-dialog">
+                                                    <form action="{% url 'complaints' %}" method="post">
+                                                        <!-- Modal content-->
+                                                        {% csrf_token %}
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h4 class="modal-title">Modal Header</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <label class="text_c" style="color: slateblue;"> Reply For Complaint No. : {{forloop.counter}}  </label>
+                                                                <input name="reply_complaint" placeholder="Enter Reply Comment for complaint ">
+                                                                <input name="ivrs_complaint" type="hidden" value={{i}}>
+                                                                <input name="ivrs_complaint_no" type="hidden" value={{forloop.counter}}>
+                                                                <input name="complaint" type="hidden" value='{{k}}'>
+                                                                <input name="complaint_type" type="hidden" value='Emergency Complaints'>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-primary" >Reply</button>
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                            <div class="row">
+                                <div class="nav col-3 flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    {% for i in complaint_ivrs %}
+                                    <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-{{i}}last" role="tab" aria-controls="v-pills-home" aria-selected="true">{{i}}</a>
+                                    {% endfor %}
+                                </div>
+                                <div class="col-9 tab-content" id="v-pills-tabContent">
+
+                                    {% for i,j in complaint_dict.items %}
+                                    <div class="tab-pane fade " id="v-pills-{{i}}last" role="tabpanel" aria-labelledby="v-pills-home-tab">
+
+                                        {% for k in j %}
+                                        <h4>{{ forloop.counter }}. {{k}}</h4>
+                                        <div class="container">
+                                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#{{i}}last{{forloop.counter}}">Reply</button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="{{i}}last{{forloop.counter}}" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <form action="{% url 'complaints' %}" method="post">
+                                                        <!-- Modal content-->
+                                                        {% csrf_token %}
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h4 class="modal-title">Modal Header</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <label class="text_c" style="color: slateblue;"> Reply For Complaint No. : {{forloop.counter}}  </label>
+                                                                <input name="reply_complaint" placeholder="Enter Reply Comment for complaint ">
+                                                                <input name="ivrs_complaint" type="hidden" value={{i}}>
+                                                                <input name="ivrs_complaint_no" type="hidden" value={{forloop.counter}}>
+                                                                 <input name="complaint" type="hidden" value='{{k}}'>
+                                                                <input name="complaint_type" type="hidden" value='Complaints'>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-primary" >Reply</button>
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        {% endfor %}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
 
-      <p>
-      Using the URLconf defined in <code>MeterReader.urls</code>,
-      Django tried these URL patterns, in this order:
-      </p>
-      <ol>
 
-          <li>
-
-                admin/
-
-
-          </li>
-
-          <li>
-
-
-                [name='login']
-
-          </li>
-
-          <li>
-
-                register/
-                [name='register']
-
-          </li>
-
-          <li>
-
-                new_user_request/
-                [name='new_user_request']
-
-          </li>
-
-          <li>
-
-                update_user_profile/
-                [name='update_user_profile']
-
-          </li>
-
-          <li>
-
-                add_new_user_request/
-                [name='add_new_user_request']
-
-          </li>
-
-          <li>
-
-                search_user/
-                [name='search_user']
-
-          </li>
-
-          <li>
-
-                user_profile/
-                [name='user_profile']
-
-          </li>
-
-          <li>
-
-                all_user/
-                [name='all_user']
-
-          </li>
-
-          <li>
-
-                AdminProfile/
-                [name='AdminProfile']
-
-          </li>
-
-          <li>
-
-                AddAdmin/
-                [name='AddAdmin']
-
-          </li>
-
-          <li>
-
-                email_verification/
-                [name='email_verification']
-
-          </li>
-
-          <li>
-
-                forgotpassword/
-                [name='forgotpassword']
-
-          </li>
-
-          <li>
-
-                password/
-                [name='password']
-
-          </li>
-
-          <li>
-
-                dashboard/
-                [name='dashboard']
-
-          </li>
-
-          <li>
-
-                adminlogin/
-                [name='adminlogin']
-
-          </li>
-
-          <li>
-
-                opencamera/
-                [name='opencamera']
-
-          </li>
-
-          <li>
-
-                opencamera/success
-                [name='success']
-
-          </li>
-
-          <li>
-
-                generated_bill/
-                [name='generated_bill']
-
-          </li>
-
-          <li>
-
-                ^media/(?P&lt;path&gt;.*)$
-
-
-          </li>
-
-          <li>
-
-                ^static/(?P&lt;path&gt;.*)$
-
-
-          </li>
-
-      </ol>
-      <p>
-
-        The current path, <code>test</code>, didn't match any of these.
-      </p>
-
-  </div>
-
-  <div id="explanation">
-    <p>
-      You're seeing this error because you have <code>DEBUG = True</code> in
-      your Django settings file. Change that to <code>False</code>, and Django
-      will display a standard 404 page.
-    </p>
-  </div>
 </body>
-</html>
 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+
+    $("#menu-toggle").click(function(e) {
+  e.preventDefault();
+  $("#wrapper").toggleClass("toggled");
+});
+
+$("#button").click(function() {
+  $("#box form").toggle("slow");
+  return false;
+});
+</script>
+</html>
