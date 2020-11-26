@@ -1,37 +1,64 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta id="viewport" name="viewport" content ="width=device-width" />
+    <title>Login</title>
+
+    <link rel="icon" href="https://iili.io/FW7QP1.md.png" type='image/x-icon'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <style>
-        body {
-            color:#8B0003;
-            display:flex;
-            font-family: Arial, Helvetica, sans-serif;
+    body{
+    color:#8B0003;
+    }
+      .bor{
+    border-right:1px solid black;
+    }
+
+    @media screen and (min-width: 576px) {
+    .hei{
+
+    height:100vh;
+    }
+    .snd{
+        margin:0px 5vw ;
         }
+    }
 
-        form {
-           display:inline;
-        }
+    @media screen and (max-width: 577px) {
+    .snd{
+    margin:2rem 1rem;
+    }
 
+    .image{
 
+    width:80%;
+    }
+    .bor{
+    border-right:0px;
+    }
 
-        input[type=text], input[type=password], input[type=number] {
+    }
+    input[type=text],
+        input[type=password] {
             width: 100%;
-            background:transparent;
+            background: transparent;
             padding: 12px 20px;
             margin: 15px 0;
             display: inline-block;
             border: 1px solid #ccc;
             box-sizing: border-box;
-            border:none;
-            border-bottom:1px solid black;
+            border: none;
+            border-bottom: 1px solid black;
         }
+    button {
 
-        button {
-           
-            background-color:#333;
+            background-color: #333;
             color: white;
-            border-radius: 20px;
+            border-radius: 25px;
             padding: 14px 20px;
             margin: 35px 0;
             border: none;
@@ -39,167 +66,33 @@
             width: 100%;
         }
 
-            button:hover {
-                opacity: 0.8;
-            }
-
-        .cancelbtn {
-            width: auto;
-            padding: 10px 18px;
-            background-color: #f44336;
-        }
-        p{
-        margin: 2rem 0rem;
-        }
-        .imgcontainer {
-            text-align: center;
-            margin: 24px 0 12px 0;
-        }
-
-        img.avatar {
-            width: 15%;
-            border-radius: 50%;
-        }
-        .maincontainer{
-
-    display: inline;
-    border-left: black 1px solid;
-    min-height: 80vh;
-    margin: 10vh 0vh;
-
-        }
-
-.imgvali{
-
-    vertical-align: middle;
-    margin: 35vh 13vh;
-    height: 11rem;
-
-}
-        .container {
-                margin: 4vh 25vh;
-            float :right;
-            display:inline;
-
-        }
-
-        .container1 {
-            margin-top: 30px;
-            margin-left: 10%;
-            margin-right: 10%;
-        }
-
-        span.psw {
-            float: right;
-            padding-top: 16px;
+        button:hover {
+            opacity: 0.8;
         }
 
 
-        @media screen and (max-width: 300px) {
-            span.psw {
-                display: block;
-                float: none;
-            }
-
-            .cancelbtn {
-                width: 100%;
-            }
-        }
-
-
-    </style>
-    <script>
-        function swapConfig(x) {
-            var radioName = document.getElementsByName(x.name);
-            for (i = 0; i < radioName.length; i++) {
-                document.getElementById(radioName[i].id.concat("info")).style.display = "none";
-            }
-            document.getElementById(x.id.concat("info")).style.display = "initial";
-        }
-    </script>
-
+</style>
 </head>
 <body>
-<div style="display:inline;" class="imgvali">
-    <img src="https://iili.io/FG6zhl.md.png" alt="FG6zhl.md.png" border="0">
-</div>
 
-<div style="display:inline;    text-align: center;" class="maincontainer">
-
-    <form name="Admininfo" action={% url 'adminlogin' %} method="POST" value="adminlogin">
-    {% csrf_token %}
-
-    <div class="container">
-        <div id="Admininfo">
-            <h1 style="">Welcome</h1>
-
-                <p>Please Login to Admin Dashboard</p>
-
-            <input type="text" placeholder="Enter Admin Username" name="admin_uname" required>
-            <input type="password" placeholder="Enter Admin Password" name="admin_psw" required>
-
-            <div class="container2">
-                <button type="submit" href="#">Login</button>
-
-            </div>
+<div class="container">
+    <div  class="row align-items-center hei">
+        <div class="col-sm bor">
+            <img class="mx-auto d-block image" src="https://iili.io/FG6zhl.md.png" alt="FG6zhl.md.png" >
         </div>
-        </form>
-        <form name="Userinfo" action=# method="POST" value="userlogin">
-            {% csrf_token %}
-
-
-            <div id="Userinfo" style="display:none">
-                <label for="uname"><b>IVRS Number</b></label>
-                <input type="number" placeholder="Enter IVRS number" name="ivrs_no" required >
-
-
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
-                <br /><br />
-                <div class="container2">
-                    <button type="submit" >Login</button>
-
-                    <label>
-                        <input type="checkbox" checked="checked" name="remember" style="margin-top:20px"> Remember me
-                    </label>
-
-                    <a href='{% url 'register' %}' style="float:right;margin-top:20px">New user</a>
-                </div>
+        <div class="col-sm snd" >
+            <form name="Admininfo" action={% url 'adminlogin' %} method="POST" value="adminlogin">
+                        {% csrf_token %}
+            <div style="text-align:center;" id="Admininfo">
+                <h1 >Welcome</h1>
+                <input type="text" placeholder="Enter Admin Username" name="admin_uname" required>
+                <input type="password" placeholder="Enter Admin Password" name="admin_psw" required>
+                <button type="submit" href="#">Login</button>
             </div>
+            </form>
+        </div>
     </div>
-
-
-    </form>
 </div>
+
 </body>
-<script>
-    {% if register %}
-    alert("You are Registered !");  // display string message
-    {% endif %}
-</script>
-<script>
-    {% if notcorrect %}
-    alert("Invalid IVRS No. / Password  !");  // display string message
-    {% endif %}
-</script>
-<script>
-    {% if nouser %}
-    alert("No user Found Please Register  !");  // display string message
-    {% endif %}
-</script>
-<script>
-    {% if Already_register %}
-    alert("Invalid IVRS No. Already Registered !");  // display string message
-    {% endif %}
-</script>
-<script>
-    {% if admin_pswrd %}
-    alert("Invalid Password ");  // display string message
-    {% endif %}
-</script>
-<script>
-    {% if no_admin %}
-    alert("No Admin Found with this UserName ");  // display string message
-    {% endif %}
-</script>
 </html>
