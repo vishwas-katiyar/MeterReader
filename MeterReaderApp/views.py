@@ -7,7 +7,6 @@ from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 import firebase_admin
 from firebase_admin import credentials, initialize_app, storage
-import qrcode
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from docxtpl import DocxTemplate
