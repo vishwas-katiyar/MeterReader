@@ -1,217 +1,87 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            color:#8B0003;
-            display:flex;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+<!doctype html>
+	<head>
+		<style>
+			/* CSS comes here */
+			body {
+			    padding:20px;
+			}
+			input {
+			    padding:5px;
+			    background-color:transparent;
+			    border:none;
+			    border-bottom:solid 4px #8c52ff;
+			    width:250px;
+			    font-size:16px;
+			}
 
-        form {
-           display:inline;
-        }
+			.qr-btn {
+			    background-color:#8c52ff;
+			    padding:8px;
+			    color:white;
+			    cursor:pointer;
+			}
+		</style>
 
-
-
-        input[type=text], input[type=password], input[type=number] {
-            width: 100%;
-            background:transparent;
-            padding: 12px 20px;
-            margin: 15px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-            border:none;
-            border-bottom:1px solid black;
-        }
-
-        button {
-
-            background-color:#333;
-            color: white;
-            border-radius: 20px;
-            padding: 14px 20px;
-            margin: 35px 0;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-        }
-
-            button:hover {
-                opacity: 0.8;
-            }
-
-        .cancelbtn {
-            width: auto;
-            padding: 10px 18px;
-            background-color: #f44336;
-        }
-        p{
-        margin: 2rem 0rem;
-        }
-        .imgcontainer {
-            text-align: center;
-            margin: 24px 0 12px 0;
-        }
-
-        img.avatar {
-            width: 15%;
-            border-radius: 50%;
-        }
-        .maincontainer{
-
-    display: inline;
-    border-left: black 1px solid;
-    min-height: 80vh;
-    margin: 10vh 0vh;
-
-        }
-
-.imgvali{
-
-    vertical-align: middle;
-    margin: 35vh 13vh;
-    height: 11rem;
-
-}
-        .container {
-                margin: 4vh 25vh;
-            float :right;
-            display:inline;
-
-        }
-
-        .container1 {
-            margin-top: 30px;
-            margin-left: 10%;
-            margin-right: 10%;
-        }
-
-        span.psw {
-            float: right;
-            padding-top: 16px;
-        }
-
-
-        @media screen and (max-width: 300px) {
-            span.psw {
-                display: block;
-                float: none;
-            }
-
-            .cancelbtn {
-                width: 100%;
-            }
-        }
-
-    input[type=text],
-        input[type=password] {
-            width: 100%;
-            background: transparent;
-            padding: 12px 20px;
-            margin: 15px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-            border: none;
-            border-bottom: 1px solid black;
-        }
-
-    </style>
-    <script>
-        function swapConfig(x) {
-            var radioName = document.getElementsByName(x.name);
-            for (i = 0; i < radioName.length; i++) {
-                document.getElementById(radioName[i].id.concat("info")).style.display = "none";
-            }
-            document.getElementById(x.id.concat("info")).style.display = "initial";
-        }
-    </script>
-
-</head>
-<body>
-<div style="display:inline;" class="imgvali">
-    <img src="https://iili.io/FG6zhl.md.png" alt="FG6zhl.md.png" border="0">
-</div>
-
-<div style="display:inline;    text-align: center;" class="maincontainer">
-
-    <form name="Admininfo" action={% url 'adminlogin' %} method="POST" value="adminlogin">
-    {% csrf_token %}
-
-    <div class="container">
-        <div id="Admininfo">
-            <h1 style="">Welcome</h1>
-
-                <p>Please Login to Admin Dashboard</p>
-
-            <input type="text" placeholder="Enter Admin Username" name="admin_uname" required>
-            <input type="password" placeholder="Enter Admin Password" name="admin_psw" required>
-
-            <div class="container2">
-                <button type="submit" href="#">Login</button>
-
-            </div>
+		<title>JavaScript QR Code Generator</title>
+	</head>
+	<body>
+		<h3>QR Code Generator</h3>
+        <div><input id="qr-text" type="text" placeholder="Text to generate QR code"/></div>
+        <br/>
+        <div>
+            <button class="qr-btn" onclick="generateQRCode()">Create QR Code</button>
+            <button class="qrtn" onclick="printCanvas()">Cre Code</button>
         </div>
-        </form>
-        <form name="Userinfo" action=# method="POST" value="userlogin">
-            {% csrf_token %}
+        <br/>
+        <p id="qr-result">This is deault QR code:</p>
+        <canvas id="qr-code">
 
 
-            <div id="Userinfo" style="display:none">
-                <label for="uname"><b>IVRS Number</b></label>
-                <input type="number" placeholder="Enter IVRS number" name="ivrs_no" required >
+		</canvas>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+		<script>
+
+            function generateQRCode() {
+              var qr = new QRious({
+                    foreground: 'black',
+                    size: 200,
+                    value: '1234',
+                        element: document.getElementById('qr-code')
+
+                });
+
+            }
 
 
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
-                <br /><br />
-                <div class="container2">
-                    <button type="submit" >Login</button>
+function printCanvas()
+{
+    const dataUrl = document.getElementById('qr-code').toDataURL();
 
-                    <label>
-                        <input type="checkbox" checked="checked" name="remember" style="margin-top:20px"> Remember me
-                    </label>
+let windowContent = '<!DOCTYPE html>';
+windowContent += '<html>';
+windowContent += '<head><title>Print canvas</title></head>';
+windowContent += '<body>';
+windowContent += '<img src="' + dataUrl + '">';
+windowContent += '<h2>QR For IVRS : {{user.ivrs}}</h2>';
+windowContent += '<hr>';
+windowContent += '</body>';
+windowContent += '</html>';
 
-                    <a href='{% url 'register' %}' style="float:right;margin-top:20px">New user</a>
-                </div>
-            </div>
-    </div>
+const printWin = window.open('', '', 'width=' + screen.availWidth + ',height=' + screen.availHeight);
+printWin.document.open();
+printWin.document.write(windowContent);
 
+printWin.document.addEventListener('load', function() {
+    printWin.focus();
+    printWin.print();
+    printWin.document.close();
+    printWin.close();
+}, true);
+}
+		</script>
 
-    </form>
-</div>
-</body>
-<script>
-    {% if register %}
-    alert("You are Registered !");  // display string message
-    {% endif %}
-</script>
-<script>
-    {% if notcorrect %}
-    alert("Invalid IVRS No. / Password  !");  // display string message
-    {% endif %}
-</script>
-<script>
-    {% if nouser %}
-    alert("No user Found Please Register  !");  // display string message
-    {% endif %}
-</script>
-<script>
-    {% if Already_register %}
-    alert("Invalid IVRS No. Already Registered !");  // display string message
-    {% endif %}
-</script>
-<script>
-    {% if admin_pswrd %}
-    alert("Invalid Password ");  // display string message
-    {% endif %}
-</script>
-<script>
-    {% if no_admin %}
-    alert("No Admin Found with this UserName ");  // display string message
-    {% endif %}
-</script>
+	</body>
 </html>
+
+

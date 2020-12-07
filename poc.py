@@ -1,33 +1,50 @@
-from firebase import firebase
-firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/', None)
-allusers=searched_user = firebaseuser.get('/UserRegister', '')
-verified_user=0
-not_verified_user=0
-user_complaint=0
-total_user=len(allusers)
-Complaints=0
-Appli_suggetion=0
-Emergency_Complaints=0
-reply=0
-for i in allusers:
-    if allusers[i]['auth']=='true':
-        verified_user += 1
-    else:
-        not_verified_user += 1
-    if 'Complaints' in allusers[i].keys():
-        user_complaint+=1
-        for j in allusers[i]['Complaints']:
-            if j :
-                if j['complaintType']=='Emergency Complaints':
-                    Emergency_Complaints+=1
-                elif j['complaintType']=='Application/Suggestions':
-                    Appli_suggetion+=1
-                else:
-                    Complaints+=1
-                if 'reply' in j.keys():
-                    reply+=1
-    print(allusers[i])
+# from firebase import firebase
+# firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/', None)
+# allusers=searched_user = firebaseuser.get('/UserRegister', '')
+# verified_user=0
+# not_verified_user=0
+# user_complaint=0
+# total_user=len(allusers)
+# Complaints=0
+# Appli_suggetion=0
+# Emergency_Complaints=0
+# reply=0
+# for i in allusers:
+#     if allusers[i]['auth']=='true':
+#         verified_user += 1
+#     else:
+#         not_verified_user += 1
+#     if 'Complaints' in allusers[i].keys():
+#         user_complaint+=1
+#         for j in allusers[i]['Complaints']:
+#             if j :
+#                 if j['complaintType']=='Emergency Complaints':
+#                     Emergency_Complaints+=1
+#                 elif j['complaintType']=='Application/Suggestions':
+#                     Appli_suggetion+=1
+#                 else:
+#                     Complaints+=1
+#                 if 'reply' in j.keys():
+#                     reply+=1
+#     print(allusers[i])
+#
+# def v():
+#     return print('vvvv')
+# def v():
+#     return print('ppppv')
+# v()
 
+
+
+#
+# camera = image
+# qr=image    qrcoadreader
+# qrcoadreader=qr
+# crop=camera
+# txtetract=crop
+# import qrcode
+# img = qrcode.make(1234)
+# img.save('imagename.jpg')
 
 # searched_user = firebaseuser.get('/UserRegister',name='0130')
 # print(searched_user)
@@ -130,21 +147,21 @@ for i in allusers:
 
 # firebaseuser.put('/UserRegister/' + str(123)+'/MeterReading', str(123)+'0010201/link/', 'hiiii11')
 #
-# # from docxtpl import DocxTemplate
+from docxtpl import DocxTemplate
 # # # import json
 # # # #
 # firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/', None)
 # # #
 # # #
-# doc = DocxTemplate("MeterReaderApp/Static/SampleBill.docx")
+doc = DocxTemplate("MeterReaderApp/Static/SampleBill.docx")
 # #
-# context_doc = {'meterNumber': '123456789',
-#                     'customer_name': 'avsss',
-#                     'previousYear': 123,
-#                     'currentYear': 123
-#                     }
-# doc.render(context_doc)
-# doc.save("MeterReaderApp/Static/generated/GeneratedBill.docx")
+context_doc = {'meterNumber': '123456789',
+                    'customer_name': 'avsss',
+                    'previousYear': 123,
+                    'currentYear': 123
+                    }
+doc.render(context_doc)
+doc.save("MeterReaderApp/Static/GeneratedBill.pdf")
 # # q=doc.toJSON()
 #
 # firebaseuser.put('/Admin', data={'abcd':q}, name='new1')

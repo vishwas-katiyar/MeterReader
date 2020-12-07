@@ -7,6 +7,7 @@ from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 import firebase_admin
 from firebase_admin import credentials, initialize_app, storage
+import qrcode
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from docxtpl import DocxTemplate
@@ -432,8 +433,10 @@ def add_new_user_request(request):
             
             Thanks 
             Team MVAR   
+            
             '''.format(name,ivrs)
             send_coad(email, mail_content)
+
             allusers = firebaseadmin.get('/UserRegister', None)
             requestlist = []
             for i in allusers:
@@ -443,6 +446,7 @@ def add_new_user_request(request):
             return render(request,'new.html',context={'requestlist':requestlist,'admin_name':request.session['admin_full_name']})
     else:
         return render(request, 'login.html')
+
 
 
 def Not_Verify_user(request):

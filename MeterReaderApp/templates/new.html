@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-   <link rel="icon" href="https://iili.io/FW7QP1.md.png" type='image/x-icon'>
+    <link rel="icon" href="https://iili.io/FW7QP1.md.png" type='image/x-icon'>
     <title>All New User Requests</title>
 
     <!-- Bootstrap Core CSS -->
@@ -347,6 +347,11 @@ padding: .375rem .75rem;
     text-align: right;
 display: block;
 }
+
+.modal-content{
+    width: max-content;
+color: black;
+}
 </style>
 </head>
 
@@ -455,16 +460,25 @@ display: block;
                                                         <input type="text" id='reading' class="inputinitial"  placeholder="Enter initial Reading..." name='initial_reading' required >
                                                         <br>
                                                     </div>
-                                                    <div class="modal-footer foot" style="border-top: 1px solid #e5e5e5;display: block;">
+                                                    <div class="modal-footer foot" style="border-top: 1px solid #e5e5e5;display: block;text-align:center;">
+                                                        <canvas id="qr-code-{{user.ivrs}}" style="display:none"></canvas>
+                                                        <br>
+                                                        <br>
+                                                        <br>
+                                                        <button type="button" id="generatebtn{{user.ivrs}}" onClick="generateQRCode({{user.ivrs}})" class="btn btn-success" value="Generate QR" >Generate QR</button>
+                                                        <button type="button" id="print{{user.ivrs}}" onClick="printCanvas({{user.ivrs}})" class="btn btn-success" style="display:none;" >Print QR</button>
 
-                                                        <input type="submit" class="btn btn-success" value="Verify" >
+
+                                                        <button type="submit" id="submit{{user.ivrs}}" style="display:none" class="btn btn-success" >Verify</button>
 
                                                 </form>
                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                <input  type="button" onClick="unhideReg({{user.ivrs}})" class="btn btn-primary" value="Not Verify" ><br>
+
                                                 <form style="display:inline;" id="notverifyform" method="post" action="{% url 'Not_Verify_user' %}" autocomplete="off">
                                                     {% csrf_token %}
-                                                    <input  type="button" onClick="unhideReg({{user.ivrs}})" class="btn btn-primary" value="Not Verify" ><br>
                                                     <br>
+
                                                     <div class="hidden_div" style="text-align: left;">
                                                         <label for="message_input{{user.ivrs}}" id="hiddenlable{{user.ivrs}}" style="display:none">Reason for Not verification   :</label>
                                                         <input type="input" name="message" id="message_input{{user.ivrs}}" style="display:none" placeholder="Enter Message for User." required/>
@@ -517,6 +531,54 @@ function unhideReg(ivrs) {
     document.getElementById(`hiddenlable${ivrs}`).style.display = "inline";
  }
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+<script>
+
+            function generateQRCode(ivrs) {
+    document.getElementById(`submit${ivrs}`).style.display = null;
+    document.getElementById(`qr-code-${ivrs}`).style.display = null;
+    document.getElementById(`generatebtn${ivrs}`).style.display = "none";
+    document.getElementById(`print${ivrs}`).style.display = null;
+
+              var qr = new QRious({
+
+                    size: 200,
+                    value: ivrs.toString(),
+                        element: document.getElementById(`qr-code-${ivrs}`)
+                });
+            }
+
+
+function printCanvas(ivrs)
+{
+    const dataUrl = document.getElementById(`qr-code-${ivrs}`).toDataURL();
+
+let windowContent = '<!DOCTYPE html>';
+windowContent += '<html>';
+windowContent += '<head><title>MVAR Meter QR </title></head>';
+windowContent += '<body>';
+windowContent += '<div style="border-bottom:2px solid black;">';
+windowContent += '<img src="' + dataUrl + '">';
+windowContent += '<h2>QR For IVRS :  '+ `${ivrs}`+'</h2>';
+windowContent += '</div>';
+windowContent += '</body>';
+windowContent += '</html>';
+
+const printWin = window.open('', '', 'width=' + screen.availWidth + ',height=' + screen.availHeight);
+printWin.document.open();
+printWin.document.write(windowContent);
+
+printWin.document.addEventListener('load', function() {
+    printWin.focus();
+    printWin.print();
+    printWin.document.close();
+    printWin.close();
+}, true);
+}
+
+
+</script>
+
 <script>
 
     $("#menu-toggle").click(function(e) {

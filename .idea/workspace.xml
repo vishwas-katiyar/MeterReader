@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="acd56e36-8497-44d0-9509-655149bbbbcd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/MeterReader.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeterReaderApp/Static/SampleBill.docx" beforeDir="false" afterPath="$PROJECT_DIR$/MeterReaderApp/Static/SampleBill.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeterReaderApp/templates/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/MeterReaderApp/templates/new.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeterReaderApp/templates/rough.html" beforeDir="false" afterPath="$PROJECT_DIR$/MeterReaderApp/templates/rough.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeterReaderApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/MeterReaderApp/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/poc.py" beforeDir="false" afterPath="$PROJECT_DIR$/poc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/SampleBill.docx" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/SampleBill.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/generated/SampleBill.docx" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/generated/SampleBill.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/static/SampleBill.docx" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/static/SampleBill.docx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/MeterReaderApp/templates/search_user.html" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectId" id="1honUGswS8AzijvO8wcbLPKWZtG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="acd56e36-8497-44d0-9509-655149bbbbcd" name="Default Changelist" comment="" />
+      <created>1600686332455</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1600686332455</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="449" y="171" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1600689726102">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="449" y="171" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.738@0.0.1366.738" timestamp="1600689726102" />
+    <state x="101" y="26" key="SettingsEditor" timestamp="1605631434402">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="101" y="26" key="SettingsEditor/0.0.1366.738@0.0.1366.738" timestamp="1605631434402" />
+    <state x="530" y="282" key="VCS.ChangelistChooser" timestamp="1605002869442">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="530" y="282" key="VCS.ChangelistChooser/0.0.1366.738@0.0.1366.738" timestamp="1605002869442" />
+    <state x="275" y="102" key="Vcs.Push.Dialog.v2" timestamp="1602060554612">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="275" y="102" key="Vcs.Push.Dialog.v2/0.0.1366.738@0.0.1366.738" timestamp="1602060554612" />
+    <state x="288" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601151759621">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="288" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.738@0.0.1366.738" timestamp="1601151759621" />
+    <state x="0" y="0" width="585" height="738" key="find.popup" timestamp="1605859313655">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="0" y="0" width="585" height="738" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1605859313655" />
+    <state x="324" y="95" width="700" height="530" key="recent.locations.popup" timestamp="1606111176823">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="324" y="95" width="700" height="530" key="recent.locations.popup/0.0.1366.738@0.0.1366.738" timestamp="1606111176823" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1606386555178">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1606386555178" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/MeterReader/urls.py</url>
+          <line>23</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
