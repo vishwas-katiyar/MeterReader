@@ -20,23 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="acd56e36-8497-44d0-9509-655149bbbbcd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/MeterReader.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeterReaderApp/Static/SampleBill.docx" beforeDir="false" afterPath="$PROJECT_DIR$/MeterReaderApp/Static/SampleBill.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeterReaderApp/templates/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/MeterReaderApp/templates/new.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeterReaderApp/templates/rough.html" beforeDir="false" afterPath="$PROJECT_DIR$/MeterReaderApp/templates/rough.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeterReader/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/MeterReader/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeterReaderApp/templates/search_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/MeterReaderApp/templates/search_user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeterReaderApp/templates/userprofile.html" beforeDir="false" afterPath="$PROJECT_DIR$/MeterReaderApp/templates/userprofile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MeterReaderApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/MeterReaderApp/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/poc.py" beforeDir="false" afterPath="$PROJECT_DIR$/poc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/staticfiles/SampleBill.docx" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/SampleBill.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/staticfiles/generated/SampleBill.docx" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/generated/SampleBill.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/staticfiles/static/SampleBill.docx" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/static/SampleBill.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,10 +112,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="324" y="95" width="700" height="530" key="recent.locations.popup/0.0.1366.738@0.0.1366.738" timestamp="1606111176823" />
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1606386555178">
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1608804078130">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1606386555178" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1608804078130" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

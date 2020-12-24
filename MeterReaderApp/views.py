@@ -49,6 +49,8 @@ def send_coad(receiver_address,mail_content):
     text = message.as_string()
     session1.sendmail(sender_address, receiver_address, text)
     session1.quit()
+
+
 # Create your views here.
 
 # ##################################################################################################################
@@ -366,7 +368,6 @@ def search_user(request):
 def user_profile(request):
 
     if request.method=="POST":
-        #print(request.POST)
         search_ivrs=request.POST['ivrs']
         searched_user = firebaseuser.get('/UserRegister', name=search_ivrs)
         #print(searched_user)
@@ -381,6 +382,27 @@ def user_profile(request):
                 'searched_user':searched_user,'admin_name':request.session['admin_full_name']
             }
         return render(request,'userprofile.html',context=context)
+    else:
+        if request.session['login_admin_confirm'] == True:
+            return render(request, 'search_user.html',context={'admin_name':request.session['admin_full_name']})
+        else:
+            return render(request, 'login.html')
+def user_bill(request):
+    if request.method=="POST":
+        search_ivrs=request.POST['ivrs']
+        searched_user = firebaseuser.get('/UserRegister', name=search_ivrs)
+        #print(searched_user)
+        #print(searched_user['name'])
+        if searched_user == None :
+            context={
+                'nouserfound':True
+            }
+            return render(request,'search_user.html',context=context)
+        else:
+            context={
+                'searched_user':searched_user,'admin_name':request.session['admin_full_name']
+            }
+        return render(request,'user_bill.html',context=context)
     else:
         if request.session['login_admin_confirm'] == True:
             return render(request, 'search_user.html',context={'admin_name':request.session['admin_full_name']})

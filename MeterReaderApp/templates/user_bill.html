@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="https://iili.io/FW7QP1.md.png" type='image/x-icon'>
-    <title>User Profile</title>
+    <title>User's Bill</title>
 
     <!-- Bootstrap Core CSS -->
 
@@ -33,6 +33,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+
     <style>
 
     /*!
@@ -61,7 +62,7 @@
   height: 100%;
   margin-left: -250px;
   overflow-y: auto;
-  background: #000;
+  background: #2C3446;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
@@ -71,7 +72,6 @@
   width: 250px;
 }
 #page-content-wrapper {
-
   width: 100%;
   position: absolute;
   padding: 15px;
@@ -128,7 +128,6 @@
     padding-left: 0;
   }
   #sidebar-wrapper {
-   background-color:#2C3446;
     width: 250px;
   }
   #wrapper.toggled #sidebar-wrapper {
@@ -143,19 +142,11 @@
     margin-right: 0;
   }
 }
-body{
-color:white;
-background-color:#1F2739;
-}
-.new input{
-width:100%;
-}
-.full {
-    margin: 0 20%;
-width:100%;
-}
+
+
 
 </style>
+
     <style>
 
         /*
@@ -222,6 +213,7 @@ h2 a {
 .container {
 	  text-align: left;
 	  overflow: hidden;
+	  width: 80%;
 	  margin: 0 auto;
   display: table;
   padding: 0 0 8em 0;
@@ -277,6 +269,71 @@ h2 a {
 }
 
     </style>
+    <style>
+.switch {
+
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #1F2739;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.content{
+margin-right: 10px;
+}
+</style>
 </head>
 
 <body>
@@ -299,7 +356,7 @@ h2 a {
                 <a href="{% url 'new_user_request' %}">All Requests</a>
             </li>
             <li>
-                <a href="{% url 'all_user' %}">All Users</a>
+                <a href='#'>All Users</a>
             </li>
             <li>
                 <a href="{% url 'search_user' %}">Profile</a>
@@ -322,102 +379,52 @@ h2 a {
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-
-                    <div class="container1">
-                        <div style="text-align:center;">
-                            <a style="float:left;" href="#menu-toggle" class=" navbar-toggler" id="menu-toggle">
-                            <span class="navbar-toggler-icon" style="vertical-align: inherit;background:url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PScwIDAgMzAgMzAnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHBhdGggc3Ryb2tlPSdyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuNSknIHN0cm9rZS13aWR0aD0nMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIGQ9J000IDdoMjJNNCAxNWgyMk00IDIzaDIyJy8+PC9zdmc+
+                    <div id="1newuser">
+                        <a href="#menu-toggle" class=" navbar-toggler" id="menu-toggle">
+                            <span class="navbar-toggler-icon" style="background:url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PScwIDAgMzAgMzAnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHBhdGggc3Ryb2tlPSdyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuNSknIHN0cm9rZS13aWR0aD0nMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIGQ9J000IDdoMjJNNCAxNWgyMk00IDIzaDIyJy8+PC9zdmc+
 );"></span></a>
-                            <h1 style="display:inline;text-align:center;" >Edit Profile</h1>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <!-- left column -->
+                        <h1><span class="blue"><</span>User's<span class="blue">></span><span class="yellow">Bill</span></h1>
+<!--                        <h2><span class="yellow">Bill</span></h2>-->
+                        <h2>Created with love by <a href="#" target="_blank">MVAR Developments</a></h2>
 
-                            <!-- edit form column -->
-                            <div class="full">
-                                <h3 style="text-align: center;">Personal info</h3>
+                        <table class="container">
+                            <thead>
+                            <tr>
+                                <th><h1>S No. </h1></th>
+                                <th><h1>Bill Number</h1></th>
+                                <th><h1>Bill Date </h1></th>
+                                <th><h1>Units </h1></th>
+                                <th><h1>Bill Amount</h1></th>
+                                <th><h1>Bill</h1></th>
 
-                                <form class="form-horizontal" action="{% url 'update_user_profile' %}" role="form" method="post">
-                                    {% csrf_token %}
-                                    <div class="form-group">
-                                        <label class="col-lg-3 control-label">Full name:</label>
-                                        <div class="new">
-                                            <input name="name" class="form-control" type="text" value="{{searched_user.name}}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-3 control-label">IVSR No. :</label>
-                                        <div class="new">
-                                            <input name="ivrs" class="form-control" type="text" value="{{searched_user.ivrs}}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-3 control-label">Address:</label>
-                                        <div class="new">
-                                            <input name="address" class="form-control" type="text" value='{{searched_user.address}}'>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-3 control-label">Email:</label>
-                                        <div class="new">
-                                            <input name="email" class="form-control" type="text" value="{{searched_user.email}}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label">Phone No. :</label>
-                                        <div class="new">
-                                            <input name="phoneno" class="form-control" type="text" value="{{searched_user.phoneno}}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label"></label>
-                                        <div class="col-md-8">
-                                            <input type="submit" class="btn btn-primary" value="Save Changes">
-                                            <span></span>
-                                            <input type="reset" class="btn btn-default" value="Cancel">
-                                        </div>
-                                    </div>
-                                </form>
-                                <table class="container">
-                                    <thead>
-                                    <tr>
-                                        <th><h1>S No. </h1></th>
-                                        <th><h1>Bill Number</h1></th>
-                                        <th><h1>Bill Date </h1></th>
-                                        <th><h1>Units </h1></th>
-                                        <th><h1>Bill Amount</h1></th>
-                                        <th><h1>Bill</h1></th>
-
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for bill_no,detail in searched_user.MeterReading.items %}
-                                    <tr>
-                                        <td>{{forloop.counter}}</td>
-                                        <td>{{bill_no}}</td>
-                                        {% for i ,j in detail.items%}
-                                            {% if forloop.counter == 1 %}
-                                                <td>{{i}}</td>
-                                                <td>{{j}}</td>
-                                            {%endif%}
-                                        {%endfor%}
-                                        <td>{{detail.Bill_Amount}}</td>
-                                        {% if forloop.counter == 1 %}
-                                        <td> <a id="bill" target="_blank" class="btn btn-primary" style="" href="{{searched_user.initialBill}}">View</a></td>
-                                        {% else %}
-                                        <td> <a id="bill" target="_blank" class="btn btn-primary" style="" href="{{detail.Bill}}">View</a></td>
-                                        {% endif %}
-                                    </tr>
-                                    {% endfor %}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for bill_no,detail in searched_user.MeterReading.items %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{bill_no}}</td>
+                                {% for i ,j in detail.items%}
+                                {% if forloop.counter == 1 %}
+                                <td>{{i}}</td>
+                                <td>{{j}}</td>
+                                {%endif%}
+                                {%endfor%}
+                                <td>{{detail.Bill_Amount}}</td>
+                                {% if forloop.counter == 1 %}
+                                <td> <a id="bill" target="_blank" class="btn btn-primary" style="" href="{{searched_user.initialBill}}">View</a></td>
+                                {% else %}
+                                <td> <a id="bill" target="_blank" class="btn btn-primary" style="" href="{{detail.Bill}}">View</a></td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
 
 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
-                    <hr>
+
+
                 </div>
             </div>
         </div>
@@ -437,13 +444,11 @@ h2 a {
 
 
 </body>
-
 <script>
 
     $("#menu-toggle").click(function(e) {
   e.preventDefault();
   $("#wrapper").toggleClass("toggled");
 });
-
 </script>
 </html>

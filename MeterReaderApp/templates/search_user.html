@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-   <link rel="icon" href="https://iili.io/FW7QP1.md.png" type='image/x-icon'>
+    <link rel="icon" href="https://iili.io/FW7QP1.md.png" type='image/x-icon'>
     <title>Admin Dashboard</title>
 
     <!-- Bootstrap Core CSS -->
@@ -261,17 +261,34 @@ form > .button:hover {
                             <span class="navbar-toggler-icon" style="vertical-align: inherit; background:url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PScwIDAgMzAgMzAnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHBhdGggc3Ryb2tlPSdyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuNSknIHN0cm9rZS13aWR0aD0nMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIGQ9J000IDdoMjJNNCAxNWgyMk00IDIzaDIyJy8+PC9zdmc+
 );"></span></a>
         <div class="container-fluid">
+            <br>
             <div class="row">
                 <div class="col-lg-12">
-                    <h1>Enter IVRS For Search User : </h1>
+                    <h2>Enter IVRS For Search User's Details  </h2>
+                    <br>
                     <form action="{% url 'user_profile' %}" method="POST">
                         {% csrf_token %}
-                        <input name='ivrs' type="text" class="textbox" placeholder="Enter Ivrs No.">
+                        <input name='ivrs' type="text" class="textbox" placeholder="Enter Ivrs No." required>
                         <button title="Search" type="submit" class="button" >
                             <i style="font-style: normal;font-size: 1.2rem;" class="fas fa-search"></i>
                         </button>
                     </form>
-
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Enter IVRS For Search User's Bill  </h2>
+                    <br>
+                    <form action="{% url 'user_bill' %}" method="POST">
+                        {% csrf_token %}
+                        <input name='ivrs' type="text" class="textbox" placeholder="Enter Ivrs No." required>
+                        <button title="Search" type="submit" class="button" >
+                            <i style="font-style: normal;font-size: 1.2rem;" class="fas fa-search"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

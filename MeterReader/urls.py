@@ -28,6 +28,7 @@ urlpatterns = [
     path('new_user_request/', views.new_user_request ,name='new_user_request'),
     path('logout/', views.logout ,name='logout'),
     path('update_user_profile/', views.update_user_profile ,name='update_user_profile'),
+    path('user_bill/', views.user_bill ,name='user_bill'),
     path('password/', views.password ,name='password'),
     path('user_register_view/', views.user_register_view ,name='user_register_view'),
     path('email_verification/', views.email_verification ,name='email_verification'),

@@ -1,6 +1,15 @@
-# from firebase import firebase
-# firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/', None)
-# allusers=searched_user = firebaseuser.get('/UserRegister', '')
+from firebase import firebase
+
+firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/', None)
+searched_user = firebaseuser.get('/UserRegister','')
+# print(searched_user['Reading_Date'])
+for i in searched_user:
+    Reading_Date=searched_user[i]['Reading_Date']
+    print(Reading_Date)
+
+# for i in searched_user['MeterReading']:
+#     print(searched_user['MeterReading'])
+
 # verified_user=0
 # not_verified_user=0
 # user_complaint=0
@@ -33,7 +42,6 @@
 # def v():
 #     return print('ppppv')
 # v()
-
 
 
 #
@@ -153,15 +161,15 @@ from docxtpl import DocxTemplate
 # firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/', None)
 # # #
 # # #
-doc = DocxTemplate("MeterReaderApp/Static/SampleBill.docx")
-# #
-context_doc = {'meterNumber': '123456789',
-                    'customer_name': 'avsss',
-                    'previousYear': 123,
-                    'currentYear': 123
-                    }
-doc.render(context_doc)
-doc.save("MeterReaderApp/Static/GeneratedBill.pdf")
+# doc = DocxTemplate("MeterReaderApp/Static/SampleBill.docx")
+# # #
+# context_doc = {'meterNumber': '123456789',
+#                     'customer_name': 'avsss',
+#                     'previousYear': 123,
+#                     'currentYear': 123
+#                     }
+# doc.render(context_doc)
+# doc.save("MeterReaderApp/Static/GeneratedBill.pdf")
 # # q=doc.toJSON()
 #
 # firebaseuser.put('/Admin', data={'abcd':q}, name='new1')
@@ -206,17 +214,6 @@ doc.save("MeterReaderApp/Static/GeneratedBill.pdf")
 #
 
 
-
-
-
-
-
-
-
-
-
-
-
 # Define a blank dictionary with no elements
 #
 # initial=int(input("Enter initial range :"))
@@ -254,7 +251,6 @@ doc.save("MeterReaderApp/Static/GeneratedBill.pdf")
 #
 
 
-
 #
 #
 # a = [10,20,30,20,10,50,60,40,80,50,40]
@@ -272,8 +268,6 @@ doc.save("MeterReaderApp/Static/GeneratedBill.pdf")
 #
 #
 #
-
-
 
 
 #
