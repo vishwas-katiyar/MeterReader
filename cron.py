@@ -10,7 +10,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 
 sched = BlockingScheduler()
 
-@sched.scheduled_job('cron', day_of_week='*' ,minute='*')
+@sched.scheduled_job('cron', day_of_week='*' ,hour=9)
 def scheduled_job():
     def send_coad(receiver_address,mail_content):
         sender_address = 'meterreading1628@gmail.com'
@@ -51,9 +51,9 @@ def scheduled_job():
 
     '''.format(all_user[i]['name'],i)
                 send_coad(all_user[i]['email'],msg)
-
+                print('notified to : '+str(i))
     check()
-    print('This job is run every weekday at 5pm.')
+    
 
 sched.start()
 
