@@ -12,12 +12,7 @@ sched = BlockingScheduler()
 
 @sched.scheduled_job('cron', day_of_week='*' ,minute='*')
 def scheduled_job():
-    check()
-    print('This job is run every weekday at 5pm.')
-
-sched.start()
-
-def send_coad(receiver_address,mail_content):
+    def send_coad(receiver_address,mail_content):
     sender_address = 'meterreading1628@gmail.com'
     sender_pass = 'MvarProject@1436'
     #receiver_address = 'honeykatiyar1436@gmail.com'
@@ -56,3 +51,9 @@ def check():
 
     '''.format(all_user[i]['name'],i)
             send_coad(all_user[i]['email'],msg)
+
+    check()
+    print('This job is run every weekday at 5pm.')
+
+sched.start()
+
