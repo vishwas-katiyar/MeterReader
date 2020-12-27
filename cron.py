@@ -52,8 +52,8 @@ def scheduled_job():
     '''.format(all_user[i]['name'],i)
                 send_coad(all_user[i]['email'],msg)
 
-        check()
-        print('This job is run every weekday at 5pm.')
+    check()
+    print('This job is run every weekday at 5pm.')
 
 sched.start()
 
