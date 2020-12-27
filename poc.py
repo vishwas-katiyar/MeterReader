@@ -1,11 +1,15 @@
 from firebase import firebase
-
+from datetime import date
 firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/', None)
-searched_user = firebaseuser.get('/UserRegister','')
-# print(searched_user['Reading_Date'])
-for i in searched_user:
-    Reading_Date=searched_user[i]['Reading_Date']
-    print(Reading_Date)
+all_user = firebaseuser.get('/UserRegister','')
+today = today = date.today()
+# print(str(today)[8:])
+for i in all_user:
+    if str(today)[8:] == all_user[i]['Reading_Date'] :
+        print(1)
+        print(i)
+
+
 
 # for i in searched_user['MeterReading']:
 #     print(searched_user['MeterReading'])

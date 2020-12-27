@@ -3,7 +3,7 @@ from django.http import JsonResponse
 import random
 import smtplib
 from django.http import HttpResponse
-from datetime import datetime
+from datetime import datetime , date 
 from django.views.decorators.csrf import csrf_exempt
 import firebase_admin
 from firebase_admin import credentials, initialize_app, storage
@@ -623,7 +623,29 @@ def complaints(request):
     else:
         return render(request, 'login.html')
 
+def check():
+    all_user = firebaseuser.get('/UserRegister','')
+    today = today = date.today()
 
+    for i in all_user:
+
+        if str(today)[8:] == all_user[i]['Reading_Date'] :
+            msg='''
+    
+    Hello,{0} 
+
+    Today is the date for your Meter Reading of 
+    IVRS No. {1} .
+    Please take reading by today otherwise penulty will be fined .
+
+    Ignore if reading is already taken .
+
+    Thanks
+    Team MVAR
+
+
+    '''.format(all_user[i]['name'],i)
+        send_coad(all_user[i]['email'],msg)
 
 @csrf_exempt
 def test(request):
