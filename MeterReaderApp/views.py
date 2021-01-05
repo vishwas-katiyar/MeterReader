@@ -709,7 +709,7 @@ def test(request):
     # Opt : if you want to make public access from the URL
     blob.make_public()
 
-    firebaseuser.put('/UserRegister/' + ivrs_no + '/MeterReading', ivrs_no + '00'+str(cd.strftime('%m'))+str(cd.year)+'/Bill/', blob.public_url)
-    firebaseuser.put('/UserRegister/' + ivrs_no + '/MeterReading', ivrs_no + '00'+str(cd.strftime('%m'))+str(cd.year)+'/Bill_Amount/', total)
+    firebaseuser.put('/UserRegister/' + ivrs_no + '/MeterReading', ivrs_no + '00'+str(cd.year)+str(cd.strftime('%m'))+'/Bill/', blob.public_url)
+    firebaseuser.put('/UserRegister/' + ivrs_no + '/MeterReading', ivrs_no + '00'+str(cd.year)+str(cd.strftime('%m'))+'/Bill_Amount/', total)
     # print(str(cd.year)+str(cd.month))
     return  HttpResponse({blob.public_url}, list(user['MeterReading'].keys()))
