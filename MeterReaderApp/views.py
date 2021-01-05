@@ -443,7 +443,8 @@ def add_new_user_request(request):
             name=request.POST['name']
             firebaseuser.put('/UserRegister/' + str(ivrs), 'auth', 'true')
             initial_date=str(initial_date).replace('-','_')
-            firebaseuser.put('/UserRegister/' + str(ivrs) + '/MeterReading/'+str(ivrs)+'00'+initial_date[5:7]+initial_date[:4]+'/',initial_date, initial_reading)
+            print(initial_date)
+            firebaseuser.put('/UserRegister/' + str(ivrs) + '/MeterReading/'+str(ivrs)+'00'+initial_date[:4]+initial_date[5:7]+'/',initial_date, initial_reading)
             firebaseuser.put('/UserRegister/' + str(ivrs) + '/' ,'Reading_Date',initial_date[8:])
             mail_content='''
             Hello, {0}
@@ -649,8 +650,8 @@ def test(request):
     pd = datetime.strptime(previous_date, date_format)
     cd = datetime.strptime(current_date, date_format)
     # cd_month=
-    print(str(cd.strftime('%m')))
-    print(pd)
+    # print(str(cd.strftime('%m')))
+    # print(pd)
     days = (cd - pd).days
 
     units = int(current_reading) - int(previous_reading)
@@ -708,7 +709,7 @@ def test(request):
     # Opt : if you want to make public access from the URL
     blob.make_public()
 
-    firebaseuser.put('/UserRegister/' + ivrs_no + '/MeterReading', ivrs_no + '00'+str(cd.year)+str(cd.strftime('%m'))+'/Bill/', blob.public_url)
-    firebaseuser.put('/UserRegister/' + ivrs_no + '/MeterReading', ivrs_no + '00'+str(cd.year)+str(cd.strftime('%m'))+'/Bill_Amount/', total)
-    print(str(cd.year)+str(cd.month))
+    firebaseuser.put('/UserRegister/' + ivrs_no + '/MeterReading', ivrs_no + '00'+str(cd.strftime('%m'))+str(cd.year)+'/Bill/', blob.public_url)
+    firebaseuser.put('/UserRegister/' + ivrs_no + '/MeterReading', ivrs_no + '00'+str(cd.strftime('%m'))+str(cd.year)+'/Bill_Amount/', total)
+    # print(str(cd.year)+str(cd.month))
     return  HttpResponse({blob.public_url}, list(user['MeterReading'].keys()))
