@@ -1,13 +1,13 @@
-from firebase import firebase
-from datetime import date
-firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/', None)
-all_user = firebaseuser.get('/UserRegister','')
-today = today = date.today()
-# print(str(today)[8:])
-for i in all_user:
-    if str(today)[8:] == all_user[i]['Reading_Date'] :
-        print(1)
-        print(i)
+# from firebase import firebase
+# from datetime import date
+# firebaseuser = firebase.FirebaseApplication('https://login-system-73453.firebaseio.com/', None)
+# all_user = firebaseuser.get('/UserRegister','')
+# today = today = date.today()
+# # print(str(today)[8:])
+# for i in all_user:
+#     if str(today)[8:] == all_user[i]['Reading_Date'] :
+#         print(1)
+#         print(i)
 
 
 
@@ -195,24 +195,24 @@ from docxtpl import DocxTemplate
 # '''
 
 # #
-# import requests
-# url = 'http://mymeterreader.herokuapp.com/test'
-# myobj = {'ivrs': '0130',
-#          'CurrentDate':'2020_11_06',
-#          'CurrentReading':65,
-#          }
-# x = requests.post(url, data = myobj)
-# # print(x.status_code, x.qreason)
-# print('jhgkjhghgjk',x.text)
-# # #
+import requests
+url = 'http://127.0.0.1:8000/test/'
+myobj = {'ivrs': '111',
+         'CurrentDate':'2021_01_05',
+         'CurrentReading':205,
+         }
+x = requests.post(url, data = myobj)
+# print(x.status_code, x.qreason)
+print('jhgkjhghgjk',x.text)
+# #
 
-#
-#
+
+
 # def login():
 #     h=1
-#
-#
-#
+
+
+
 # def loginh():
 #     if h:
 #

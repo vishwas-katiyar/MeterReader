@@ -648,6 +648,9 @@ def test(request):
     date_format = "%Y,%m,%d"
     pd = datetime.strptime(previous_date, date_format)
     cd = datetime.strptime(current_date, date_format)
+    # cd_month=
+    print(str(cd.strftime('%m')))
+    print(pd)
     days = (cd - pd).days
 
     units = int(current_reading) - int(previous_reading)
@@ -705,6 +708,7 @@ def test(request):
     # Opt : if you want to make public access from the URL
     blob.make_public()
 
-    firebaseuser.put('/UserRegister/' + ivrs_no + '/MeterReading', ivrs_no + '00'+str(cd.month)+str(cd.year)+'/Bill/', blob.public_url)
-    firebaseuser.put('/UserRegister/' + ivrs_no + '/MeterReading', ivrs_no + '00'+str(cd.month)+str(cd.year)+'/Bill_Amount/', total)
+    firebaseuser.put('/UserRegister/' + ivrs_no + '/MeterReading', ivrs_no + '00'+str(cd.year)+str(cd.strftime('%m'))+'/Bill/', blob.public_url)
+    firebaseuser.put('/UserRegister/' + ivrs_no + '/MeterReading', ivrs_no + '00'+str(cd.year)+str(cd.strftime('%m'))+'/Bill_Amount/', total)
+    print(str(cd.year)+str(cd.month))
     return  HttpResponse({blob.public_url}, list(user['MeterReading'].keys()))
